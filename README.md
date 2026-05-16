@@ -1,4 +1,4 @@
-# MyGlowUp 🌸
+# MiGlowUp 🌸
 
 Landing de validación para una app fitness dirigida a mujeres chilenas 25-45.
 

@@ -1,4 +1,4 @@
-# MyGlowUp — Guía de setup (paso a paso)
+# MiGlowUp — Guía de setup (paso a paso)
 
 Esta es una landing de **validación**: simula que la app ya existe y cobra $990 por trial de 7 días. Si la gente paga, validaste la idea antes de gastar en desarrollo real.
 
@@ -8,7 +8,7 @@ Esta es una landing de **validación**: simula que la app ya existe y cobra $990
 
 | Día | Tarea | Costo |
 |---|---|---|
-| 1 | Comprar dominio myglowup.cl | ~$10.000 CLP/año |
+| 1 | Comprar dominio miglowup.cl | ~$10.000 CLP/año |
 | 1 | Crear cuenta Mercado Pago | Gratis |
 | 1-2 | Deploy de la landing | Gratis |
 | 3-4 | Crear cuenta Meta Business + pixel | Gratis |
@@ -23,7 +23,7 @@ Esta es una landing de **validación**: simula que la app ya existe y cobra $990
 ## 1️⃣ Comprar el dominio (5 min)
 
 1. Ve a **nic.cl** o **hostingplus.cl**.
-2. Compra `myglowup.cl` (~$10.000 CLP/año).
+2. Compra `miglowup.cl` (~$10.000 CLP/año).
 3. Guarda los datos de acceso.
 
 ---
@@ -34,10 +34,10 @@ Esta es una landing de **validación**: simula que la app ya existe y cobra $990
 2. Verifica tu identidad con cédula.
 3. Ve a **"Tu negocio" → "Cobrar" → "Link de pago"**.
 4. Crea un link de **$990 CLP** con:
-   - Título: `MyGlowUp — Trial 7 días`
-   - Descripción: `Acceso completo a MyGlowUp por 7 días`
+   - Título: `MiGlowUp — Trial 7 días`
+   - Descripción: `Acceso completo a MiGlowUp por 7 días`
    - Cantidad: 1
-5. Copia el link generado (algo como `https://link.mercadopago.cl/myglowupchile`).
+5. Copia el link generado (algo como `https://link.mercadopago.cl/miglowupchile`).
 6. Abre `index.html` y reemplaza en la línea ~310:
    ```js
    const MP_LINKS = {
@@ -57,14 +57,14 @@ Esta es una landing de **validación**: simula que la app ya existe y cobra $990
 
 1. Crea cuenta en https://pages.cloudflare.com
 2. "Create project" → "Upload assets"
-3. Sube la carpeta `myglowup/` completa
-4. Te dan una URL tipo `myglowup.pages.dev`
-5. En "Custom domains" agregas `myglowup.cl` (sigue las instrucciones DNS)
+3. Sube la carpeta `miglowup/` completa
+4. Te dan una URL tipo `miglowup.pages.dev`
+5. En "Custom domains" agregas `miglowup.cl` (sigue las instrucciones DNS)
 
 **Opción B — Netlify (más simple):**
 
 1. Ve a https://app.netlify.com/drop
-2. Arrastra la carpeta `myglowup/` al sitio
+2. Arrastra la carpeta `miglowup/` al sitio
 3. Te dan URL inmediata
 4. Configuras dominio custom en "Domain settings"
 
@@ -141,7 +141,7 @@ Después de 7-14 días con $100-200 USD gastados en ads:
 ## Estructura del proyecto
 
 ```
-myglowup/
+miglowup/
 ├── index.html      ← La landing (todo en un archivo)
 ├── SETUP.md        ← Este archivo
 └── README.md       ← Resumen del proyecto
