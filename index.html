@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MyGlowUp — Transforma tu cuerpo en 8 semanas desde tu casa</title>
+<meta name="description" content="El método chileno para bajar 6-10 kilos y tonificar en 8 semanas. Rutinas, plan de comidas y comunidad de mujeres reales. Trial 7 días por $990." />
+<meta property="og:title" content="MyGlowUp — Tu transformación en 8 semanas" />
+<meta property="og:description" content="Únete a miles de mujeres chilenas que están cambiando su cuerpo desde casa. Trial 7 días por $990." />
+<meta property="og:type" content="website" />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          serif: ['Fraunces', 'serif'],
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+        },
+        colors: {
+          glow: {
+            50:  '#FFF6F2',
+            100: '#FFE9DF',
+            200: '#FFD1BD',
+            300: '#FFB294',
+            400: '#FF8A66',
+            500: '#F26A47',
+            600: '#D74E2D',
+            700: '#A93A20',
+          },
+          cream: '#FBF6EE',
+          ink: '#1A1A1A',
+        },
+      },
+    },
+  };
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: #FBF6EE; color: #1A1A1A; }
+  .font-serif { font-family: 'Fraunces', serif; letter-spacing: -0.02em; }
+  .grain::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+    opacity: 0.06; mix-blend-mode: multiply;
+  }
+  .phone-shadow { filter: drop-shadow(0 30px 60px rgba(215, 78, 45, 0.25)); }
+  .marquee { animation: marquee 30s linear infinite; }
+  @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .fade-up { opacity: 0; transform: translateY(20px); transition: all 0.8s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .pulse-dot { animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+</style>
+</head>
+<body class="grain">
+
+<!-- Top banner -->
+<div class="bg-ink text-white text-center text-xs sm:text-sm py-2 px-4 font-medium">
+  <span class="inline-block w-2 h-2 bg-green-400 rounded-full pulse-dot mr-2"></span>
+  Reto Invierno arranca el lunes — quedan <span class="text-glow-300 font-bold">37 cupos</span> de 150
+</div>
+
+<!-- Nav -->
+<nav class="sticky top-0 z-40 bg-cream/80 backdrop-blur border-b border-ink/5">
+  <div class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
+    <a href="#" class="font-serif text-2xl font-bold tracking-tight">
+      MyGlowUp<span class="text-glow-500">.</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+      <a href="#metodo" class="hover:text-glow-500">El método</a>
+      <a href="#coach" class="hover:text-glow-500">Tu coach</a>
+      <a href="#testimonios" class="hover:text-glow-500">Resultados</a>
+      <a href="#precio" class="hover:text-glow-500">Precio</a>
+    </div>
+    <a href="#precio" class="bg-ink text-cream px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-glow-600 transition">
+      Empezar por $990
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative overflow-hidden">
+  <div class="absolute top-20 -right-20 w-96 h-96 bg-glow-200 rounded-full blur-3xl opacity-50"></div>
+  <div class="absolute bottom-0 -left-20 w-96 h-96 bg-glow-300 rounded-full blur-3xl opacity-30"></div>
+
+  <div class="relative max-w-6xl mx-auto px-5 pt-16 pb-20 md:pt-24 md:pb-28 grid md:grid-cols-2 gap-12 items-center">
+    <div>
+      <div class="inline-flex items-center gap-2 bg-white border border-ink/10 rounded-full px-4 py-1.5 text-xs font-semibold mb-6">
+        <span class="text-glow-500">★★★★★</span>
+        <span>+2.300 chilenas transformándose</span>
+      </div>
+      <h1 class="font-serif text-5xl md:text-7xl font-bold leading-[0.95] mb-6">
+        Tu mejor versión<br/>
+        en <span class="italic text-glow-500">8 semanas</span>.
+      </h1>
+      <p class="text-lg md:text-xl text-ink/70 mb-8 max-w-lg leading-relaxed">
+        El método chileno que combina rutinas en casa, plan de comidas con productos de Jumbo/Líder y una comunidad privada de mujeres reales. Sin gym, sin dietas imposibles.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-3 mb-8">
+        <a href="#precio" class="bg-ink text-cream px-7 py-4 rounded-full text-base font-semibold text-center hover:bg-glow-600 transition shadow-lg shadow-ink/20">
+          Probar 7 días por $990 →
+        </a>
+        <a href="#metodo" class="px-7 py-4 rounded-full text-base font-semibold text-center border border-ink/20 hover:border-ink transition">
+          Ver cómo funciona
+        </a>
+      </div>
+
+      <div class="flex items-center gap-4 text-sm text-ink/60">
+        <div class="flex -space-x-2">
+          <div class="w-9 h-9 rounded-full bg-glow-300 border-2 border-cream"></div>
+          <div class="w-9 h-9 rounded-full bg-glow-400 border-2 border-cream"></div>
+          <div class="w-9 h-9 rounded-full bg-glow-500 border-2 border-cream"></div>
+          <div class="w-9 h-9 rounded-full bg-ink border-2 border-cream text-cream text-xs flex items-center justify-center font-bold">+2k</div>
+        </div>
+        <span>Únete a la cohorte de mayo</span>
+      </div>
+    </div>
+
+    <!-- Phone mockup -->
+    <div class="relative flex justify-center">
+      <div class="relative phone-shadow">
+        <div class="w-[280px] md:w-[320px] bg-ink rounded-[3rem] p-3">
+          <div class="bg-cream rounded-[2.3rem] overflow-hidden">
+            <!-- Status bar -->
+            <div class="flex justify-between items-center px-6 pt-3 pb-2 text-xs font-semibold">
+              <span>9:41</span>
+              <span>●●● 100%</span>
+            </div>
+            <!-- App content -->
+            <div class="px-5 pb-5">
+              <div class="flex items-center justify-between mb-4">
+                <div>
+                  <div class="text-xs text-ink/50">Hola, Camila</div>
+                  <div class="font-serif text-xl font-bold">Día 12 / 56</div>
+                </div>
+                <div class="w-10 h-10 rounded-full bg-glow-300"></div>
+              </div>
+
+              <!-- Progress ring -->
+              <div class="bg-gradient-to-br from-glow-400 to-glow-600 rounded-2xl p-5 text-white mb-4">
+                <div class="text-xs opacity-80 mb-1">Tu progreso</div>
+                <div class="font-serif text-3xl font-bold mb-2">-2.4 kg</div>
+                <div class="h-2 bg-white/20 rounded-full overflow-hidden">
+                  <div class="h-full bg-white w-[28%] rounded-full"></div>
+                </div>
+                <div class="text-xs opacity-80 mt-2">Semana 2 de 8 · Vas excelente 🔥</div>
+              </div>
+
+              <!-- Today -->
+              <div class="text-xs font-semibold uppercase tracking-wider text-ink/50 mb-2">Hoy</div>
+              <div class="space-y-2">
+                <div class="bg-white border border-ink/10 rounded-xl p-3 flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-lg bg-glow-100 flex items-center justify-center text-lg">🔥</div>
+                  <div class="flex-1">
+                    <div class="text-sm font-semibold">Glúteos + Cardio</div>
+                    <div class="text-xs text-ink/50">28 min · Intensidad media</div>
+                  </div>
+                  <div class="text-glow-500 text-xl">▶</div>
+                </div>
+                <div class="bg-white border border-ink/10 rounded-xl p-3 flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-lg bg-glow-100 flex items-center justify-center text-lg">🥑</div>
+                  <div class="flex-1">
+                    <div class="text-sm font-semibold">Almuerzo: Pollo + arroz</div>
+                    <div class="text-xs text-ink/50">420 kcal · Lista en 15 min</div>
+                  </div>
+                </div>
+                <div class="bg-glow-50 border border-glow-200 rounded-xl p-3 flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-lg">💬</div>
+                  <div class="flex-1">
+                    <div class="text-sm font-semibold">Grupo Cohorte Mayo</div>
+                    <div class="text-xs text-ink/50">14 mensajes nuevos</div>
+                  </div>
+                  <div class="w-2 h-2 bg-glow-500 rounded-full"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Logos / Trust marquee -->
+<section class="border-y border-ink/5 bg-white/50 py-6 overflow-hidden">
+  <div class="text-center text-xs uppercase tracking-widest text-ink/50 mb-4 font-semibold">Como visto en</div>
+  <div class="flex marquee gap-16 whitespace-nowrap items-center text-ink/40 font-serif text-2xl">
+    <span>Glamour</span><span>·</span><span>Mujer y Punto</span><span>·</span><span>BioBío</span><span>·</span><span>Cosas</span><span>·</span><span>Caras</span><span>·</span><span>Ya</span><span>·</span>
+    <span>Glamour</span><span>·</span><span>Mujer y Punto</span><span>·</span><span>BioBío</span><span>·</span><span>Cosas</span><span>·</span><span>Caras</span><span>·</span><span>Ya</span><span>·</span>
+  </div>
+</section>
+
+<!-- EL MÉTODO -->
+<section id="metodo" class="py-24 px-5">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <div class="text-xs uppercase tracking-widest font-semibold text-glow-500 mb-3">El método MyGlowUp</div>
+      <h2 class="font-serif text-4xl md:text-5xl font-bold mb-5">
+        No es otra app de rutinas.<br/>
+        Es <span class="italic">tu transformación</span>.
+      </h2>
+      <p class="text-ink/70 text-lg">4 pilares que hacen imposible que NO cambies tu cuerpo.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="bg-white rounded-3xl p-8 border border-ink/5 hover:border-glow-300 transition">
+        <div class="w-14 h-14 rounded-2xl bg-glow-100 flex items-center justify-center text-2xl mb-5">🎯</div>
+        <h3 class="font-serif text-2xl font-bold mb-3">Reto de 8 semanas con fecha real</h3>
+        <p class="text-ink/70 leading-relaxed">No empiezas "cuando quieras". Entras a una cohorte con día 1 fijo, 50 chicas como tú, y un objetivo claro. La fecha límite te empuja como ninguna otra app.</p>
+      </div>
+
+      <div class="bg-white rounded-3xl p-8 border border-ink/5 hover:border-glow-300 transition">
+        <div class="w-14 h-14 rounded-2xl bg-glow-100 flex items-center justify-center text-2xl mb-5">📸</div>
+        <h3 class="font-serif text-2xl font-bold mb-3">Tu progreso, semana a semana</h3>
+        <p class="text-ink/70 leading-relaxed">Cada domingo subes tu foto (privada). La app te muestra tu evolución lado a lado. Ver el cambio real es lo que te mantiene firme cuando el cuerpo aún no lo nota.</p>
+      </div>
+
+      <div class="bg-white rounded-3xl p-8 border border-ink/5 hover:border-glow-300 transition">
+        <div class="w-14 h-14 rounded-2xl bg-glow-100 flex items-center justify-center text-2xl mb-5">🥑</div>
+        <h3 class="font-serif text-2xl font-bold mb-3">Plan de comidas 100% chileno</h3>
+        <p class="text-ink/70 leading-relaxed">Olvídate de "1 cup of oats". Aquí es marraqueta integral, palta, pollo, arroz. Lista de compras semanal para Jumbo, Líder o tu feria.</p>
+      </div>
+
+      <div class="bg-white rounded-3xl p-8 border border-ink/5 hover:border-glow-300 transition">
+        <div class="w-14 h-14 rounded-2xl bg-glow-100 flex items-center justify-center text-2xl mb-5">👯‍♀️</div>
+        <h3 class="font-serif text-2xl font-bold mb-3">Tu cohorte privada</h3>
+        <p class="text-ink/70 leading-relaxed">Grupo cerrado con tus 50 compañeras y la coach. Pregunta cuando estés desmotivada, celebra cuando bajes el primer kilo. Aquí nadie está sola.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="py-24 px-5 bg-gradient-to-b from-cream to-glow-50">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <div class="text-xs uppercase tracking-widest font-semibold text-glow-500 mb-3">Cómo funciona</div>
+      <h2 class="font-serif text-4xl md:text-5xl font-bold">Tu primera semana, paso a paso</h2>
+    </div>
+
+    <div class="grid md:grid-cols-4 gap-6">
+      <div class="text-center">
+        <div class="w-16 h-16 rounded-full bg-ink text-cream font-serif text-2xl font-bold flex items-center justify-center mx-auto mb-4">1</div>
+        <h3 class="font-semibold text-lg mb-2">Descargas la app</h3>
+        <p class="text-sm text-ink/60">Disponible para iOS y Android. Test inicial de 2 min para personalizar tu plan.</p>
+      </div>
+      <div class="text-center">
+        <div class="w-16 h-16 rounded-full bg-ink text-cream font-serif text-2xl font-bold flex items-center justify-center mx-auto mb-4">2</div>
+        <h3 class="font-semibold text-lg mb-2">Subes tu foto día 1</h3>
+        <p class="text-sm text-ink/60">Privada, solo tú la ves. Es el "antes" que pronto vas a celebrar.</p>
+      </div>
+      <div class="text-center">
+        <div class="w-16 h-16 rounded-full bg-ink text-cream font-serif text-2xl font-bold flex items-center justify-center mx-auto mb-4">3</div>
+        <h3 class="font-semibold text-lg mb-2">Entras a tu cohorte</h3>
+        <p class="text-sm text-ink/60">Conoces a tus 50 compañeras y a tu coach en el grupo privado.</p>
+      </div>
+      <div class="text-center">
+        <div class="w-16 h-16 rounded-full bg-glow-500 text-white font-serif text-2xl font-bold flex items-center justify-center mx-auto mb-4">4</div>
+        <h3 class="font-semibold text-lg mb-2">Empiezas a brillar</h3>
+        <p class="text-sm text-ink/60">28 min al día, 5 días por semana. Resultados visibles desde la semana 2.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COACH -->
+<section id="coach" class="py-24 px-5">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <div class="relative">
+      <div class="aspect-[4/5] rounded-3xl bg-gradient-to-br from-glow-300 to-glow-600 overflow-hidden relative">
+        <!-- Reemplazar con foto real de la coach -->
+        <div class="absolute inset-0 flex items-center justify-center text-white/40 font-serif text-6xl italic">
+          [Foto Coach]
+        </div>
+        <div class="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur rounded-2xl p-5">
+          <div class="font-serif text-2xl font-bold">Coach [Nombre]</div>
+          <div class="text-sm text-ink/60 mb-2">Certificada IFBB · Nutrición deportiva</div>
+          <div class="flex items-center gap-3 text-xs">
+            <span class="bg-glow-100 px-3 py-1 rounded-full font-semibold">+5 años entrenando mujeres</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="text-xs uppercase tracking-widest font-semibold text-glow-500 mb-3">Tu coach</div>
+      <h2 class="font-serif text-4xl md:text-5xl font-bold mb-6 leading-tight">
+        "Llevo 5 años cambiando cuerpos de mujeres chilenas. <span class="italic">Ahora me toca el tuyo.</span>"
+      </h2>
+      <p class="text-ink/70 text-lg leading-relaxed mb-6">
+        No soy una influencer gringa con genética perfecta. Soy chilena, pasé por el postparto, por el sobrepeso, por las dietas que no funcionan. Diseñé MyGlowUp porque ninguna app entendía nuestro cuerpo, nuestra comida, ni nuestra vida real.
+      </p>
+      <div class="space-y-3">
+        <div class="flex gap-3"><div class="text-glow-500 font-bold">✓</div><div class="text-ink/80">Responde personalmente en el grupo de tu cohorte</div></div>
+        <div class="flex gap-3"><div class="text-glow-500 font-bold">✓</div><div class="text-ink/80">Live semanal de Q&A con todas las cohortes</div></div>
+        <div class="flex gap-3"><div class="text-glow-500 font-bold">✓</div><div class="text-ink/80">Ajusta tu plan si tienes lesiones o condiciones especiales</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section id="testimonios" class="py-24 px-5 bg-ink text-cream">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <div class="text-xs uppercase tracking-widest font-semibold text-glow-300 mb-3">Resultados reales</div>
+      <h2 class="font-serif text-4xl md:text-5xl font-bold">Ellas ya brillaron.<br/><span class="italic text-glow-300">Tú sigues.</span></h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-cream/5 backdrop-blur rounded-3xl p-6 border border-cream/10">
+        <div class="aspect-square rounded-2xl bg-gradient-to-br from-glow-400 to-glow-700 mb-5 flex items-center justify-center text-cream/30 font-serif italic">[Antes / Después]</div>
+        <div class="font-serif text-2xl font-bold text-glow-300 mb-2">-8 kg en 8 semanas</div>
+        <p class="text-cream/80 text-sm mb-4 italic">"Probé de todo. Por primera vez una app que entiende que como pan con palta y no avena con berries. Bajé 8 kilos sin pasar hambre."</p>
+        <div class="text-sm font-semibold">Javiera, 34 · Las Condes</div>
+      </div>
+
+      <div class="bg-cream/5 backdrop-blur rounded-3xl p-6 border border-cream/10">
+        <div class="aspect-square rounded-2xl bg-gradient-to-br from-glow-400 to-glow-700 mb-5 flex items-center justify-center text-cream/30 font-serif italic">[Antes / Después]</div>
+        <div class="font-serif text-2xl font-bold text-glow-300 mb-2">+4 cm de glúteo</div>
+        <p class="text-cream/80 text-sm mb-4 italic">"El grupo de mi cohorte fue lo que me cambió. Cuando quería bajarme, mis chiquillas me empujaban. Hoy somos amigas."</p>
+        <div class="text-sm font-semibold">Catalina, 28 · Concepción</div>
+      </div>
+
+      <div class="bg-cream/5 backdrop-blur rounded-3xl p-6 border border-cream/10">
+        <div class="aspect-square rounded-2xl bg-gradient-to-br from-glow-400 to-glow-700 mb-5 flex items-center justify-center text-cream/30 font-serif italic">[Antes / Después]</div>
+        <div class="font-serif text-2xl font-bold text-glow-300 mb-2">Postparto recuperado</div>
+        <p class="text-cream/80 text-sm mb-4 italic">"Después de mi segundo hijo pensé que ya no había vuelta atrás. En 2 cohortes recuperé mi cuerpo y mi seguridad."</p>
+        <div class="text-sm font-semibold">Daniela, 38 · Viña del Mar</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRECIO -->
+<section id="precio" class="py-24 px-5">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-12">
+      <div class="text-xs uppercase tracking-widest font-semibold text-glow-500 mb-3">Empieza hoy</div>
+      <h2 class="font-serif text-4xl md:text-5xl font-bold mb-4">Una decisión, 8 semanas, <span class="italic">tu mejor versión.</span></h2>
+      <p class="text-ink/70 text-lg">Prueba 7 días por $990. Si no es para ti, cancelas en 1 clic.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      <!-- Mensual -->
+      <div class="bg-white rounded-3xl p-8 border-2 border-ink/10 relative">
+        <div class="font-serif text-xl font-semibold mb-1">Mensual</div>
+        <div class="text-ink/60 text-sm mb-6">Flexible, cancela cuando quieras</div>
+        <div class="mb-6">
+          <div class="text-5xl font-serif font-bold">$12.990</div>
+          <div class="text-ink/60">/mes después del trial</div>
+        </div>
+        <div class="bg-glow-50 border border-glow-200 rounded-xl p-4 mb-6">
+          <div class="text-xs font-semibold text-glow-700 uppercase tracking-wider mb-1">Trial 7 días</div>
+          <div class="font-serif text-3xl font-bold">$990</div>
+        </div>
+        <a href="#" data-mp-link="MONTHLY" class="block text-center bg-ink text-cream py-4 rounded-full font-semibold hover:bg-glow-600 transition">
+          Empezar trial — $990
+        </a>
+      </div>
+
+      <!-- Anual -->
+      <div class="bg-gradient-to-br from-glow-500 to-glow-700 rounded-3xl p-8 text-white relative shadow-2xl shadow-glow-500/40">
+        <div class="absolute -top-3 right-6 bg-ink text-cream text-xs font-bold px-3 py-1.5 rounded-full">★ MÁS POPULAR · AHORRAS 42%</div>
+        <div class="font-serif text-xl font-semibold mb-1">Anual</div>
+        <div class="text-cream/80 text-sm mb-6">Para chicas que van en serio</div>
+        <div class="mb-6">
+          <div class="text-5xl font-serif font-bold">$89.990</div>
+          <div class="text-cream/80">/año · equivale a $7.499/mes</div>
+        </div>
+        <div class="bg-white/15 backdrop-blur rounded-xl p-4 mb-6">
+          <div class="text-xs font-semibold uppercase tracking-wider mb-1 opacity-90">Trial 7 días</div>
+          <div class="font-serif text-3xl font-bold">$990</div>
+          <div class="text-xs mt-1 opacity-80">Luego $89.990 anual</div>
+        </div>
+        <a href="#" data-mp-link="ANNUAL" class="block text-center bg-white text-ink py-4 rounded-full font-semibold hover:bg-cream transition">
+          Empezar trial — $990
+        </a>
+        <div class="mt-4 text-xs text-cream/80 space-y-1">
+          <div>✓ Bono: Guía de recetas chilenas PDF</div>
+          <div>✓ Bono: Asesoría 1:1 con la coach (30 min)</div>
+          <div>✓ Bono: Acceso vitalicio a cohortes futuras</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-8 text-sm text-ink/60">
+      🔒 Pago seguro vía Mercado Pago · Cancela cuando quieras · Garantía de 14 días
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="py-24 px-5 bg-white">
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-12">
+      <div class="text-xs uppercase tracking-widest font-semibold text-glow-500 mb-3">Preguntas frecuentes</div>
+      <h2 class="font-serif text-4xl md:text-5xl font-bold">Resolvemos tus dudas</h2>
+    </div>
+
+    <div class="space-y-3">
+      <details class="bg-cream rounded-2xl p-6 group">
+        <summary class="font-semibold cursor-pointer flex justify-between items-center">¿Necesito gimnasio o equipamiento?<span class="text-glow-500 group-open:rotate-45 transition">+</span></summary>
+        <p class="mt-4 text-ink/70">No. Todas las rutinas son en casa. Recomendamos un par de mancuernas livianas (3-5 kg) opcionales — pero las primeras 4 semanas no necesitas nada.</p>
+      </details>
+      <details class="bg-cream rounded-2xl p-6 group">
+        <summary class="font-semibold cursor-pointer flex justify-between items-center">¿Y si no puedo todos los días?<span class="text-glow-500 group-open:rotate-45 transition">+</span></summary>
+        <p class="mt-4 text-ink/70">El programa son 5 días a la semana, 28 min al día. Si te saltas uno, no pasa nada — la app reorganiza tu semana. La cohorte te ayuda a no perder el ritmo.</p>
+      </details>
+      <details class="bg-cream rounded-2xl p-6 group">
+        <summary class="font-semibold cursor-pointer flex justify-between items-center">¿Puedo cancelar el trial sin que me cobren los $12.990?<span class="text-glow-500 group-open:rotate-45 transition">+</span></summary>
+        <p class="mt-4 text-ink/70">Sí, totalmente. Cancelas desde la app en 1 clic antes del día 7 y no se cobra nada más. Sin letra chica.</p>
+      </details>
+      <details class="bg-cream rounded-2xl p-6 group">
+        <summary class="font-semibold cursor-pointer flex justify-between items-center">¿Cuándo empiezo si me inscribo hoy?<span class="text-glow-500 group-open:rotate-45 transition">+</span></summary>
+        <p class="mt-4 text-ink/70">Te integras a la cohorte que arranca el próximo lunes. Mientras tanto tienes acceso a contenido de bienvenida y al grupo.</p>
+      </details>
+      <details class="bg-cream rounded-2xl p-6 group">
+        <summary class="font-semibold cursor-pointer flex justify-between items-center">Tengo más de 40 / soy postparto / tengo lesión. ¿Sirve?<span class="text-glow-500 group-open:rotate-45 transition">+</span></summary>
+        <p class="mt-4 text-ink/70">Sí. La app te hace un test inicial y adapta el plan. La coach revisa casos especiales en el onboarding.</p>
+      </details>
+      <details class="bg-cream rounded-2xl p-6 group">
+        <summary class="font-semibold cursor-pointer flex justify-between items-center">¿Cómo se paga?<span class="text-glow-500 group-open:rotate-45 transition">+</span></summary>
+        <p class="mt-4 text-ink/70">Con tarjeta de débito o crédito a través de Mercado Pago. Cobro automático mensual o anual según el plan que elijas.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="py-24 px-5 bg-gradient-to-br from-glow-400 via-glow-500 to-glow-700 text-white text-center relative overflow-hidden">
+  <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 20% 50%, white 0%, transparent 50%), radial-gradient(circle at 80% 80%, white 0%, transparent 50%);"></div>
+  <div class="relative max-w-3xl mx-auto">
+    <h2 class="font-serif text-5xl md:text-7xl font-bold mb-6 leading-[0.95]">
+      Tu mejor verano<br/>empieza <span class="italic">hoy</span>.
+    </h2>
+    <p class="text-xl text-white/90 mb-8 max-w-xl mx-auto">
+      Únete a la cohorte que arranca el lunes. 37 cupos disponibles. Trial 7 días por $990.
+    </p>
+    <a href="#" data-mp-link="MONTHLY" class="inline-block bg-ink text-cream px-10 py-5 rounded-full text-lg font-bold hover:bg-cream hover:text-ink transition shadow-2xl">
+      Quiero mi glow up →
+    </a>
+    <div class="mt-6 text-sm text-white/80">🔒 Pago seguro · Cancela cuando quieras</div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-10 px-5 bg-ink text-cream/60 text-sm">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="font-serif text-cream text-xl font-bold">MyGlowUp<span class="text-glow-400">.</span></div>
+    <div class="flex gap-6">
+      <a href="#" class="hover:text-cream">Términos</a>
+      <a href="#" class="hover:text-cream">Privacidad</a>
+      <a href="mailto:hola@myglowup.cl" class="hover:text-cream">hola@myglowup.cl</a>
+    </div>
+    <div>© 2026 MyGlowUp · Hecho en Chile 🇨🇱</div>
+  </div>
+</footer>
+
+<!-- Sticky mobile CTA -->
+<div class="md:hidden fixed bottom-4 left-4 right-4 z-30">
+  <a href="#precio" class="block bg-ink text-cream py-4 rounded-full text-center font-bold shadow-2xl shadow-ink/40">
+    Probar 7 días por $990 →
+  </a>
+</div>
+
+<script>
+  // ============================================================
+  //  MERCADO PAGO LINKS — REEMPLAZA ESTOS URLs
+  // ============================================================
+  //  1. Crea tu cuenta en https://www.mercadopago.cl/
+  //  2. Ve a "Link de pago" → "Crear nuevo link"
+  //  3. Crea un link de $990 (trial) y pega el URL abajo
+  //  4. (Opcional, más adelante) Crea suscripciones automáticas
+  // ============================================================
+  const MP_LINKS = {
+    MONTHLY: 'https://link.mercadopago.cl/REEMPLAZAR_AQUI',
+    ANNUAL:  'https://link.mercadopago.cl/REEMPLAZAR_AQUI',
+  };
+
+  document.querySelectorAll('[data-mp-link]').forEach(el => {
+    const key = el.dataset.mpLink;
+    el.href = MP_LINKS[key] || '#';
+    el.addEventListener('click', (e) => {
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'InitiateCheckout', { content_name: key, value: 990, currency: 'CLP' });
+      }
+    });
+  });
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // ============================================================
+  //  FACEBOOK PIXEL — REEMPLAZA EL ID
+  // ============================================================
+  /*
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', 'TU_PIXEL_ID_AQUI');
+  fbq('track', 'PageView');
+  */
+</script>
+
+</body>
+</html>
