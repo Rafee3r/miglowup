@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MiGlowUp — Marcarse en 8 semanas. Glúteo firme. Cuerpo de verano.</title>
+<meta name="description" content="App fitness con coach IA personalizado. Reto de 8 semanas para tonificar, marcar glúteo y recuperar tu mejor cuerpo. Desde casa, sin esperar respuestas." />
+<meta property="og:title" content="MiGlowUp — Tu cuerpo de verano en 8 semanas" />
+<meta property="og:description" content="Coach IA personalizado · Reto 8 semanas · Rutinas desde casa · Resultados visibles." />
+<meta property="og:type" content="website" />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          serif: ['Fraunces', 'serif'],
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+        },
+        colors: {
+          glow: {
+            50:  '#FFF6F2', 100: '#FFE9DF', 200: '#FFD1BD', 300: '#FFB294',
+            400: '#FF8A66', 500: '#F26A47', 600: '#D74E2D', 700: '#A93A20',
+          },
+          cream: '#FBF6EE',
+          ink: '#0A0A0A',
+        },
+      },
+    },
+  };
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: #0A0A0A; color: #FBF6EE; }
+  .font-serif { font-family: 'Fraunces', serif; letter-spacing: -0.02em; }
+  .grain::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+    opacity: 0.05; mix-blend-mode: screen;
+  }
+  .phone-shadow { filter: drop-shadow(0 30px 80px rgba(242, 106, 71, 0.4)); }
+  .pulse-dot { animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .gradient-text {
+    background: linear-gradient(135deg, #FF8A66 0%, #F26A47 50%, #FFB294 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .glow-border {
+    background: linear-gradient(#0A0A0A, #0A0A0A) padding-box,
+                linear-gradient(135deg, #F26A47, #FFB294) border-box;
+    border: 2px solid transparent;
+  }
+</style>
+</head>
+<body class="grain">
+
+<!-- Top banner -->
+<div class="bg-glow-500 text-white text-center text-xs sm:text-sm py-2 px-4 font-semibold">
+  <span class="inline-block w-2 h-2 bg-white rounded-full pulse-dot mr-2"></span>
+  Reto Verano 2026 · Plazas fundadoras desde $990
+</div>
+
+<!-- Nav -->
+<nav class="sticky top-0 z-40 bg-ink/90 backdrop-blur border-b border-cream/5">
+  <div class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
+    <a href="#" class="font-serif text-2xl font-bold tracking-tight text-cream">
+      MiGlowUp<span class="text-glow-500">.</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8 text-sm font-medium text-cream/70">
+      <a href="#reto" class="hover:text-glow-400">El reto</a>
+      <a href="#coach" class="hover:text-glow-400">Coach IA</a>
+      <a href="#transformacion" class="hover:text-glow-400">Resultados</a>
+      <a href="#precio" class="hover:text-glow-400">Precio</a>
+    </div>
+    <a href="#precio" class="bg-glow-500 text-white px-5 py-2.5 rounded-full text-sm font-bold hover:bg-glow-600 transition">
+      Empezar $990 →
+    </a>
+  </div>
+</nav>
+
+<!-- HERO aspiracional -->
+<section class="relative overflow-hidden">
+  <div class="absolute top-20 -right-32 w-[500px] h-[500px] bg-glow-500 rounded-full blur-[120px] opacity-30"></div>
+  <div class="absolute bottom-0 -left-32 w-[500px] h-[500px] bg-glow-400 rounded-full blur-[120px] opacity-20"></div>
+
+  <div class="relative max-w-6xl mx-auto px-5 pt-16 pb-20 md:pt-24 md:pb-28 grid md:grid-cols-2 gap-12 items-center">
+    <div>
+      <div class="inline-flex items-center gap-2 bg-cream/5 border border-cream/10 rounded-full px-4 py-1.5 text-xs font-bold mb-6 text-cream/80">
+        <span>✦</span>
+        <span>POWERED BY AI · NO HUMAN COACH</span>
+      </div>
+      <h1 class="font-serif text-5xl md:text-7xl font-bold leading-[0.9] mb-6 text-cream">
+        Marcarse<br/>
+        en <span class="italic gradient-text">8 semanas</span>.
+      </h1>
+      <p class="text-lg md:text-xl text-cream/60 mb-8 max-w-lg leading-relaxed">
+        Glúteo firme. Abdomen plano. Cuerpo de verano. Coach IA que adapta tu plan cada semana según tu progreso real. <strong class="text-cream">Sin esperar respuestas. Sin coaches gritones. Solo tú y tu plan.</strong>
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-3 mb-8">
+        <a href="#precio" class="bg-glow-500 text-white px-7 py-4 rounded-full text-base font-bold text-center hover:bg-glow-600 transition shadow-2xl shadow-glow-500/30">
+          Empezar reto $990 →
+        </a>
+        <a href="#reto" class="px-7 py-4 rounded-full text-base font-semibold text-center border border-cream/20 hover:border-cream text-cream transition">
+          Ver el reto
+        </a>
+      </div>
+
+      <div class="flex items-center gap-6 text-sm text-cream/50">
+        <div class="flex items-center gap-2"><span class="text-glow-400">⚡</span><span>28 min/día</span></div>
+        <div class="flex items-center gap-2"><span class="text-glow-400">🏠</span><span>Desde casa</span></div>
+        <div class="flex items-center gap-2"><span class="text-glow-400">🤖</span><span>IA 24/7</span></div>
+      </div>
+    </div>
+
+    <!-- Phone mockup workout -->
+    <div class="relative flex justify-center">
+      <div class="relative phone-shadow">
+        <div class="w-[280px] md:w-[320px] bg-cream rounded-[3rem] p-3">
+          <div class="bg-ink rounded-[2.3rem] overflow-hidden text-cream">
+            <div class="flex justify-between items-center px-6 pt-3 pb-2 text-xs font-semibold text-cream/80">
+              <span>9:41</span>
+              <span>●●● 100%</span>
+            </div>
+            <div class="px-5 pb-5">
+              <div class="mb-4">
+                <div class="text-xs text-cream/50 uppercase tracking-wider font-bold">SEMANA 3 · DÍA 17</div>
+                <div class="font-serif text-2xl font-bold">Glúteo + HIIT</div>
+              </div>
+
+              <!-- Workout card -->
+              <div class="bg-gradient-to-br from-glow-500 to-glow-700 rounded-2xl p-5 text-white mb-4 relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-white/10 rounded-full"></div>
+                <div class="relative">
+                  <div class="text-xs opacity-80 mb-1">Rutina de hoy</div>
+                  <div class="font-serif text-2xl font-bold mb-3">28 min · 6 ejercicios</div>
+                  <div class="flex gap-2 text-xs">
+                    <span class="bg-white/20 px-2 py-1 rounded-full font-semibold">Glúteo</span>
+                    <span class="bg-white/20 px-2 py-1 rounded-full font-semibold">Cardio</span>
+                    <span class="bg-white/20 px-2 py-1 rounded-full font-semibold">Core</span>
+                  </div>
+                  <button class="mt-4 bg-white text-glow-700 font-bold rounded-full py-2 px-5 text-sm">Empezar ▶</button>
+                </div>
+              </div>
+
+              <!-- Streak -->
+              <div class="bg-cream/5 rounded-xl p-3 flex items-center gap-3 mb-2">
+                <div class="text-2xl">🔥</div>
+                <div class="flex-1">
+                  <div class="text-sm font-bold">17 días seguidos</div>
+                  <div class="text-xs text-cream/50">Tu racha más larga · sigue así</div>
+                </div>
+              </div>
+
+              <!-- AI message -->
+              <div class="bg-glow-500/10 border border-glow-500/30 rounded-xl p-3 flex items-start gap-3">
+                <div class="w-8 h-8 rounded-full bg-glow-500 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">AI</div>
+                <div class="flex-1 text-xs text-cream/80 leading-relaxed">
+                  <div class="font-bold text-cream mb-1">Coach AI · hace 2h</div>
+                  Subí la intensidad de tus piernas un 10%. Tu progreso de la semana pasada lo permite. 💪
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUIÉN ES -->
+<section class="py-20 px-5 bg-cream text-ink">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-12">
+      <div class="text-xs uppercase tracking-widest font-bold text-glow-500 mb-3">Para quién es</div>
+      <h2 class="font-serif text-4xl md:text-5xl font-bold">¿Te suena <span class="italic">familiar</span>?</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div class="bg-white rounded-2xl p-6 border border-ink/10 flex gap-4">
+        <div class="text-3xl">🏖️</div>
+        <div>
+          <div class="font-bold mb-1">Tu cuerpo de verano</div>
+          <div class="text-sm text-ink/70">Quieres llegar a diciembre marcada, no en pánico la semana antes de la playa.</div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border border-ink/10 flex gap-4">
+        <div class="text-3xl">🍑</div>
+        <div>
+          <div class="font-bold mb-1">Glúteo firme · piernas tonificadas</div>
+          <div class="text-sm text-ink/70">El reto trabaja específicamente lower-body, donde más resultados visibles se ven.</div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border border-ink/10 flex gap-4">
+        <div class="text-3xl">👶</div>
+        <div>
+          <div class="font-bold mb-1">Post-parto · recuperar tu cuerpo</div>
+          <div class="text-sm text-ink/70">Plan adaptado por la IA para volver gradual al ejercicio sin lesionarte.</div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border border-ink/10 flex gap-4">
+        <div class="text-3xl">⏱️</div>
+        <div>
+          <div class="font-bold mb-1">28 minutos al día · desde casa</div>
+          <div class="text-sm text-ink/70">No tienes 2 horas para ir al gym. Esto encaja entre el trabajo, los niños y tu vida.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EL RETO 8 SEMANAS -->
+<section id="reto" class="py-24 px-5">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <div class="text-xs uppercase tracking-widest font-bold text-glow-400 mb-3">El reto</div>
+      <h2 class="font-serif text-4xl md:text-5xl font-bold mb-5 text-cream">
+        8 semanas. 4 fases.<br/>
+        <span class="italic gradient-text">Tu nuevo cuerpo.</span>
+      </h2>
+      <p class="text-cream/60 text-lg">Plan progresivo diseñado por entrenadoras y ejecutado por IA que se adapta a ti.</p>
+    </div>
+
+    <div class="grid md:grid-cols-4 gap-4">
+      <div class="bg-cream/5 backdrop-blur rounded-2xl p-6 border border-cream/10">
+        <div class="font-serif text-glow-400 text-5xl font-bold mb-3">01</div>
+        <div class="text-xs uppercase tracking-wider text-cream/50 font-bold mb-2">Semanas 1-2</div>
+        <h3 class="font-serif text-xl font-bold mb-2 text-cream">Activación</h3>
+        <p class="text-sm text-cream/60">Despertás músculos dormidos. Cardio bajo + fuerza inicial. Sin agujetas que te dejen tirada.</p>
+      </div>
+      <div class="bg-cream/5 backdrop-blur rounded-2xl p-6 border border-cream/10">
+        <div class="font-serif text-glow-400 text-5xl font-bold mb-3">02</div>
+        <div class="text-xs uppercase tracking-wider text-cream/50 font-bold mb-2">Semanas 3-4</div>
+        <h3 class="font-serif text-xl font-bold mb-2 text-cream">Quema</h3>
+        <p class="text-sm text-cream/60">HIIT progresivo. Ya empezás a ver cintura más definida, ropa más holgada.</p>
+      </div>
+      <div class="bg-cream/5 backdrop-blur rounded-2xl p-6 border border-cream/10">
+        <div class="font-serif text-glow-400 text-5xl font-bold mb-3">03</div>
+        <div class="text-xs uppercase tracking-wider text-cream/50 font-bold mb-2">Semanas 5-6</div>
+        <h3 class="font-serif text-xl font-bold mb-2 text-cream">Tonificación</h3>
+        <p class="text-sm text-cream/60">Foco glúteo, piernas y core. La fase donde más cambia tu reflejo en el espejo.</p>
+      </div>
+      <div class="bg-gradient-to-br from-glow-500 to-glow-700 rounded-2xl p-6 text-white">
+        <div class="font-serif text-5xl font-bold mb-3 opacity-90">04</div>
+        <div class="text-xs uppercase tracking-wider opacity-80 font-bold mb-2">Semanas 7-8</div>
+        <h3 class="font-serif text-xl font-bold mb-2">Definición</h3>
+        <p class="text-sm opacity-90">Pulir resultado. Combinación HIIT + fuerza para que llegues a la foto final marcada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COACH IA -->
+<section id="coach" class="py-24 px-5 bg-cream text-ink">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <div>
+      <div class="text-xs uppercase tracking-widest font-bold text-glow-500 mb-3">Tu coach IA</div>
+      <h2 class="font-serif text-4xl md:text-5xl font-bold mb-6 leading-tight">
+        Sin humanos.<br/>
+        Sin esperas.<br/>
+        <span class="italic gradient-text">Solo resultados.</span>
+      </h2>
+      <p class="text-ink/70 text-lg mb-6 leading-relaxed">
+        Olvídate de coaches con genética perfecta vendiéndote su rutina. <strong>Tu coach IA personal</strong> adapta tu plan cada semana según tu progreso real, tu nivel de energía, las rutinas que completas y las que te saltas.
+      </p>
+      <div class="space-y-3">
+        <div class="bg-white rounded-xl p-4 border border-ink/10 flex gap-3">
+          <div class="text-2xl">🤖</div>
+          <div>
+            <div class="font-bold">Plan que se adapta sola</div>
+            <div class="text-sm text-ink/60">Si ayer no pudiste, hoy el plan ajusta intensidad. Sin culpa, sin sermones.</div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl p-4 border border-ink/10 flex gap-3">
+          <div class="text-2xl">⚡</div>
+          <div>
+            <div class="font-bold">Respuestas 24/7</div>
+            <div class="text-sm text-ink/60">¿Duda con un ejercicio? ¿Cómo sustituir uno por lesión? Respuesta inmediata.</div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl p-4 border border-ink/10 flex gap-3">
+          <div class="text-2xl">🔒</div>
+          <div>
+            <div class="font-bold">Privacidad total</div>
+            <div class="text-sm text-ink/60">Tus fotos de progreso y datos solo los ves tú. Ningún humano accede.</div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl p-4 border border-ink/10 flex gap-3">
+          <div class="text-2xl">📊</div>
+          <div>
+            <div class="font-bold">Datos reales, sin manipulación</div>
+            <div class="text-sm text-ink/60">Métricas honestas semana a semana. Lo que avanzas y lo que falta.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="relative">
+      <div class="bg-ink rounded-3xl p-6 text-cream shadow-2xl">
+        <div class="flex items-center gap-3 mb-5 pb-4 border-b border-cream/10">
+          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-glow-400 to-glow-600 flex items-center justify-center text-white font-bold text-sm">AI</div>
+          <div>
+            <div class="font-bold">Coach MiGlowUp</div>
+            <div class="text-xs text-glow-400 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-glow-400 rounded-full"></span>En línea</div>
+          </div>
+        </div>
+        <div class="space-y-3 text-sm">
+          <div class="bg-cream/5 rounded-2xl rounded-tl-sm p-3 max-w-[85%]">
+            Buenas, Cami. Vi que ayer te saltaste la rutina. Todo bien — ajusté la de hoy a 22 min en vez de 28. Vamos suave hoy. 💪
+          </div>
+          <div class="bg-glow-500 text-white rounded-2xl rounded-tr-sm p-3 max-w-[85%] ml-auto">
+            Gracias 🙏 Tengo molestia en la rodilla derecha
+          </div>
+          <div class="bg-cream/5 rounded-2xl rounded-tl-sm p-3 max-w-[85%]">
+            Ok, saqué sentadillas y burpees. Te dejé glúteo en suelo + core. Reservame cómo te sentís al terminar.
+          </div>
+          <div class="bg-cream/5 rounded-2xl rounded-tl-sm p-3 max-w-[85%] text-xs text-cream/50 italic">
+            Coach AI escribiendo...
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSFORMACIÓN (sin testimonios falsos) -->
+<section id="transformacion" class="py-24 px-5">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <div class="text-xs uppercase tracking-widest font-bold text-glow-400 mb-3">Lo que vas a lograr</div>
+      <h2 class="font-serif text-4xl md:text-5xl font-bold text-cream mb-4">8 semanas. Tu nuevo <span class="italic gradient-text">reflejo</span>.</h2>
+      <p class="text-cream/50 text-base max-w-xl mx-auto italic">Estamos lanzando. Las primeras 50 fundadoras serán los testimonios reales — sin invenciones.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="bg-cream/5 backdrop-blur rounded-3xl p-7 border border-cream/10">
+        <div class="text-5xl mb-4">🍑</div>
+        <h3 class="font-serif text-2xl font-bold text-glow-400 mb-3">Glúteo firme</h3>
+        <p class="text-cream/70 text-sm leading-relaxed">35% del programa enfocado en lower-body. Resultados visibles desde la semana 3 si seguís el plan.</p>
+      </div>
+      <div class="bg-cream/5 backdrop-blur rounded-3xl p-7 border border-cream/10">
+        <div class="text-5xl mb-4">⚡</div>
+        <h3 class="font-serif text-2xl font-bold text-glow-400 mb-3">Cintura más marcada</h3>
+        <p class="text-cream/70 text-sm leading-relaxed">HIIT + core trabajan zona abdominal. La diferencia en la ropa la notás antes que en la balanza.</p>
+      </div>
+      <div class="bg-cream/5 backdrop-blur rounded-3xl p-7 border border-cream/10">
+        <div class="text-5xl mb-4">💪</div>
+        <h3 class="font-serif text-2xl font-bold text-glow-400 mb-3">Fuerza real</h3>
+        <p class="text-cream/70 text-sm leading-relaxed">No solo te ves mejor — subís escaleras sin cansarte, cargás compras sin esfuerzo. Energía nueva.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMA FUNDADORA -->
+<section class="py-24 px-5 bg-gradient-to-b from-ink to-glow-700/40">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-12">
+      <div class="text-xs uppercase tracking-widest font-bold text-glow-400 mb-3">Programa fundadora</div>
+      <h2 class="font-serif text-4xl md:text-5xl font-bold text-cream mb-4">Las primeras <span class="italic gradient-text">50 entran ahora</span>.</h2>
+      <p class="text-cream/70 text-lg max-w-2xl mx-auto">Estamos en lanzamiento. Las 50 primeras fundadoras consiguen precio congelado de por vida y acceso anticipado al coach IA.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="bg-cream/5 backdrop-blur rounded-2xl p-6 border border-cream/10">
+        <div class="text-3xl mb-3">🎟️</div>
+        <h3 class="font-bold text-cream mb-2">Precio congelado</h3>
+        <p class="text-sm text-cream/60">Cuando subamos precio, vos seguís pagando $12.990. Para siempre.</p>
+      </div>
+      <div class="bg-cream/5 backdrop-blur rounded-2xl p-6 border border-cream/10">
+        <div class="text-3xl mb-3">🤖</div>
+        <h3 class="font-bold text-cream mb-2">Coach IA primero</h3>
+        <p class="text-sm text-cream/60">Acceso anticipado a nuevas funciones del coach IA antes que el resto.</p>
+      </div>
+      <div class="bg-cream/5 backdrop-blur rounded-2xl p-6 border border-cream/10">
+        <div class="text-3xl mb-3">🏆</div>
+        <h3 class="font-bold text-cream mb-2">Tu transformación documentada</h3>
+        <p class="text-sm text-cream/60">Si quieres, tu antes/después puede ser el primer testimonio real de MiGlowUp.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRECIO -->
+<section id="precio" class="py-24 px-5">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-12">
+      <div class="text-xs uppercase tracking-widest font-bold text-glow-400 mb-3">Empezá hoy</div>
+      <h2 class="font-serif text-4xl md:text-5xl font-bold text-cream mb-4">Tu cuerpo de verano <span class="italic gradient-text">desde $990</span>.</h2>
+      <p class="text-cream/60 text-lg">7 días por $990. Cancelás en 1 clic si no es para ti.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="bg-cream/5 backdrop-blur rounded-3xl p-8 border border-cream/10">
+        <div class="font-serif text-xl font-semibold mb-1 text-cream">Mensual</div>
+        <div class="text-cream/50 text-sm mb-6">Cancelá cuando quieras</div>
+        <div class="mb-6">
+          <div class="text-5xl font-serif font-bold text-cream">$12.990</div>
+          <div class="text-cream/50">/mes después del trial</div>
+        </div>
+        <div class="bg-glow-500/10 border border-glow-500/30 rounded-xl p-4 mb-6">
+          <div class="text-xs font-bold text-glow-400 uppercase tracking-wider mb-1">Trial 7 días</div>
+          <div class="font-serif text-3xl font-bold text-cream">$990</div>
+        </div>
+        <a href="#" data-mp-link="MONTHLY" class="block text-center bg-cream text-ink py-4 rounded-full font-bold hover:bg-glow-400 hover:text-white transition">
+          Empezar reto $990
+        </a>
+      </div>
+
+      <div class="bg-gradient-to-br from-glow-500 to-glow-700 rounded-3xl p-8 text-white relative shadow-2xl shadow-glow-500/40">
+        <div class="absolute -top-3 right-6 bg-cream text-ink text-xs font-bold px-3 py-1.5 rounded-full">★ AHORRA 42%</div>
+        <div class="font-serif text-xl font-semibold mb-1">Anual</div>
+        <div class="text-cream/80 text-sm mb-6">Para chicas que van en serio</div>
+        <div class="mb-6">
+          <div class="text-5xl font-serif font-bold">$89.990</div>
+          <div class="text-cream/80">/año · $7.499 por mes</div>
+        </div>
+        <div class="bg-white/15 backdrop-blur rounded-xl p-4 mb-6">
+          <div class="text-xs font-bold uppercase tracking-wider mb-1 opacity-90">Trial 7 días</div>
+          <div class="font-serif text-3xl font-bold">$990</div>
+          <div class="text-xs mt-1 opacity-80">Luego $89.990 anual</div>
+        </div>
+        <a href="#" data-mp-link="ANNUAL" class="block text-center bg-ink text-cream py-4 rounded-full font-bold hover:bg-cream hover:text-ink transition">
+          Anual fundadora $990
+        </a>
+        <div class="mt-4 text-xs text-cream/80 space-y-1">
+          <div>✓ Precio fundadora congelado de por vida</div>
+          <div>✓ Coach IA acceso prioritario</div>
+          <div>✓ Acceso a futuros retos incluido</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-8 text-sm text-cream/40">
+      🔒 Pago seguro vía Mercado Pago · Cancelá cuando quieras · Garantía 14 días
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="py-24 px-5 bg-cream text-ink">
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-12">
+      <div class="text-xs uppercase tracking-widest font-bold text-glow-500 mb-3">Preguntas frecuentes</div>
+      <h2 class="font-serif text-4xl md:text-5xl font-bold">Lo que más nos preguntan</h2>
+    </div>
+
+    <div class="space-y-3">
+      <details class="bg-white rounded-2xl p-6 group border border-ink/5">
+        <summary class="font-semibold cursor-pointer flex justify-between items-center">¿Necesito gym o equipamiento?<span class="text-glow-500 group-open:rotate-45 transition">+</span></summary>
+        <p class="mt-4 text-ink/70">No. El reto se hace 100% en casa. Las semanas 1-4 sin equipamiento. Para semanas 5-8 recomendamos un par de mancuernas livianas (3-5 kg) o bandas elásticas — opcional.</p>
+      </details>
+      <details class="bg-white rounded-2xl p-6 group border border-ink/5">
+        <summary class="font-semibold cursor-pointer flex justify-between items-center">¿Cómo funciona el coach IA?<span class="text-glow-500 group-open:rotate-45 transition">+</span></summary>
+        <p class="mt-4 text-ink/70">Es un asistente que adapta tu rutina según tu progreso, te responde dudas sobre ejercicios y técnica, te recuerda hidratarte, y ajusta el plan si te lesionas. No reemplaza a un médico — pero sí a tener que esperar a que tu coach humano te conteste por WhatsApp.</p>
+      </details>
+      <details class="bg-white rounded-2xl p-6 group border border-ink/5">
+        <summary class="font-semibold cursor-pointer flex justify-between items-center">¿Cuántos kilos voy a bajar?<span class="text-glow-500 group-open:rotate-45 transition">+</span></summary>
+        <p class="mt-4 text-ink/70">No prometemos números — cada cuerpo es distinto. El reto está enfocado en <strong>recomposición</strong>: marcarte, tonificar, ganar fuerza. Algunas chicas ven la balanza moverse poco pero la ropa enorme. Esa es la idea.</p>
+      </details>
+      <details class="bg-white rounded-2xl p-6 group border border-ink/5">
+        <summary class="font-semibold cursor-pointer flex justify-between items-center">¿Hay plan de alimentación?<span class="text-glow-500 group-open:rotate-45 transition">+</span></summary>
+        <p class="mt-4 text-ink/70">La app incluye tracker de hábitos alimentarios (registrás vos lo que comés) y guías generales. <strong>No recomendamos comidas específicas</strong> — para plan personalizado de nutrición, te sugerimos un nutricionista.</p>
+      </details>
+      <details class="bg-white rounded-2xl p-6 group border border-ink/5">
+        <summary class="font-semibold cursor-pointer flex justify-between items-center">¿Sirve si soy post-parto?<span class="text-glow-500 group-open:rotate-45 transition">+</span></summary>
+        <p class="mt-4 text-ink/70">Sí, pero <strong>consulta con tu médico antes de empezar</strong>. El plan se adapta a tu nivel desde semana 1 — empezás suave y vas escalando solo cuando tu cuerpo lo permite.</p>
+      </details>
+      <details class="bg-white rounded-2xl p-6 group border border-ink/5">
+        <summary class="font-semibold cursor-pointer flex justify-between items-center">¿Puedo cancelar el trial sin que me cobren?<span class="text-glow-500 group-open:rotate-45 transition">+</span></summary>
+        <p class="mt-4 text-ink/70">Sí. Antes del día 7 cancelas desde la app y no se cobra nada más. Cero letra chica.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="py-24 px-5 bg-gradient-to-br from-glow-500 via-glow-600 to-glow-700 text-white text-center relative overflow-hidden">
+  <div class="absolute inset-0 opacity-30" style="background-image: radial-gradient(circle at 20% 50%, white 0%, transparent 50%), radial-gradient(circle at 80% 80%, white 0%, transparent 50%);"></div>
+  <div class="relative max-w-3xl mx-auto">
+    <h2 class="font-serif text-5xl md:text-7xl font-bold mb-6 leading-[0.9]">
+      Tu cuerpo de<br/><span class="italic">verano</span> empieza<br/>HOY.
+    </h2>
+    <p class="text-xl text-white/90 mb-8 max-w-xl mx-auto">
+      8 semanas. Coach IA. Resultados visibles. Sé una de las primeras 50 fundadoras.
+    </p>
+    <a href="#" data-mp-link="MONTHLY" class="inline-block bg-ink text-cream px-10 py-5 rounded-full text-lg font-bold hover:bg-cream hover:text-ink transition shadow-2xl">
+      Empezar reto $990 →
+    </a>
+    <div class="mt-6 text-sm text-white/80">🔒 Pago seguro · Cancelá cuando quieras · 7 días de garantía</div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-10 px-5 bg-ink text-cream/50 text-sm">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="font-serif text-cream text-xl font-bold">MiGlowUp<span class="text-glow-400">.</span></div>
+    <div class="flex gap-6">
+      <a href="#" class="hover:text-cream">Términos</a>
+      <a href="#" class="hover:text-cream">Privacidad</a>
+      <a href="mailto:hola@miglowup.cl" class="hover:text-cream">hola@miglowup.cl</a>
+    </div>
+    <div>© 2026 MiGlowUp · Hecho en Chile 🇨🇱</div>
+  </div>
+</footer>
+
+<!-- Sticky mobile CTA -->
+<div class="md:hidden fixed bottom-4 left-4 right-4 z-30">
+  <a href="#precio" class="block bg-glow-500 text-white py-4 rounded-full text-center font-bold shadow-2xl shadow-glow-500/50">
+    Empezar reto $990 →
+  </a>
+</div>
+
+<script>
+  const MP_LINKS = {
+    MONTHLY: 'https://mpago.la/1BaojSf',
+    ANNUAL:  'https://mpago.la/1BaojSf',
+  };
+
+  document.querySelectorAll('[data-mp-link]').forEach(el => {
+    const key = el.dataset.mpLink;
+    el.href = MP_LINKS[key] || '#';
+    el.addEventListener('click', () => {
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'InitiateCheckout', { content_name: 'D_cambio_' + key, value: 990, currency: 'CLP' });
+      }
+    });
+  });
+
+  if (typeof fbq !== 'undefined') {
+    fbq('trackCustom', 'LandingView', { variant: 'D_cambio' });
+  }
+</script>
+
+</body>
+</html>
