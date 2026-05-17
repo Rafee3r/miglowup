@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MiGlowUp — App de comunidad y hábitos para chilenas. Sé fundadora.</title>
+<meta name="description" content="App que combina tracking de hábitos, ejercicios mentales y una comunidad real de chilenas guiada por Marciana. Estamos lanzando. Las primeras 50 chicas entran como fundadoras." />
+<meta property="og:title" content="MiGlowUp — Sé una de las primeras 50 chilenas fundadoras" />
+<meta property="og:description" content="App de hábitos + comunidad + ejercicios mentales. Lanzamiento mayo 2026." />
+<meta property="og:type" content="website" />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          serif: ['Fraunces', 'serif'],
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+        },
+        colors: {
+          glow: {
+            50:  '#FFF6F2', 100: '#FFE9DF', 200: '#FFD1BD', 300: '#FFB294',
+            400: '#FF8A66', 500: '#F26A47', 600: '#D74E2D', 700: '#A93A20',
+          },
+          cream: '#FBF6EE',
+          ink: '#1A1A1A',
+        },
+      },
+    },
+  };
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: #FBF6EE; color: #1A1A1A; }
+  .font-serif { font-family: 'Fraunces', serif; letter-spacing: -0.02em; }
+  .grain::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+    opacity: 0.06; mix-blend-mode: multiply;
+  }
+  .phone-shadow { filter: drop-shadow(0 30px 60px rgba(215, 78, 45, 0.25)); }
+  .highlight {
+    background: linear-gradient(180deg, transparent 60%, #FFE9DF 60%);
+    padding: 0 4px;
+  }
+  .pulse-dot { animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+</style>
+</head>
+<body class="grain">
+
+<!-- Top banner: HONESTO -->
+<div class="bg-ink text-white text-center text-xs sm:text-sm py-2 px-4 font-medium">
+  <span class="inline-block w-2 h-2 bg-glow-300 rounded-full pulse-dot mr-2"></span>
+  Lanzamiento mayo 2026 — abrimos las primeras <span class="text-glow-300 font-bold">50 plazas fundadoras</span>
+</div>
+
+<!-- Nav -->
+<nav class="sticky top-0 z-40 bg-cream/80 backdrop-blur border-b border-ink/5">
+  <div class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
+    <a href="#" class="font-serif text-2xl font-bold tracking-tight">
+      MiGlowUp<span class="text-glow-500">.</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+      <a href="#app" class="hover:text-glow-500">La app</a>
+      <a href="#guia" class="hover:text-glow-500">Tu guía</a>
+      <a href="#fundadora" class="hover:text-glow-500">Fundadora</a>
+      <a href="#precio" class="hover:text-glow-500">Precio</a>
+    </div>
+    <a href="#precio" class="bg-ink text-cream px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-glow-600 transition">
+      Ser fundadora
+    </a>
+  </div>
+</nav>
+
+<!-- HERO honesto -->
+<section class="relative overflow-hidden">
+  <div class="absolute top-20 -right-20 w-96 h-96 bg-glow-200 rounded-full blur-3xl opacity-50"></div>
+  <div class="absolute bottom-0 -left-20 w-96 h-96 bg-glow-300 rounded-full blur-3xl opacity-30"></div>
+
+  <div class="relative max-w-6xl mx-auto px-5 pt-16 pb-20 md:pt-24 md:pb-28 grid md:grid-cols-2 gap-12 items-center">
+    <div>
+      <div class="inline-flex items-center gap-2 bg-white border border-ink/10 rounded-full px-4 py-1.5 text-xs font-semibold mb-6">
+        <span>🚀</span>
+        <span>Lanzamiento: mayo 2026</span>
+      </div>
+      <h1 class="font-serif text-5xl md:text-7xl font-bold leading-[0.95] mb-6">
+        Una app honesta<br/>
+        <span class="italic text-glow-500">para chilenas.</span>
+      </h1>
+      <p class="text-lg md:text-xl text-ink/70 mb-8 max-w-lg leading-relaxed">
+        Tracking de hábitos, ejercicios mentales diarios y una comunidad real guiada por <span class="highlight font-semibold">Marciana</span>. Sin recetas mágicas, sin promesas que no podemos cumplir, sin influencers con genética perfecta.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-3 mb-8">
+        <a href="#precio" class="bg-ink text-cream px-7 py-4 rounded-full text-base font-semibold text-center hover:bg-glow-600 transition shadow-lg shadow-ink/20">
+          Ser fundadora desde $990 →
+        </a>
+        <a href="#app" class="px-7 py-4 rounded-full text-base font-semibold text-center border border-ink/20 hover:border-ink transition">
+          Ver qué incluye
+        </a>
+      </div>
+
+      <div class="text-sm text-ink/60 italic">
+        Estamos empezando. No tenemos miles de testimonios todavía — porque esto se hace contigo.
+      </div>
+    </div>
+
+    <!-- Phone mockup: TRACKING REAL -->
+    <div class="relative flex justify-center">
+      <div class="relative phone-shadow">
+        <div class="w-[280px] md:w-[320px] bg-ink rounded-[3rem] p-3">
+          <div class="bg-cream rounded-[2.3rem] overflow-hidden">
+            <div class="flex justify-between items-center px-6 pt-3 pb-2 text-xs font-semibold">
+              <span>9:41</span>
+              <span>●●● 100%</span>
+            </div>
+            <div class="px-5 pb-5">
+              <div class="flex items-center justify-between mb-4">
+                <div>
+                  <div class="text-xs text-ink/50">Hola 👋</div>
+                  <div class="font-serif text-xl font-bold">¿Cómo estás hoy?</div>
+                </div>
+                <div class="w-10 h-10 rounded-full bg-glow-300"></div>
+              </div>
+
+              <!-- Tracker del día -->
+              <div class="bg-gradient-to-br from-glow-400 to-glow-600 rounded-2xl p-5 text-white mb-4">
+                <div class="text-xs opacity-80 mb-1">Tu día</div>
+                <div class="grid grid-cols-3 gap-3 mt-2">
+                  <div>
+                    <div class="font-serif text-2xl font-bold">6.4k</div>
+                    <div class="text-xs opacity-80">pasos</div>
+                  </div>
+                  <div>
+                    <div class="font-serif text-2xl font-bold">1.420</div>
+                    <div class="text-xs opacity-80">kcal</div>
+                  </div>
+                  <div>
+                    <div class="font-serif text-2xl font-bold">2.1</div>
+                    <div class="text-xs opacity-80">L agua</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Ejercicio mental -->
+              <div class="bg-white border border-ink/10 rounded-xl p-3 flex items-center gap-3 mb-2">
+                <div class="w-10 h-10 rounded-lg bg-glow-100 flex items-center justify-center text-lg">🧠</div>
+                <div class="flex-1">
+                  <div class="text-sm font-semibold">Ejercicio mental de hoy</div>
+                  <div class="text-xs text-ink/50">"Identifica tu hambre real" · 8 min</div>
+                </div>
+                <div class="text-glow-500 text-xl">▶</div>
+              </div>
+
+              <!-- Registrar comida -->
+              <div class="bg-white border border-ink/10 rounded-xl p-3 flex items-center gap-3 mb-2">
+                <div class="w-10 h-10 rounded-lg bg-glow-100 flex items-center justify-center text-lg">🥗</div>
+                <div class="flex-1">
+                  <div class="text-sm font-semibold">Registra lo que comiste</div>
+                  <div class="text-xs text-ink/50">Sin juicios. Tú decides qué comer.</div>
+                </div>
+                <div class="text-ink/40 text-xl">+</div>
+              </div>
+
+              <!-- Comunidad -->
+              <div class="bg-glow-50 border border-glow-200 rounded-xl p-3 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-lg">💬</div>
+                <div class="flex-1">
+                  <div class="text-sm font-semibold">Tu cohorte</div>
+                  <div class="text-xs text-ink/50">14 mensajes · Marciana respondió</div>
+                </div>
+                <div class="w-2 h-2 bg-glow-500 rounded-full"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LO QUE LA APP NO HACE (transparencia radical) -->
+<section class="py-16 px-5 bg-white border-y border-ink/5">
+  <div class="max-w-4xl mx-auto text-center">
+    <div class="text-xs uppercase tracking-widest font-semibold text-glow-500 mb-3">Transparencia total</div>
+    <h2 class="font-serif text-3xl md:text-4xl font-bold mb-8">Lo que MiGlowUp <span class="italic">no</span> hace</h2>
+
+    <div class="grid sm:grid-cols-2 gap-3 text-left max-w-3xl mx-auto">
+      <div class="bg-cream rounded-2xl p-5 flex gap-3">
+        <div class="text-glow-500 text-xl flex-shrink-0">✕</div>
+        <div>
+          <div class="font-semibold mb-1">No te dice qué comer</div>
+          <div class="text-sm text-ink/70">Tú decides. La app te ayuda a <em>registrar</em> y entender tus hábitos, no te impone dieta.</div>
+        </div>
+      </div>
+      <div class="bg-cream rounded-2xl p-5 flex gap-3">
+        <div class="text-glow-500 text-xl flex-shrink-0">✕</div>
+        <div>
+          <div class="font-semibold mb-1">No promete kilos específicos</div>
+          <div class="text-sm text-ink/70">Cada cuerpo es distinto. Te damos herramientas, no garantías inventadas.</div>
+        </div>
+      </div>
+      <div class="bg-cream rounded-2xl p-5 flex gap-3">
+        <div class="text-glow-500 text-xl flex-shrink-0">✕</div>
+        <div>
+          <div class="font-semibold mb-1">No reemplaza profesionales</div>
+          <div class="text-sm text-ink/70">Si tienes condiciones médicas, tu nutricionista o médico va primero. Somos complemento.</div>
+        </div>
+      </div>
+      <div class="bg-cream rounded-2xl p-5 flex gap-3">
+        <div class="text-glow-500 text-xl flex-shrink-0">✕</div>
+        <div>
+          <div class="font-semibold mb-1">No usa testimonios falsos</div>
+          <div class="text-sm text-ink/70">Recién partimos. Cuando tengamos chicas reales con resultados reales, ellas hablarán por sí mismas.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LA APP: 4 pilares -->
+<section id="app" class="py-24 px-5">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <div class="text-xs uppercase tracking-widest font-semibold text-glow-500 mb-3">Lo que sí incluye</div>
+      <h2 class="font-serif text-4xl md:text-5xl font-bold mb-5">
+        Herramientas honestas.<br/>
+        <span class="italic">Tú llevas el control.</span>
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="bg-white rounded-3xl p-8 border border-ink/5">
+        <div class="w-14 h-14 rounded-2xl bg-glow-100 flex items-center justify-center text-2xl mb-5">📊</div>
+        <h3 class="font-serif text-2xl font-bold mb-3">Tracker de hábitos</h3>
+        <p class="text-ink/70 leading-relaxed mb-4">Registras pasos, calorías, agua, ánimo y actividad. Datos los pones <strong>tú</strong>; la app te muestra patrones y avance semanal sin juzgar.</p>
+        <ul class="text-sm text-ink/60 space-y-1">
+          <li>· Contador de pasos (manual o sincronizado)</li>
+          <li>· Calorías estimadas que registras tú</li>
+          <li>· Actividad física semanal</li>
+          <li>· Estado de ánimo diario</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-3xl p-8 border border-ink/5 ring-2 ring-glow-300">
+        <div class="w-14 h-14 rounded-2xl bg-glow-100 flex items-center justify-center text-2xl mb-5">🧠</div>
+        <div class="text-xs uppercase tracking-widest font-bold text-glow-500 mb-2">El diferenciador</div>
+        <h3 class="font-serif text-2xl font-bold mb-3">Ejercicios mentales diarios</h3>
+        <p class="text-ink/70 leading-relaxed mb-4">10 minutos al día de mini-audios sobre la relación con tu cuerpo y la comida: identificar hambre real vs emocional, cortar ciclo de culpa, sostener hábitos a largo plazo.</p>
+        <ul class="text-sm text-ink/60 space-y-1">
+          <li>· Audios cortos, escuchas en el bus o caminando</li>
+          <li>· Basados en psicología conductual</li>
+          <li>· Sin tono de coach gritón</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-3xl p-8 border border-ink/5">
+        <div class="w-14 h-14 rounded-2xl bg-glow-100 flex items-center justify-center text-2xl mb-5">📏</div>
+        <h3 class="font-serif text-2xl font-bold mb-3">Registro corporal</h3>
+        <p class="text-ink/70 leading-relaxed mb-4">Peso, estatura, medidas y fotos privadas (solo tú las ves). Ves tu evolución semana a semana sin obsesionarte con la balanza diaria.</p>
+        <ul class="text-sm text-ink/60 space-y-1">
+          <li>· Fotos comparativas privadas</li>
+          <li>· Medidas mensuales opcionales</li>
+          <li>· Sin alarmas ni gráficos manipulados</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-3xl p-8 border border-ink/5">
+        <div class="w-14 h-14 rounded-2xl bg-glow-100 flex items-center justify-center text-2xl mb-5">👯‍♀️</div>
+        <h3 class="font-serif text-2xl font-bold mb-3">Comunidad guiada por Marciana</h3>
+        <p class="text-ink/70 leading-relaxed mb-4">Cada cohorte arranca con un grupo cerrado de hasta 50 chicas. Marciana lidera, responde y acompaña — sin pretender ser nutricionista ni entrenadora certificada.</p>
+        <ul class="text-sm text-ink/60 space-y-1">
+          <li>· Grupo privado por cohorte</li>
+          <li>· Marciana presente todos los días</li>
+          <li>· Cero spam, cero ventas adentro</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GUÍA: Marciana real -->
+<section id="guia" class="py-24 px-5 bg-ink text-cream">
+  <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <div class="relative">
+      <div class="aspect-[4/5] rounded-3xl bg-gradient-to-br from-glow-400 to-glow-700 overflow-hidden relative">
+        <!-- REEMPLAZAR con foto real de Marciana, vertical 4:5 -->
+        <div class="absolute inset-0 flex items-center justify-center text-white/40 font-serif text-2xl italic text-center p-6">
+          [Foto Marciana<br/>vertical 4:5]
+        </div>
+        <div class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur rounded-2xl p-4">
+          <div class="font-serif text-xl font-bold text-ink">Marciana</div>
+          <div class="text-xs text-ink/60">Guía de comunidad MiGlowUp</div>
+          <a href="https://www.tiktok.com/@maarciana_" target="_blank" class="text-xs text-glow-600 font-semibold mt-1 inline-block">@maarciana_ en TikTok ↗</a>
+        </div>
+      </div>
+      <div class="absolute -top-3 -left-3 bg-glow-500 text-white rounded-2xl px-4 py-3 rotate-[-6deg] shadow-xl">
+        <div class="font-serif text-sm font-bold leading-tight">Verifícame en<br/>TikTok 👀</div>
+      </div>
+    </div>
+    <div>
+      <div class="text-xs uppercase tracking-widest font-semibold text-glow-300 mb-3">Tu guía</div>
+      <h2 class="font-serif text-4xl md:text-5xl font-bold mb-6 leading-tight">
+        Hola, soy <span class="italic text-glow-300">Marciana</span>.
+      </h2>
+      <div class="space-y-4 text-cream/80 leading-relaxed">
+        <p>No soy nutricionista. No soy entrenadora certificada. <strong class="text-cream">Soy alguien que pasó por lo mismo que tal vez tú estás pasando.</strong></p>
+        <p>Bajé 22 kilos sin dieta restrictiva, caminando y aprendiendo a entender mi propia cabeza. Llevo 4 años manteniéndolo. Mi proceso entero está documentado en mi TikTok — puedes ir a verificarlo.</p>
+        <p>En MiGlowUp acompaño los grupos de WhatsApp de cada cohorte. <strong class="text-cream">Estoy ahí para escucharte, no para decirte qué comer.</strong> Si necesitas plan de comidas específico, te recomendamos un nutricionista. Si necesitas a alguien que entienda cómo se siente, ahí estoy yo.</p>
+        <p class="pt-2 text-glow-300 font-semibold italic">"No vine a venderte una transformación. Vine a acompañarte mientras tú la construyes."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIKTOK PROOF (real, verificable) -->
+<section class="py-20 px-5 bg-gradient-to-b from-cream to-glow-50">
+  <div class="max-w-4xl mx-auto text-center">
+    <div class="text-xs uppercase tracking-widest font-semibold text-glow-500 mb-3">Social proof verificable</div>
+    <h2 class="font-serif text-4xl md:text-5xl font-bold mb-4">Esto <span class="italic">sí</span> es real.</h2>
+    <p class="text-ink/70 text-lg mb-10 max-w-2xl mx-auto">No tenemos chilenas con resultados que mostrar — todavía. Pero el método que vas a aprender ya lo aplica Marciana en su TikTok. Ve, verifica, después decide.</p>
+
+    <a href="https://www.tiktok.com/@maarciana_" target="_blank" class="inline-flex items-center gap-3 bg-ink text-cream px-7 py-4 rounded-full font-semibold hover:bg-glow-600 transition">
+      Ver @maarciana_ en TikTok →
+    </a>
+
+    <div class="text-xs text-ink/50 mt-6">
+      Cualquier cifra, foto o testimonio que veas en MiGlowUp es real y verificable. Si encuentras algo dudoso, escríbenos.
+    </div>
+  </div>
+</section>
+
+<!-- FUNDADORA: escasez REAL -->
+<section id="fundadora" class="py-24 px-5">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-12">
+      <div class="text-xs uppercase tracking-widest font-semibold text-glow-500 mb-3">Programa fundadora</div>
+      <h2 class="font-serif text-4xl md:text-5xl font-bold mb-4">Sé una de las <span class="italic">primeras 50</span>.</h2>
+      <p class="text-ink/70 text-lg max-w-2xl mx-auto">Estamos partiendo. Las primeras 50 chilenas entran a precio fundadora y serán las protagonistas de los testimonios reales de MiGlowUp.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="bg-white rounded-2xl p-6 border border-ink/10">
+        <div class="text-3xl mb-3">🎟️</div>
+        <h3 class="font-semibold text-lg mb-2">Precio fundadora para siempre</h3>
+        <p class="text-sm text-ink/70">Quedas con tu plan al precio actual ($990 trial + $12.990 mensual). Cuando subamos precio, tú sigues igual.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border border-ink/10">
+        <div class="text-3xl mb-3">💬</div>
+        <h3 class="font-semibold text-lg mb-2">Acceso directo a Marciana</h3>
+        <p class="text-sm text-ink/70">Tu cohorte va a ser la primera. Marciana va a estar más presente que nunca para construir esto contigo.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border border-ink/10">
+        <div class="text-3xl mb-3">📣</div>
+        <h3 class="font-semibold text-lg mb-2">Tu voz cuenta</h3>
+        <p class="text-sm text-ink/70">Vas a dar feedback que cambia la app. Si quieres, también podrás aparecer como testimonio real al final del proceso.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TU PRIMERA SEMANA -->
+<section class="py-24 px-5 bg-gradient-to-b from-cream to-glow-50">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-16">
+      <div class="text-xs uppercase tracking-widest font-semibold text-glow-500 mb-3">Cómo funciona</div>
+      <h2 class="font-serif text-4xl md:text-5xl font-bold">Tu primera semana</h2>
+    </div>
+
+    <div class="space-y-4">
+      <div class="bg-white rounded-2xl p-6 flex gap-5 items-start">
+        <div class="w-12 h-12 rounded-full bg-ink text-cream font-serif text-xl font-bold flex items-center justify-center flex-shrink-0">1</div>
+        <div>
+          <h3 class="font-semibold text-lg mb-1">Día 1 — Configuras tu perfil</h3>
+          <p class="text-ink/70">Pones tu estatura, peso actual, edad y meta personal. Te integramos al grupo privado con tus compañeras de cohorte.</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 flex gap-5 items-start">
+        <div class="w-12 h-12 rounded-full bg-ink text-cream font-serif text-xl font-bold flex items-center justify-center flex-shrink-0">2</div>
+        <div>
+          <h3 class="font-semibold text-lg mb-1">Día 2-3 — Empiezas a registrar</h3>
+          <p class="text-ink/70">Pasos, comida, agua, ánimo. Sin presión, sin metas imposibles. Conoces tu punto de partida real.</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 flex gap-5 items-start">
+        <div class="w-12 h-12 rounded-full bg-ink text-cream font-serif text-xl font-bold flex items-center justify-center flex-shrink-0">3</div>
+        <div>
+          <h3 class="font-semibold text-lg mb-1">Día 4-7 — Primeros ejercicios mentales</h3>
+          <p class="text-ink/70">10 min al día de audio con Marciana. Empiezas a entender tu relación con la comida, no a "controlarla".</p>
+        </div>
+      </div>
+      <div class="bg-glow-500 text-white rounded-2xl p-6 flex gap-5 items-start">
+        <div class="w-12 h-12 rounded-full bg-white text-glow-600 font-serif text-xl font-bold flex items-center justify-center flex-shrink-0">→</div>
+        <div>
+          <h3 class="font-semibold text-lg mb-1">A partir de ahí — Tu propio camino</h3>
+          <p class="text-white/90">No hay "8 semanas y listo". Hay herramientas que usas el tiempo que te sirvan. Si en 7 días sientes que no es para ti, cancelas sin preguntas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRECIO -->
+<section id="precio" class="py-24 px-5">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-12">
+      <div class="text-xs uppercase tracking-widest font-semibold text-glow-500 mb-3">Precio fundadora</div>
+      <h2 class="font-serif text-4xl md:text-5xl font-bold mb-4">7 días por <span class="italic">$990</span>.</h2>
+      <p class="text-ink/70 text-lg">Si no es para ti, cancelas en 1 clic. Sin letra chica.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="bg-white rounded-3xl p-8 border-2 border-ink/10">
+        <div class="font-serif text-xl font-semibold mb-1">Mensual</div>
+        <div class="text-ink/60 text-sm mb-6">Flexible, cancela cuando quieras</div>
+        <div class="mb-6">
+          <div class="text-5xl font-serif font-bold">$12.990</div>
+          <div class="text-ink/60">/mes después del trial</div>
+        </div>
+        <div class="bg-glow-50 border border-glow-200 rounded-xl p-4 mb-6">
+          <div class="text-xs font-semibold text-glow-700 uppercase tracking-wider mb-1">Trial 7 días</div>
+          <div class="font-serif text-3xl font-bold">$990</div>
+        </div>
+        <a href="#" data-mp-link="MONTHLY" class="block text-center bg-ink text-cream py-4 rounded-full font-semibold hover:bg-glow-600 transition">
+          Ser fundadora — $990
+        </a>
+      </div>
+
+      <div class="bg-gradient-to-br from-glow-500 to-glow-700 rounded-3xl p-8 text-white relative shadow-2xl shadow-glow-500/40">
+        <div class="absolute -top-3 right-6 bg-ink text-cream text-xs font-bold px-3 py-1.5 rounded-full">★ AHORRAS 42%</div>
+        <div class="font-serif text-xl font-semibold mb-1">Anual</div>
+        <div class="text-cream/80 text-sm mb-6">Para quien va en serio</div>
+        <div class="mb-6">
+          <div class="text-5xl font-serif font-bold">$89.990</div>
+          <div class="text-cream/80">/año · $7.499 por mes</div>
+        </div>
+        <div class="bg-white/15 backdrop-blur rounded-xl p-4 mb-6">
+          <div class="text-xs font-semibold uppercase tracking-wider mb-1 opacity-90">Trial 7 días</div>
+          <div class="font-serif text-3xl font-bold">$990</div>
+          <div class="text-xs mt-1 opacity-80">Luego $89.990 anual</div>
+        </div>
+        <a href="#" data-mp-link="ANNUAL" class="block text-center bg-white text-ink py-4 rounded-full font-semibold hover:bg-cream transition">
+          Ser fundadora anual — $990
+        </a>
+        <div class="mt-4 text-xs text-cream/80 space-y-1">
+          <div>✓ Precio fundadora congelado de por vida</div>
+          <div>✓ Tu voz cuenta en el desarrollo de la app</div>
+          <div>✓ Acceso a futuras cohortes incluido</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-8 text-sm text-ink/60">
+      🔒 Pago seguro vía Mercado Pago · Cancela cuando quieras · Garantía de 14 días
+    </div>
+  </div>
+</section>
+
+<!-- FAQ honestas -->
+<section class="py-24 px-5 bg-white">
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-12">
+      <div class="text-xs uppercase tracking-widest font-semibold text-glow-500 mb-3">Preguntas frecuentes</div>
+      <h2 class="font-serif text-4xl md:text-5xl font-bold">Hablamos claro</h2>
+    </div>
+
+    <div class="space-y-3">
+      <details class="bg-cream rounded-2xl p-6 group">
+        <summary class="font-semibold cursor-pointer flex justify-between items-center">¿La app me va a hacer bajar de peso?<span class="text-glow-500 group-open:rotate-45 transition">+</span></summary>
+        <p class="mt-4 text-ink/70">No directamente. La app te da herramientas para entender tus hábitos y tu relación con la comida. Quien hace el trabajo eres tú. Algunas chicas verán cambios en semanas, otras en meses, otras priorizarán bienestar antes que peso. No prometemos kilos específicos.</p>
+      </details>
+      <details class="bg-cream rounded-2xl p-6 group">
+        <summary class="font-semibold cursor-pointer flex justify-between items-center">¿Marciana es nutricionista o entrenadora?<span class="text-glow-500 group-open:rotate-45 transition">+</span></summary>
+        <p class="mt-4 text-ink/70">No, y nunca dirá serlo. Marciana es una chilena que vivió un proceso de pérdida de peso (22 kg) y lleva 4 años manteniéndolo. Su rol es acompañar la comunidad desde la experiencia, no desde una credencial profesional. Si necesitas plan personalizado, recomendamos un profesional.</p>
+      </details>
+      <details class="bg-cream rounded-2xl p-6 group">
+        <summary class="font-semibold cursor-pointer flex justify-between items-center">¿Por qué no veo testimonios de otras chicas?<span class="text-glow-500 group-open:rotate-45 transition">+</span></summary>
+        <p class="mt-4 text-ink/70">Porque acabamos de lanzar y no queremos inventarlos. Cuando las primeras 50 fundadoras tengan resultados reales que quieran compartir, ellas hablarán. Mientras tanto, te invitamos a verificar a Marciana directamente en su TikTok público.</p>
+      </details>
+      <details class="bg-cream rounded-2xl p-6 group">
+        <summary class="font-semibold cursor-pointer flex justify-between items-center">¿La app me recomienda qué comer?<span class="text-glow-500 group-open:rotate-45 transition">+</span></summary>
+        <p class="mt-4 text-ink/70">No. La app te ayuda a registrar lo que comes y entender tus patrones (cuándo, cuánto, cómo te sentiste). No te dice "come esto" porque cada cuerpo es distinto. Si quieres plan personalizado, eso es trabajo de un nutricionista.</p>
+      </details>
+      <details class="bg-cream rounded-2xl p-6 group">
+        <summary class="font-semibold cursor-pointer flex justify-between items-center">¿Puedo cancelar el trial sin que me cobren más?<span class="text-glow-500 group-open:rotate-45 transition">+</span></summary>
+        <p class="mt-4 text-ink/70">Sí. Antes del día 7 nos escribes y cancelamos sin más preguntas. No se cobra nada adicional.</p>
+      </details>
+      <details class="bg-cream rounded-2xl p-6 group">
+        <summary class="font-semibold cursor-pointer flex justify-between items-center">¿Tengo que ir al gym o salir a correr?<span class="text-glow-500 group-open:rotate-45 transition">+</span></summary>
+        <p class="mt-4 text-ink/70">No es obligatorio. La app te ayuda a moverte más de manera sostenible (caminar es lo más recomendado al inicio). Tú decides el ritmo. Sin culpa si un día no haces nada.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA honesto -->
+<section class="py-24 px-5 bg-gradient-to-br from-glow-400 via-glow-500 to-glow-700 text-white text-center relative overflow-hidden">
+  <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 20% 50%, white 0%, transparent 50%), radial-gradient(circle at 80% 80%, white 0%, transparent 50%);"></div>
+  <div class="relative max-w-3xl mx-auto">
+    <h2 class="font-serif text-5xl md:text-7xl font-bold mb-6 leading-[0.95]">
+      Construye esto<br/><span class="italic">con nosotras</span>.
+    </h2>
+    <p class="text-xl text-white/90 mb-8 max-w-xl mx-auto">
+      Sé una de las primeras 50 chilenas fundadoras. Sin promesas vacías, sin testimonios inventados — solo herramientas honestas y una comunidad real.
+    </p>
+    <a href="#" data-mp-link="MONTHLY" class="inline-block bg-ink text-cream px-10 py-5 rounded-full text-lg font-bold hover:bg-cream hover:text-ink transition shadow-2xl">
+      Probar 7 días por $990 →
+    </a>
+    <div class="mt-6 text-sm text-white/80">🔒 Pago seguro · Cancela cuando quieras · Te espera Marciana 💛</div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-10 px-5 bg-ink text-cream/60 text-sm">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="font-serif text-cream text-xl font-bold">MiGlowUp<span class="text-glow-400">.</span></div>
+    <div class="flex gap-6">
+      <a href="https://www.tiktok.com/@maarciana_" target="_blank" class="hover:text-cream">TikTok</a>
+      <a href="#" class="hover:text-cream">Términos</a>
+      <a href="#" class="hover:text-cream">Privacidad</a>
+      <a href="mailto:hola@miglowup.cl" class="hover:text-cream">hola@miglowup.cl</a>
+    </div>
+    <div>© 2026 MiGlowUp · Hecho en Chile 🇨🇱</div>
+  </div>
+</footer>
+
+<!-- Sticky mobile CTA -->
+<div class="md:hidden fixed bottom-4 left-4 right-4 z-30">
+  <a href="#precio" class="block bg-ink text-cream py-4 rounded-full text-center font-bold shadow-2xl shadow-ink/40">
+    Ser fundadora — $990 →
+  </a>
+</div>
+
+<script>
+  const MP_LINKS = {
+    MONTHLY: 'https://mpago.la/1BaojSf',
+    ANNUAL:  'https://mpago.la/1BaojSf',
+  };
+
+  document.querySelectorAll('[data-mp-link]').forEach(el => {
+    const key = el.dataset.mpLink;
+    el.href = MP_LINKS[key] || '#';
+    el.addEventListener('click', () => {
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'InitiateCheckout', { content_name: 'C_fundadora_' + key, value: 990, currency: 'CLP' });
+      }
+    });
+  });
+
+  if (typeof fbq !== 'undefined') {
+    fbq('trackCustom', 'LandingView', { variant: 'C_fundadora' });
+  }
+</script>
+
+</body>
+</html>
