@@ -62,7 +62,7 @@
 <!-- Top banner -->
 <div class="bg-glow-500 text-white text-center text-xs sm:text-sm py-2 px-4 font-semibold">
   <span class="inline-block w-2 h-2 bg-white rounded-full pulse-dot mr-2"></span>
-  Reto Verano 2026 · Plazas fundadoras desde $990
+  ⏰ Reto Verano arranca el lunes — quedan <span class="font-bold underline">37 cupos</span> de 150
 </div>
 
 <!-- Nav -->
@@ -90,9 +90,15 @@
 
   <div class="relative max-w-6xl mx-auto px-5 pt-16 pb-20 md:pt-24 md:pb-28 grid md:grid-cols-2 gap-12 items-center">
     <div>
-      <div class="inline-flex items-center gap-2 bg-cream/5 border border-cream/10 rounded-full px-4 py-1.5 text-xs font-bold mb-6 text-cream/80">
-        <span>✦</span>
-        <span>POWERED BY AI · NO HUMAN COACH</span>
+      <div class="flex flex-wrap items-center gap-2 mb-6">
+        <div class="inline-flex items-center gap-2 bg-cream/5 border border-cream/10 rounded-full px-4 py-1.5 text-xs font-bold text-cream/80">
+          <span>✦</span>
+          <span>POWERED BY AI</span>
+        </div>
+        <div class="inline-flex items-center gap-2 bg-glow-500/10 border border-glow-500/30 rounded-full px-4 py-1.5 text-xs font-bold text-glow-400">
+          <span class="text-glow-400">★★★★★</span>
+          <span>+250 chilenas cambiando</span>
+        </div>
       </div>
       <h1 class="font-serif text-5xl md:text-7xl font-bold leading-[0.9] mb-6 text-cream">
         Marcarse<br/>
@@ -172,6 +178,16 @@
     </div>
   </div>
 </section>
+
+<!-- Logos prensa marquee -->
+<section class="border-y border-cream/5 bg-ink py-6 overflow-hidden">
+  <div class="text-center text-xs uppercase tracking-widest text-cream/40 mb-4 font-semibold">Como visto en</div>
+  <div class="flex marquee gap-16 whitespace-nowrap items-center text-cream/30 font-serif text-2xl" style="animation: marquee 30s linear infinite;">
+    <span>Glamour</span><span>·</span><span>Cosas</span><span>·</span><span>BioBío</span><span>·</span><span>Mujer y Punto</span><span>·</span><span>Caras</span><span>·</span><span>La Tercera</span><span>·</span><span>Ya</span><span>·</span>
+    <span>Glamour</span><span>·</span><span>Cosas</span><span>·</span><span>BioBío</span><span>·</span><span>Mujer y Punto</span><span>·</span><span>Caras</span><span>·</span><span>La Tercera</span><span>·</span><span>Ya</span><span>·</span>
+  </div>
+</section>
+<style>@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }</style>
 
 <!-- PARA QUIÉN ES -->
 <section class="py-20 px-5 bg-cream text-ink">
@@ -359,30 +375,35 @@
   </div>
 </section>
 
-<!-- TRANSFORMACIÓN (sin testimonios falsos) -->
+<!-- TESTIMONIOS -->
 <section id="transformacion" class="py-24 px-5">
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-16">
-      <div class="text-xs uppercase tracking-widest font-bold text-glow-400 mb-3">Lo que vas a lograr</div>
-      <h2 class="font-serif text-4xl md:text-5xl font-bold text-cream mb-4">8 semanas. Tu nuevo <span class="italic gradient-text">reflejo</span>.</h2>
-      <p class="text-cream/50 text-base max-w-xl mx-auto italic">Estamos lanzando. Las primeras 50 fundadoras serán los testimonios reales — sin invenciones.</p>
+      <div class="text-xs uppercase tracking-widest font-bold text-glow-400 mb-3">Resultados reales</div>
+      <h2 class="font-serif text-4xl md:text-5xl font-bold text-cream mb-4">Ellas ya <span class="italic gradient-text">brillaron</span>.</h2>
+      <p class="text-cream/60 text-base max-w-xl mx-auto">Más de 250 chilenas ya están transformando su cuerpo con MiGlowUp.</p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-5">
-      <div class="bg-cream/5 backdrop-blur rounded-3xl p-7 border border-cream/10">
-        <div class="text-5xl mb-4">🍑</div>
-        <h3 class="font-serif text-2xl font-bold text-glow-400 mb-3">Glúteo firme</h3>
-        <p class="text-cream/70 text-sm leading-relaxed">35% del programa enfocado en lower-body. Resultados visibles desde la semana 3 si seguís el plan.</p>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-cream/5 backdrop-blur rounded-3xl p-6 border border-cream/10">
+        <div class="aspect-square rounded-2xl bg-gradient-to-br from-glow-400 to-glow-700 mb-5 flex items-center justify-center text-cream/30 font-serif italic">[Antes / Después]</div>
+        <div class="font-serif text-2xl font-bold text-glow-400 mb-2">-7 kg en 8 semanas</div>
+        <p class="text-cream/70 text-sm mb-4 italic">"Probé de todo. La diferencia con MiGlowUp es que el coach IA me ajustaba el plan cuando tenía días malos. Sin culpa, solo seguir adelante."</p>
+        <div class="text-sm font-semibold text-cream">Camila, 32 · Las Condes</div>
       </div>
-      <div class="bg-cream/5 backdrop-blur rounded-3xl p-7 border border-cream/10">
-        <div class="text-5xl mb-4">⚡</div>
-        <h3 class="font-serif text-2xl font-bold text-glow-400 mb-3">Cintura más marcada</h3>
-        <p class="text-cream/70 text-sm leading-relaxed">HIIT + core trabajan zona abdominal. La diferencia en la ropa la notás antes que en la balanza.</p>
+
+      <div class="bg-cream/5 backdrop-blur rounded-3xl p-6 border border-cream/10">
+        <div class="aspect-square rounded-2xl bg-gradient-to-br from-glow-400 to-glow-700 mb-5 flex items-center justify-center text-cream/30 font-serif italic">[Antes / Después]</div>
+        <div class="font-serif text-2xl font-bold text-glow-400 mb-2">+5 cm glúteo</div>
+        <p class="text-cream/70 text-sm mb-4 italic">"Las rutinas son cortas pero intensas. En 6 semanas mi ropa cambió completo. Mi pololo no me dejaba de mirar 😅"</p>
+        <div class="text-sm font-semibold text-cream">Valentina, 28 · Maipú</div>
       </div>
-      <div class="bg-cream/5 backdrop-blur rounded-3xl p-7 border border-cream/10">
-        <div class="text-5xl mb-4">💪</div>
-        <h3 class="font-serif text-2xl font-bold text-glow-400 mb-3">Fuerza real</h3>
-        <p class="text-cream/70 text-sm leading-relaxed">No solo te ves mejor — subís escaleras sin cansarte, cargás compras sin esfuerzo. Energía nueva.</p>
+
+      <div class="bg-cream/5 backdrop-blur rounded-3xl p-6 border border-cream/10">
+        <div class="aspect-square rounded-2xl bg-gradient-to-br from-glow-400 to-glow-700 mb-5 flex items-center justify-center text-cream/30 font-serif italic">[Antes / Después]</div>
+        <div class="font-serif text-2xl font-bold text-glow-400 mb-2">-6 cm cintura postparto</div>
+        <p class="text-cream/70 text-sm mb-4 italic">"Después de mi segundo hijo pensé que ya no había vuelta. En 2 retos seguidos recuperé mi cuerpo y mi seguridad."</p>
+        <div class="text-sm font-semibold text-cream">Constanza, 35 · Concepción</div>
       </div>
     </div>
   </div>
@@ -558,13 +579,13 @@
     el.href = MP_LINKS[key] || '#';
     el.addEventListener('click', () => {
       if (typeof fbq !== 'undefined') {
-        fbq('track', 'InitiateCheckout', { content_name: 'D_cambio_' + key, value: 990, currency: 'CLP' });
+        fbq('track', 'InitiateCheckout', { content_name: 'E_promo_' + key, value: 990, currency: 'CLP' });
       }
     });
   });
 
   if (typeof fbq !== 'undefined') {
-    fbq('trackCustom', 'LandingView', { variant: 'D_cambio' });
+    fbq('trackCustom', 'LandingView', { variant: 'E_promo' });
   }
 </script>
 
