@@ -566,6 +566,7 @@ fbq('track', 'PageView');
     const key = el.dataset.mpLink;
     el.href = MP_LINKS[key] || '#';
     el.addEventListener('click', () => {
+      localStorage.setItem('mgu_variant', 'D_cambio_' + key);
       if (typeof fbq !== 'undefined') {
         fbq('track', 'InitiateCheckout', { content_name: 'D_cambio_' + key, value: 990, currency: 'CLP' });
       }

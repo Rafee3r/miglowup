@@ -587,6 +587,7 @@ fbq('track', 'PageView');
     const key = el.dataset.mpLink;
     el.href = MP_LINKS[key] || '#';
     el.addEventListener('click', () => {
+      localStorage.setItem('mgu_variant', 'E_promo_' + key);
       if (typeof fbq !== 'undefined') {
         fbq('track', 'InitiateCheckout', { content_name: 'E_promo_' + key, value: 990, currency: 'CLP' });
       }

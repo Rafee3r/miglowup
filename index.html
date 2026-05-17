@@ -487,8 +487,9 @@ fbq('track', 'PageView');
     const key = el.dataset.mpLink;
     el.href = MP_LINKS[key] || '#';
     el.addEventListener('click', (e) => {
+      localStorage.setItem('mgu_variant', 'A_glowup_' + key);
       if (typeof fbq !== 'undefined') {
-        fbq('track', 'InitiateCheckout', { content_name: key, value: 990, currency: 'CLP' });
+        fbq('track', 'InitiateCheckout', { content_name: 'A_glowup_' + key, value: 990, currency: 'CLP' });
       }
     });
   });
