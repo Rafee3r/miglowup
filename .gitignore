@@ -8,3 +8,13 @@ Thumbs.db
 
 # Source files (no necesitamos pushear los PNG originales pesados del ícono)
 *.original.png
+
+# Next.js app
+app/node_modules
+app/.next
+app/out
+app/.env.local
+app/.env*.local
+app/.vercel
+app/next-env.d.ts
+app/.turbo

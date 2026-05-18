@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme {
+  --color-glow-50: #FFF6F2;
+  --color-glow-100: #FFE9DF;
+  --color-glow-200: #FFD1BD;
+  --color-glow-300: #FFB294;
+  --color-glow-400: #FF8A66;
+  --color-glow-500: #F26A47;
+  --color-glow-600: #D74E2D;
+  --color-glow-700: #A93A20;
+  --color-cream: #FBF6EE;
+  --color-ink: #1A1A1A;
+
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: "Fraunces", serif;
+}
+
+html, body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+  letter-spacing: -0.02em;
+}
+
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeUp 0.5s ease both; }
+
+* { -webkit-tap-highlight-color: transparent; }
