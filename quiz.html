@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="theme-color" content="#F26A47" />
+<title>Descubre tu plan Glow Up en 60 segundos — MiGlowUp</title>
+<meta name="description" content="Quiz personalizado para encontrar el método ideal para ti. Toma 1 minuto y revela tu plan." />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      fontFamily: { serif: ['Fraunces','serif'], sans: ['Inter','system-ui','sans-serif'] },
+      colors: {
+        glow: { 50:'#FFF6F2',100:'#FFE9DF',200:'#FFD1BD',300:'#FFB294',400:'#FF8A66',500:'#F26A47',600:'#D74E2D',700:'#A93A20' },
+        cream: '#FBF6EE',
+        ink: '#1A1A1A',
+      },
+    }},
+  };
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; background: #FBF6EE; color: #1A1A1A; }
+  .font-serif { font-family: 'Fraunces', serif; letter-spacing: -0.02em; }
+  @keyframes slideIn { 0% { opacity: 0; transform: translateY(30px); } 100% { opacity: 1; transform: translateY(0); } }
+  .slide-in { animation: slideIn 0.5s ease both; }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(242,106,71,0.4); }
+    50% { box-shadow: 0 0 0 12px rgba(242,106,71,0); }
+  }
+  .pulse-glow { animation: pulse-glow 2s infinite; }
+  .progress-bar { transition: width 0.5s ease; }
+  .opt:hover { transform: translateY(-2px); }
+  .opt { transition: all 0.2s ease; }
+  .typing-dots span {
+    display: inline-block; width: 6px; height: 6px; background: #F26A47;
+    border-radius: 50%; margin: 0 2px; animation: dots 1.4s infinite;
+  }
+  .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes dots {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-8px); opacity: 1; }
+  }
+</style>
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '4376662015813242');
+fbq('track', 'PageView');
+</script>
+</head>
+<body class="min-h-screen flex flex-col">
+
+<!-- INTRO -->
+<section id="intro" class="min-h-screen flex items-center justify-center px-5 py-12">
+  <div class="max-w-lg w-full text-center slide-in">
+    <div class="inline-block bg-glow-100 text-glow-700 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">🔮 Quiz personalizado</div>
+    <h1 class="font-serif text-4xl md:text-6xl font-black leading-tight mb-5">
+      Descubre <span class="italic text-glow-500">tu plan</span><br/>en 60 segundos.
+    </h1>
+    <p class="text-lg text-ink/70 mb-8">6 preguntas. Te revelamos el método personalizado para tu cuerpo, tiempo y nivel.</p>
+    <button onclick="startQuiz()" class="bg-glow-500 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-glow-600 transition pulse-glow">
+      Empezar quiz →
+    </button>
+    <p class="text-xs text-ink/40 mt-4">+200 chilenas ya descubrieron el suyo</p>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz" class="hidden min-h-screen flex-col items-center justify-center px-5 py-12">
+  <div class="max-w-lg w-full">
+    <div class="mb-6">
+      <div class="flex justify-between text-xs text-ink/50 mb-2">
+        <span>Pregunta <span id="q-num">1</span> de 6</span>
+        <span><span id="q-pct">17</span>%</span>
+      </div>
+      <div class="h-1.5 bg-ink/10 rounded-full overflow-hidden">
+        <div id="progress" class="progress-bar h-full bg-glow-500" style="width: 17%"></div>
+      </div>
+    </div>
+
+    <div id="question-container" class="slide-in">
+      <!-- Inyectado por JS -->
+    </div>
+  </div>
+</section>
+
+<!-- LOADING (entre quiz y resultado) -->
+<section id="loading" class="hidden min-h-screen flex items-center justify-center px-5 py-12">
+  <div class="max-w-md w-full text-center slide-in">
+    <div class="text-6xl mb-6">🔮</div>
+    <h2 class="font-serif text-3xl font-bold mb-4">Analizando tus respuestas...</h2>
+    <div class="typing-dots mb-6"><span></span><span></span><span></span></div>
+    <div class="space-y-2 text-sm text-ink/60">
+      <p id="loading-step-1" class="opacity-0 transition">✓ Calculando tu nivel base...</p>
+      <p id="loading-step-2" class="opacity-0 transition">✓ Diseñando tus rutinas...</p>
+      <p id="loading-step-3" class="opacity-0 transition">✓ Conectándote con tu cohorte...</p>
+    </div>
+  </div>
+</section>
+
+<!-- RESULT -->
+<section id="result" class="hidden min-h-screen px-5 py-12">
+  <div class="max-w-lg mx-auto slide-in">
+    <div class="text-center mb-8">
+      <div class="inline-block bg-glow-100 text-glow-700 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-4">✨ Tu plan personalizado</div>
+      <h2 class="font-serif text-4xl md:text-5xl font-black leading-tight mb-3">
+        <span id="result-name">Tu</span> Glow Up<br/>
+        <span class="italic text-glow-500">está listo.</span>
+      </h2>
+      <p class="text-ink/70">Basado en tus 6 respuestas, esto es lo que te recomendamos:</p>
+    </div>
+
+    <!-- Plan -->
+    <div class="bg-white rounded-3xl p-7 mb-5 border-2 border-glow-300">
+      <h3 class="font-serif text-xl font-bold mb-5">📋 Tu programa</h3>
+      <div class="space-y-4 text-sm">
+        <div class="flex justify-between border-b border-ink/10 pb-3">
+          <span class="text-ink/60">Duración rutinas</span>
+          <span id="r-duration" class="font-bold">28 min/día</span>
+        </div>
+        <div class="flex justify-between border-b border-ink/10 pb-3">
+          <span class="text-ink/60">Frecuencia</span>
+          <span id="r-freq" class="font-bold">5 días/semana</span>
+        </div>
+        <div class="flex justify-between border-b border-ink/10 pb-3">
+          <span class="text-ink/60">Nivel inicial</span>
+          <span id="r-level" class="font-bold">Principiante</span>
+        </div>
+        <div class="flex justify-between border-b border-ink/10 pb-3">
+          <span class="text-ink/60">Tipo de entrenamiento</span>
+          <span id="r-type" class="font-bold">Tonificación + cardio</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-ink/60">Tiempo estimado al objetivo</span>
+          <span id="r-time" class="font-bold text-glow-600">8-12 semanas</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Incluido -->
+    <div class="bg-glow-50 border border-glow-200 rounded-3xl p-7 mb-6">
+      <h3 class="font-serif text-xl font-bold mb-4">Todo incluido:</h3>
+      <ul class="space-y-3 text-sm">
+        <li class="flex gap-3"><span class="text-glow-500 font-bold">✓</span><span>App MiGlowUp con tus rutinas adaptadas</span></li>
+        <li class="flex gap-3"><span class="text-glow-500 font-bold">✓</span><span>Grupo WhatsApp con tu cohorte (chilenas como tú)</span></li>
+        <li class="flex gap-3"><span class="text-glow-500 font-bold">✓</span><span>Coach IA 24/7 — pregúntale lo que sea</span></li>
+        <li class="flex gap-3"><span class="text-glow-500 font-bold">✓</span><span>Tracking de progreso y medidas</span></li>
+        <li class="flex gap-3"><span class="text-glow-500 font-bold">✓</span><span>Sin contrato, cancelas cuando quieras</span></li>
+      </ul>
+    </div>
+
+    <!-- Precio + CTA -->
+    <div class="bg-ink text-cream rounded-3xl p-7 text-center mb-4">
+      <div class="text-xs uppercase tracking-widest font-bold text-glow-300 mb-2">Plazas fundadoras</div>
+      <div class="font-serif text-4xl font-black mb-2">$990</div>
+      <p class="text-sm text-cream/70 mb-6">Trial 7 días · luego mensual</p>
+      <a id="result-cta" href="#" class="block bg-glow-500 hover:bg-glow-600 transition text-white py-4 rounded-full font-bold text-lg shadow-lg shadow-glow-500/40">
+        Activar mi plan →
+      </a>
+      <p class="text-xs text-cream/50 mt-4">🔒 Pago seguro vía Mercado Pago</p>
+    </div>
+
+    <p class="text-center text-xs text-ink/40">⏱️ Tu plan personalizado caduca en 30 minutos</p>
+  </div>
+</section>
+
+<script>
+  const MP_LINK = 'https://mpago.la/1BaojSf';
+  document.getElementById('result-cta').href = MP_LINK;
+
+  const questions = [
+    {
+      q: '¿Cuál es tu objetivo principal?',
+      opts: [
+        { e: '⚖️', t: 'Bajar de peso', v: 'lose' },
+        { e: '💪', t: 'Tonificar mi cuerpo', v: 'tonify' },
+        { e: '⚡', t: 'Tener más energía', v: 'energy' },
+        { e: '🧘‍♀️', t: 'Sentirme mejor conmigo', v: 'mindset' },
+      ],
+    },
+    {
+      q: '¿Cuánto tiempo tienes al día?',
+      opts: [
+        { e: '⏱️', t: '15 minutos máximo', v: '15' },
+        { e: '⏰', t: '20-30 minutos', v: '25' },
+        { e: '🕐', t: '40+ minutos', v: '45' },
+      ],
+    },
+    {
+      q: '¿Cuál es tu nivel actual?',
+      opts: [
+        { e: '🌱', t: 'Hace meses que no entreno', v: 'beginner' },
+        { e: '🚶‍♀️', t: 'Algo de actividad esporádica', v: 'intermediate' },
+        { e: '🏃‍♀️', t: 'Entreno regular pero estoy estancada', v: 'advanced' },
+      ],
+    },
+    {
+      q: '¿Qué te ha frenado antes?',
+      opts: [
+        { e: '😩', t: 'Falta de motivación', v: 'motivation' },
+        { e: '⌛', t: 'No tener tiempo', v: 'time' },
+        { e: '🥗', t: 'Las dietas me agotan', v: 'diet' },
+        { e: '🏋️‍♀️', t: 'Odio el gym', v: 'gym' },
+      ],
+    },
+    {
+      q: '¿Cuál es tu rango de edad?',
+      opts: [
+        { e: '🌷', t: '20-29', v: '25' },
+        { e: '🌹', t: '30-39', v: '35' },
+        { e: '🌺', t: '40-49', v: '45' },
+        { e: '🌸', t: '50+', v: '55' },
+      ],
+    },
+    {
+      q: '¿Cómo te sentirías si en 8 semanas vieras un cambio real?',
+      opts: [
+        { e: '🤩', t: 'Increíble — necesito esto', v: 'urgent' },
+        { e: '😊', t: 'Muy feliz pero no me lo creo aún', v: 'hopeful' },
+        { e: '🤔', t: 'Curiosa, dudo si funciona', v: 'skeptical' },
+      ],
+    },
+  ];
+
+  let currentQ = 0;
+  const answers = {};
+
+  function startQuiz() {
+    document.getElementById('intro').classList.add('hidden');
+    document.getElementById('quiz').classList.remove('hidden');
+    document.getElementById('quiz').classList.add('flex');
+    if (typeof fbq !== 'undefined') {
+      fbq('trackCustom', 'QuizStart', { variant: 'G_quiz' });
+    }
+    renderQuestion();
+  }
+
+  function renderQuestion() {
+    const q = questions[currentQ];
+    const pct = Math.round(((currentQ + 1) / questions.length) * 100);
+    document.getElementById('q-num').textContent = currentQ + 1;
+    document.getElementById('q-pct').textContent = pct;
+    document.getElementById('progress').style.width = pct + '%';
+
+    const c = document.getElementById('question-container');
+    c.className = 'slide-in';
+    void c.offsetWidth; // restart animation
+    c.innerHTML = `
+      <h2 class="font-serif text-3xl md:text-4xl font-bold mb-8">${q.q}</h2>
+      <div class="space-y-3">
+        ${q.opts.map((o, i) => `
+          <button onclick="answer(${i})" class="opt w-full bg-white rounded-2xl p-5 border-2 border-ink/10 hover:border-glow-500 text-left flex items-center gap-4">
+            <span class="text-3xl">${o.e}</span>
+            <span class="font-semibold flex-1">${o.t}</span>
+            <span class="text-ink/30">›</span>
+          </button>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  function answer(idx) {
+    const q = questions[currentQ];
+    answers[`q${currentQ + 1}`] = q.opts[idx].v;
+    currentQ++;
+    if (currentQ >= questions.length) {
+      showLoading();
+    } else {
+      renderQuestion();
+    }
+  }
+
+  function showLoading() {
+    document.getElementById('quiz').classList.add('hidden');
+    document.getElementById('loading').classList.remove('hidden');
+    document.getElementById('loading').classList.add('flex');
+
+    setTimeout(() => document.getElementById('loading-step-1').classList.replace('opacity-0','opacity-100'), 500);
+    setTimeout(() => document.getElementById('loading-step-2').classList.replace('opacity-0','opacity-100'), 1500);
+    setTimeout(() => document.getElementById('loading-step-3').classList.replace('opacity-0','opacity-100'), 2500);
+    setTimeout(showResult, 3500);
+  }
+
+  function showResult() {
+    document.getElementById('loading').classList.add('hidden');
+    document.getElementById('result').classList.remove('hidden');
+
+    // Calcular plan personalizado
+    const time = answers.q2 === '15' ? '15 min/día' : answers.q2 === '45' ? '45 min/día' : '28 min/día';
+    const freq = answers.q3 === 'beginner' ? '3 días/semana' : '5 días/semana';
+    const level = answers.q3 === 'beginner' ? 'Principiante' : answers.q3 === 'advanced' ? 'Intermedio-Avanzado' : 'Intermedio';
+    const type = answers.q1 === 'lose' ? 'Cardio + tonificación' : answers.q1 === 'tonify' ? 'Tonificación + fuerza' : answers.q1 === 'energy' ? 'Cardio liviano + movilidad' : 'Yoga + mindfulness';
+    const weeks = answers.q3 === 'advanced' ? '6-10 semanas' : '8-12 semanas';
+
+    document.getElementById('r-duration').textContent = time;
+    document.getElementById('r-freq').textContent = freq;
+    document.getElementById('r-level').textContent = level;
+    document.getElementById('r-type').textContent = type;
+    document.getElementById('r-time').textContent = weeks;
+
+    // Guardar quiz answers para el coach IA
+    localStorage.setItem('mgu_quiz', JSON.stringify(answers));
+
+    if (typeof fbq !== 'undefined') {
+      fbq('trackCustom', 'QuizComplete', { variant: 'G_quiz', plan: type });
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Track variant on landing view
+  if (typeof fbq !== 'undefined') {
+    fbq('trackCustom', 'LandingView', { variant: 'G_quiz' });
+  }
+
+  // Save variant + fire InitiateCheckout when MP link clicked
+  document.getElementById('result-cta').addEventListener('click', () => {
+    localStorage.setItem('mgu_variant', 'G_quiz_MONTHLY');
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'InitiateCheckout', { content_name: 'G_quiz_MONTHLY', value: 990, currency: 'CLP' });
+    }
+  });
+</script>
+
+</body>
+</html>

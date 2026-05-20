@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="theme-color" content="#F26A47" />
+<title>Sola es imposible. Juntas, inevitable. — MiGlowUp</title>
+<meta name="description" content="Una comunidad de chilenas que se acompañan. Porque solas, lo intentamos 100 veces. Juntas, lo logramos." />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800;9..144,900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      fontFamily: { serif: ['Fraunces','serif'], sans: ['Inter','system-ui','sans-serif'] },
+      colors: {
+        glow: { 50:'#FFF6F2',100:'#FFE9DF',200:'#FFD1BD',300:'#FFB294',400:'#FF8A66',500:'#F26A47',600:'#D74E2D',700:'#A93A20' },
+        cream: '#FBF6EE',
+        ink: '#1A1A1A',
+        whats: '#25D366',
+      },
+    }},
+  };
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; background: #FBF6EE; color: #1A1A1A; }
+  .font-serif { font-family: 'Fraunces', serif; letter-spacing: -0.02em; }
+  @keyframes fadeUp { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+  .fade-in { animation: fadeUp 0.8s ease both; }
+  @keyframes float-up {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
+  }
+  .float { animation: float-up 3s ease-in-out infinite; }
+  .float-2 { animation: float-up 3s ease-in-out infinite; animation-delay: 0.5s; }
+  .float-3 { animation: float-up 3s ease-in-out infinite; animation-delay: 1s; }
+  .chat-bubble {
+    position: relative; background: white; border-radius: 18px; padding: 12px 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .chat-bubble.right { background: #DCF8C6; }
+</style>
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '4376662015813242');
+fbq('track', 'PageView');
+</script>
+</head>
+<body class="min-h-screen">
+
+<!-- HERO -->
+<section class="px-5 py-12 md:py-20 max-w-3xl mx-auto fade-in">
+  <div class="text-center">
+    <div class="inline-block bg-glow-100 text-glow-700 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">💛 Comunidad fundadora</div>
+    <h1 class="font-serif text-5xl md:text-7xl font-black leading-[0.95] mb-6">
+      Sola es imposible.<br/>
+      <span class="italic text-glow-500">Juntas,</span><br/>
+      inevitable.
+    </h1>
+    <p class="text-lg md:text-xl text-ink/70 max-w-xl mx-auto mb-8">
+      Lo intentaste sola 100 veces. Esta vez no. Una comunidad real de chilenas que se acompañan en lo bueno, lo difícil, y lo "no quiero hoy".
+    </p>
+    <a href="#empezar" class="inline-block bg-glow-500 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-glow-600 transition shadow-lg shadow-glow-500/30">
+      Unirme a la comunidad por $990 →
+    </a>
+    <p class="text-xs text-ink/50 mt-4">Trial 7 días · cancelas cuando quieras</p>
+  </div>
+</section>
+
+<!-- WHATSAPP MOCK -->
+<section class="px-5 py-12 bg-white fade-in">
+  <div class="max-w-md mx-auto">
+    <div class="text-center mb-6">
+      <div class="text-xs uppercase tracking-widest font-bold text-glow-500 mb-2">📱 Así se ve un día normal</div>
+      <h2 class="font-serif text-2xl font-bold">Grupo MiGlowUp · 247 chilenas</h2>
+    </div>
+
+    <div class="bg-[#ECE5DD] rounded-2xl p-4 space-y-3">
+      <div class="flex gap-2">
+        <div class="w-8 h-8 rounded-full bg-glow-300 flex-shrink-0 flex items-center justify-center text-xs font-bold text-glow-700">M</div>
+        <div class="chat-bubble float">
+          <div class="text-xs font-bold text-glow-600 mb-1">Marciana 🌟</div>
+          <div class="text-sm">¡Buenos días equipo! ☀️ Hoy es lunes — rutina de glúteos 25 min en la app. ¿Quién parte conmigo a las 7?</div>
+          <div class="text-[10px] text-ink/40 text-right mt-1">06:45</div>
+        </div>
+      </div>
+
+      <div class="flex gap-2 justify-end">
+        <div class="chat-bubble right float-2">
+          <div class="text-xs font-bold text-emerald-700 mb-1">Cami</div>
+          <div class="text-sm">¡Yo! En 5 min me cambio y partoooo 💪</div>
+          <div class="text-[10px] text-ink/40 text-right mt-1">06:47</div>
+        </div>
+      </div>
+
+      <div class="flex gap-2 justify-end">
+        <div class="chat-bubble right float-3">
+          <div class="text-xs font-bold text-emerald-700 mb-1">Pau</div>
+          <div class="text-sm">Yo me uno!! Después del café 🫶</div>
+          <div class="text-[10px] text-ink/40 text-right mt-1">06:48</div>
+        </div>
+      </div>
+
+      <div class="flex gap-2">
+        <div class="w-8 h-8 rounded-full bg-pink-200 flex-shrink-0 flex items-center justify-center text-xs font-bold">J</div>
+        <div class="chat-bubble">
+          <div class="text-xs font-bold text-pink-600 mb-1">Javi</div>
+          <div class="text-sm">Llevo 3 semanas seguidas chicas 😭 Antes no llegaba ni a 3 días</div>
+          <div class="text-[10px] text-ink/40 text-right mt-1">06:52</div>
+        </div>
+      </div>
+
+      <div class="flex gap-2 justify-end">
+        <div class="chat-bubble right">
+          <div class="text-xs font-bold text-emerald-700 mb-1">Tú</div>
+          <div class="text-sm italic text-ink/60">Empieza tu propia historia →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POR QUÉ JUNTAS -->
+<section class="px-5 py-16 max-w-3xl mx-auto fade-in">
+  <div class="text-center mb-12">
+    <h2 class="font-serif text-4xl md:text-5xl font-bold leading-tight">
+      Las estadísticas<br/>no mienten.
+    </h2>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-5">
+    <div class="bg-white rounded-3xl p-7 border border-ink/10">
+      <div class="font-serif text-5xl font-black text-glow-500 mb-2">95%</div>
+      <p class="text-sm text-ink/70">Abandona sus propósitos antes del 31 de enero <strong>cuando lo hace sola</strong>.</p>
+    </div>
+    <div class="bg-glow-500 text-white rounded-3xl p-7">
+      <div class="font-serif text-5xl font-black mb-2">3x</div>
+      <p class="text-sm opacity-90">Más probabilidad de mantener un cambio <strong>cuando lo haces con apoyo de un grupo</strong>.</p>
+    </div>
+    <div class="bg-white rounded-3xl p-7 border border-ink/10">
+      <div class="font-serif text-5xl font-black text-glow-500 mb-2">+247</div>
+      <p class="text-sm text-ink/70">Chilenas ya están en la comunidad. Activas, reales, hablando todos los días.</p>
+    </div>
+    <div class="bg-ink text-cream rounded-3xl p-7">
+      <div class="font-serif text-5xl font-black mb-2">0</div>
+      <p class="text-sm opacity-90">Hombres en el grupo. Espacio seguro 100% para nosotras.</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUÉ INCLUYE -->
+<section class="px-5 py-16 bg-cream max-w-3xl mx-auto fade-in">
+  <h2 class="font-serif text-3xl md:text-4xl font-bold text-center mb-3">No solo es la comunidad.</h2>
+  <p class="text-center text-ink/60 mb-12">Pero la comunidad es lo que lo hace funcionar.</p>
+
+  <div class="space-y-4">
+    <div class="bg-white rounded-2xl p-6 border-l-4 border-whats flex gap-4 items-start">
+      <div class="text-3xl">💬</div>
+      <div class="flex-1">
+        <h3 class="font-serif text-lg font-bold mb-1">Grupo WhatsApp privado</h3>
+        <p class="text-ink/70 text-sm">Activo todos los días. Marciana modera. Apoyo, motivación, dudas, victorias chicas y grandes.</p>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl p-6 border-l-4 border-glow-500 flex gap-4 items-start">
+      <div class="text-3xl">💪</div>
+      <div class="flex-1">
+        <h3 class="font-serif text-lg font-bold mb-1">Rutinas en la app</h3>
+        <p class="text-ink/70 text-sm">25-30 min al día, desde tu casa, sin equipamiento. Te avisamos en el grupo cuando hay rutina del día.</p>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl p-6 border-l-4 border-glow-500 flex gap-4 items-start">
+      <div class="text-3xl">✨</div>
+      <div class="flex-1">
+        <h3 class="font-serif text-lg font-bold mb-1">Coach IA personal 24/7</h3>
+        <p class="text-ink/70 text-sm">Cuando no quieres preguntarle al grupo, hablas con tu coach IA. Cero juicio, respuesta inmediata.</p>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl p-6 border-l-4 border-glow-500 flex gap-4 items-start">
+      <div class="text-3xl">📈</div>
+      <div class="flex-1">
+        <h3 class="font-serif text-lg font-bold mb-1">Tracking de progreso</h3>
+        <p class="text-ink/70 text-sm">Tus medidas, peso, fotos — todo privado, solo tú las ves. Para que veas cómo cambias.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIO -->
+<section class="px-5 py-16 max-w-2xl mx-auto fade-in">
+  <div class="bg-glow-500 text-white rounded-3xl p-8 md:p-10">
+    <div class="text-5xl mb-4">"</div>
+    <p class="font-serif text-xl md:text-2xl leading-snug font-semibold mb-6">
+      Me separé hace un año. Me sentía completamente sola. Entré a MiGlowUp por los entrenamientos pero me quedé por las chicas. Hablamos todos los días. Lloramos juntas, reímos juntas, entrenamos juntas. Mi cuerpo cambió, pero lo más importante: ya no estoy sola.
+    </p>
+    <p class="text-sm opacity-90">— Antonia, 38, Las Condes</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="empezar" class="px-5 py-20 max-w-2xl mx-auto fade-in">
+  <div class="bg-white rounded-3xl p-8 md:p-10 border-2 border-glow-300 text-center">
+    <div class="text-xs uppercase tracking-widest font-bold text-glow-500 mb-3">Plazas fundadoras</div>
+    <h2 class="font-serif text-4xl md:text-5xl font-bold leading-tight mb-4">
+      Únete a la <span class="italic text-glow-500">tribu.</span>
+    </h2>
+    <p class="text-ink/70 mb-8">247 chilenas te están esperando.</p>
+
+    <div class="font-serif text-5xl font-black mb-2">$990</div>
+    <p class="text-sm text-ink/60 mb-8">Trial 7 días · luego mensual</p>
+
+    <a id="cta-final" href="#" class="block bg-glow-500 hover:bg-glow-600 transition text-white px-12 py-5 rounded-full font-bold text-xl shadow-lg shadow-glow-500/30 mb-4">
+      Unirme ahora →
+    </a>
+    <p class="text-xs text-ink/50">🔒 Pago seguro · cancelas cuando quieras</p>
+  </div>
+</section>
+
+<footer class="px-5 py-8 text-center text-xs text-ink/50">
+  © MiGlowUp · <a href="mailto:hola@miglowup.cl" class="underline">hola@miglowup.cl</a>
+</footer>
+
+<script>
+  const MP_LINK = 'https://mpago.la/1BaojSf';
+  document.getElementById('cta-final').href = MP_LINK;
+
+  if (typeof fbq !== 'undefined') {
+    fbq('trackCustom', 'LandingView', { variant: 'J_juntas' });
+  }
+
+  document.getElementById('cta-final').addEventListener('click', () => {
+    localStorage.setItem('mgu_variant', 'J_juntas_MONTHLY');
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'InitiateCheckout', { content_name: 'J_juntas_MONTHLY', value: 990, currency: 'CLP' });
+    }
+  });
+</script>
+
+</body>
+</html>
