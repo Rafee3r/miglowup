@@ -156,24 +156,68 @@ fbq('track', 'PageView');
       </ul>
     </div>
 
-    <!-- Precio + CTA -->
-    <div class="bg-ink text-cream rounded-3xl p-7 text-center mb-4">
-      <div class="text-xs uppercase tracking-widest font-bold text-glow-300 mb-2">Plazas fundadoras</div>
-      <div class="font-serif text-4xl font-black mb-2">$990</div>
-      <p class="text-sm text-cream/70 mb-6">Trial 7 días · luego mensual</p>
-      <a id="result-cta" href="#" class="block bg-glow-500 hover:bg-glow-600 transition text-white py-4 rounded-full font-bold text-lg shadow-lg shadow-glow-500/40">
-        Activar mi plan →
-      </a>
-      <p class="text-xs text-cream/50 mt-4">🔒 Pago seguro vía Mercado Pago</p>
+    <!-- Plan selector -->
+    <div class="text-center mb-3">
+      <div class="text-xs uppercase tracking-widest font-bold text-glow-500">Elige tu plan</div>
     </div>
 
+    <div class="grid grid-cols-2 gap-3 mb-5">
+      <div class="bg-white rounded-2xl p-4 border-2 border-ink/10 text-center">
+        <div class="font-serif text-base font-bold mb-1">Mensual</div>
+        <div class="font-serif text-2xl font-bold mb-1">$12.990</div>
+        <div class="text-[10px] text-ink/60 mb-3">/mes después del trial</div>
+        <a id="result-cta-monthly" href="#" data-plan="MONTHLY" class="block bg-ink text-white py-2.5 rounded-full font-bold text-sm hover:bg-glow-600 transition">Empezar · $990</a>
+      </div>
+      <div class="bg-glow-500 text-white rounded-2xl p-4 border-2 border-glow-500 text-center relative">
+        <div class="absolute -top-2 left-1/2 -translate-x-1/2 bg-ink text-cream text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full whitespace-nowrap">42% menos</div>
+        <div class="font-serif text-base font-bold mb-1">Anual</div>
+        <div class="font-serif text-2xl font-bold mb-1">$89.990</div>
+        <div class="text-[10px] text-white/80 mb-3">$7.499/mes equivalente</div>
+        <a id="result-cta" href="#" data-plan="ANNUAL" class="block bg-white text-ink py-2.5 rounded-full font-bold text-sm hover:bg-cream transition">Empezar · $990</a>
+      </div>
+    </div>
+
+    <p class="text-center text-xs text-ink/50 mb-2">🔒 Pago seguro vía Mercado Pago</p>
     <p class="text-center text-xs text-ink/40">⏱️ Tu plan personalizado caduca en 30 minutos</p>
+
+    <!-- TESTIMONIOS QUIZ -->
+    <div class="mt-12 pt-10 border-t border-ink/10">
+      <h3 class="font-serif text-2xl font-bold text-center mb-2">Otras que tomaron el quiz</h3>
+      <p class="text-center text-ink/60 text-sm mb-6">Y siguieron su plan personalizado.</p>
+
+      <div class="space-y-4">
+        <div class="bg-white rounded-2xl p-5 border border-ink/10 flex gap-4 items-start">
+          <img src="/assets/testimonial-1.jpg" alt="Camila" class="w-16 h-16 rounded-2xl object-cover flex-shrink-0" loading="lazy" />
+          <div>
+            <div class="font-serif text-sm font-bold text-glow-600 mb-1">Mi plan exacto · -7 kg</div>
+            <p class="text-ink/70 text-xs italic mb-2">"Respondí 6 preguntas y me dieron una rutina pensada para mí. 28 min, días por la tarde porque rindo mejor así. Funcionó."</p>
+            <div class="text-xs font-semibold">Camila, 32 · Las Condes</div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl p-5 border border-ink/10 flex gap-4 items-start">
+          <img src="/assets/testimonial-2.jpg" alt="Valentina" class="w-16 h-16 rounded-2xl object-cover flex-shrink-0" loading="lazy" />
+          <div>
+            <div class="font-serif text-sm font-bold text-glow-600 mb-1">Personalizado de verdad</div>
+            <p class="text-ink/70 text-xs italic mb-2">"Pensé que las apps eran genéricas. El quiz me sorprendió — me preguntó cosas que mi nutri ni preguntaba. El plan era para mí."</p>
+            <div class="text-xs font-semibold">Valentina, 28 · Maipú</div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl p-5 border border-ink/10 flex gap-4 items-start">
+          <img src="/assets/testimonial-3.jpg" alt="Constanza" class="w-16 h-16 rounded-2xl object-cover flex-shrink-0" loading="lazy" />
+          <div>
+            <div class="font-serif text-sm font-bold text-glow-600 mb-1">Postparto -6 cm</div>
+            <p class="text-ink/70 text-xs italic mb-2">"Después del segundo embarazo necesitaba algo realmente personalizado. El plan que me dio el quiz era específico para mi cuerpo de ahora."</p>
+            <div class="text-xs font-semibold">Constanza, 35 · Concepción</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <script>
   const MP_LINK = 'https://mpago.la/1BaojSf';
-  document.getElementById('result-cta').href = MP_LINK;
+  document.querySelectorAll('a[data-plan]').forEach(a => a.href = MP_LINK);
 
   const questions = [
     {
@@ -213,7 +257,7 @@ fbq('track', 'PageView');
     {
       q: '¿Cuál es tu rango de edad?',
       opts: [
-        { e: '🌷', t: '20-29', v: '25' },
+        { e: '🌷', t: '15-29', v: '22' },
         { e: '🌹', t: '30-39', v: '35' },
         { e: '🌺', t: '40-49', v: '45' },
         { e: '🌸', t: '50+', v: '55' },
@@ -321,11 +365,14 @@ fbq('track', 'PageView');
   }
 
   // Save variant + fire InitiateCheckout when MP link clicked
-  document.getElementById('result-cta').addEventListener('click', () => {
-    localStorage.setItem('mgu_variant', 'G_quiz_MONTHLY');
-    if (typeof fbq !== 'undefined') {
-      fbq('track', 'InitiateCheckout', { content_name: 'G_quiz_MONTHLY', value: 990, currency: 'CLP' });
-    }
+  document.querySelectorAll('a[data-plan]').forEach(el => {
+    el.addEventListener('click', () => {
+      const plan = el.getAttribute('data-plan');
+      localStorage.setItem('mgu_variant', 'G_quiz_' + plan);
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'InitiateCheckout', { content_name: 'G_quiz_' + plan, value: 990, currency: 'CLP' });
+      }
+    });
   });
 </script>
 

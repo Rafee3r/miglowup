@@ -171,6 +171,74 @@ fbq('track', 'PageView');
   </div>
 </section>
 
+<!-- TESTIMONIOS MAMÁS -->
+<section class="px-5 py-16 bg-white fade-in">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="font-serif text-3xl md:text-4xl font-bold text-center mb-3">Mamás chilenas que lo lograron</h2>
+    <p class="text-center text-ink/60 mb-10">Mientras los cabros duermen, ellas avanzan.</p>
+
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="bg-cream rounded-3xl p-6 border border-ink/5">
+        <img src="/assets/testimonial-1.jpg" alt="Camila" class="w-full aspect-square object-cover rounded-2xl mb-5" loading="lazy" />
+        <div class="font-serif text-xl font-bold text-glow-600 mb-2">-7 kg con 2 cabros chicos</div>
+        <p class="text-ink/70 text-sm mb-4 italic">"Entreno mientras Joaco duerme siesta. 15 min y sigo con mi día. Bajé 7 kilos sin sacarle tiempo a mis hijos."</p>
+        <div class="text-sm font-semibold">Camila, 32 · mamá de Joaco (4) y Sofi (1)</div>
+      </div>
+      <div class="bg-cream rounded-3xl p-6 border border-ink/5">
+        <img src="/assets/testimonial-2.jpg" alt="Valentina" class="w-full aspect-square object-cover rounded-2xl mb-5" loading="lazy" />
+        <div class="font-serif text-xl font-bold text-glow-600 mb-2">Recuperación primeriza</div>
+        <p class="text-ink/70 text-sm mb-4 italic">"Llevo 8 meses de mi hija. Recuperé mi cuerpo entrenando con ella al lado en el corral. Es posible — solo necesitas otro tipo de plan."</p>
+        <div class="text-sm font-semibold">Valentina, 28 · mamá de Emilia</div>
+      </div>
+      <div class="bg-cream rounded-3xl p-6 border border-ink/5">
+        <img src="/assets/testimonial-3.jpg" alt="Constanza" class="w-full aspect-square object-cover rounded-2xl mb-5" loading="lazy" />
+        <div class="font-serif text-xl font-bold text-glow-600 mb-2">-6 cm cintura · 2 partos</div>
+        <p class="text-ink/70 text-sm mb-4 italic">"Después de 2 embarazos pensé que no había vuelta. En 12 semanas los jeans pre-embarazo volvieron a calzar. Me siento yo de nuevo."</p>
+        <div class="text-sm font-semibold">Constanza, 35 · mamá de Tomi y Luca</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="px-5 py-16 max-w-3xl mx-auto fade-in">
+  <h2 class="font-serif text-3xl md:text-4xl font-bold text-center mb-3">Elige tu plan</h2>
+  <p class="text-center text-ink/60 mb-10">Siempre empiezas con trial de $990 · 7 días</p>
+
+  <div class="grid md:grid-cols-2 gap-5">
+    <div class="bg-white rounded-3xl p-7 border border-ink/10">
+      <div class="font-serif text-xl font-semibold mb-1">Mensual</div>
+      <div class="text-ink/60 text-sm mb-5">Flexibilidad total</div>
+      <div class="mb-5">
+        <div class="text-4xl font-serif font-bold">$12.990</div>
+        <div class="text-ink/60 text-sm">/mes después del trial</div>
+      </div>
+      <div class="bg-glow-50 rounded-xl p-4 mb-5 border border-glow-200">
+        <div class="text-xs font-bold uppercase tracking-wider text-glow-700 mb-1">Empieza por</div>
+        <div class="text-2xl font-bold text-glow-700">$990 · 7 días</div>
+      </div>
+      <a href="#" data-plan="MONTHLY" class="block text-center bg-ink text-white py-4 rounded-full font-bold hover:bg-glow-600 transition">Empezar mensual</a>
+      <p class="text-xs text-ink/50 mt-3 text-center">Cancela cuando quieras</p>
+    </div>
+
+    <div class="bg-glow-500 text-white rounded-3xl p-7 relative">
+      <div class="absolute -top-3 right-5 bg-ink text-cream text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">42% menos</div>
+      <div class="font-serif text-xl font-semibold mb-1">Anual</div>
+      <div class="text-white/80 text-sm mb-5">Para las que van en serio</div>
+      <div class="mb-5">
+        <div class="text-4xl font-serif font-bold">$89.990</div>
+        <div class="text-white/80 text-sm">/año · equivale a $7.499/mes</div>
+      </div>
+      <div class="bg-white/15 backdrop-blur rounded-xl p-4 mb-5">
+        <div class="text-xs font-bold uppercase tracking-wider mb-1">Empieza por</div>
+        <div class="text-2xl font-bold">$990 · 7 días</div>
+      </div>
+      <a href="#" data-plan="ANNUAL" class="block text-center bg-white text-ink py-4 rounded-full font-bold hover:bg-cream transition">Empezar anual</a>
+      <p class="text-xs text-white/80 mt-3 text-center">Ahorras $66.890 vs mensual</p>
+    </div>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section class="px-5 py-16 max-w-2xl mx-auto fade-in">
   <h2 class="font-serif text-3xl font-bold text-center mb-10">Preguntas reales de mamás</h2>
@@ -223,20 +291,27 @@ fbq('track', 'PageView');
 <script>
   const MP_LINK = 'https://mpago.la/1BaojSf';
   document.getElementById('cta-final').href = MP_LINK;
+  document.querySelectorAll('a[data-plan]').forEach(a => a.href = MP_LINK);
 
   if (typeof fbq !== 'undefined') {
     fbq('trackCustom', 'LandingView', { variant: 'H_mamas' });
   }
 
-  document.querySelectorAll('a[href="#empezar"], #cta-final').forEach(el => {
+  document.querySelectorAll('a[data-plan]').forEach(el => {
     el.addEventListener('click', () => {
-      if (el.id === 'cta-final') {
-        localStorage.setItem('mgu_variant', 'H_mamas_MONTHLY');
-        if (typeof fbq !== 'undefined') {
-          fbq('track', 'InitiateCheckout', { content_name: 'H_mamas_MONTHLY', value: 990, currency: 'CLP' });
-        }
+      const plan = el.getAttribute('data-plan');
+      localStorage.setItem('mgu_variant', 'H_mamas_' + plan);
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'InitiateCheckout', { content_name: 'H_mamas_' + plan, value: 990, currency: 'CLP' });
       }
     });
+  });
+
+  document.getElementById('cta-final').addEventListener('click', () => {
+    localStorage.setItem('mgu_variant', 'H_mamas_MONTHLY');
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'InitiateCheckout', { content_name: 'H_mamas_MONTHLY', value: 990, currency: 'CLP' });
+    }
   });
 </script>
 

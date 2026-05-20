@@ -140,12 +140,71 @@ fbq('track', 'PageView');
   </div>
 </section>
 
-<!-- TESTIMONIO -->
-<section class="px-5 py-16 max-w-2xl mx-auto fade-in">
-  <div class="bg-glow-500 text-white rounded-3xl p-8 md:p-10">
-    <div class="text-5xl mb-4">"</div>
-    <p class="font-serif text-2xl md:text-3xl leading-snug font-semibold mb-6">Cancelé Smart Fit el segundo mes. Sigo entrenando 5 días a la semana, en la pieza, mientras mi hijo ve monitos. Bajé 6 kilos en 3 meses.</p>
-    <p class="text-sm opacity-90">— Cami, 34, Ñuñoa</p>
+<!-- TESTIMONIOS -->
+<section class="px-5 py-16 bg-white fade-in">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="font-serif text-3xl md:text-4xl font-bold text-center mb-3">Cancelaron el gym. No volvieron.</h2>
+    <p class="text-center text-ink/60 mb-10">Historias reales de chilenas que dejaron de pagar membresía y siguen mejorando.</p>
+
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="bg-cream rounded-3xl p-6 border border-ink/5">
+        <img src="/assets/testimonial-1.jpg" alt="Camila" class="w-full aspect-square object-cover rounded-2xl mb-5" loading="lazy" />
+        <div class="font-serif text-xl font-bold text-glow-600 mb-2">-7 kg en 8 semanas</div>
+        <p class="text-ink/70 text-sm mb-4 italic">"Cancelé Smart Fit el segundo mes. Sigo entrenando 5 días en la pieza mientras mi hijo ve monos. Plata que no boto más."</p>
+        <div class="text-sm font-semibold">Camila, 32 · Las Condes</div>
+      </div>
+      <div class="bg-cream rounded-3xl p-6 border border-ink/5">
+        <img src="/assets/testimonial-2.jpg" alt="Valentina" class="w-full aspect-square object-cover rounded-2xl mb-5" loading="lazy" />
+        <div class="font-serif text-xl font-bold text-glow-600 mb-2">+5 cm glúteo · 6 semanas</div>
+        <p class="text-ink/70 text-sm mb-4 italic">"Nunca pisé un gym, me daba vergüenza. Pensé que era para otras. En 6 semanas entrenando en mi casa mi ropa cambió completo."</p>
+        <div class="text-sm font-semibold">Valentina, 28 · Maipú</div>
+      </div>
+      <div class="bg-cream rounded-3xl p-6 border border-ink/5">
+        <img src="/assets/testimonial-3.jpg" alt="Constanza" class="w-full aspect-square object-cover rounded-2xl mb-5" loading="lazy" />
+        <div class="font-serif text-xl font-bold text-glow-600 mb-2">-6 cm cintura postparto</div>
+        <p class="text-ink/70 text-sm mb-4 italic">"Después de Daniel pensé 'nunca más voy a entrar al gym'. No tuve que. 28 min al día desde mi casa y volví a estar bien."</p>
+        <div class="text-sm font-semibold">Constanza, 35 · Concepción</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="px-5 py-16 max-w-3xl mx-auto fade-in">
+  <h2 class="font-serif text-3xl md:text-4xl font-bold text-center mb-3">Elige tu plan</h2>
+  <p class="text-center text-ink/60 mb-10">Siempre empiezas con trial de $990 · 7 días</p>
+
+  <div class="grid md:grid-cols-2 gap-5">
+    <div class="bg-white rounded-3xl p-7 border border-ink/10">
+      <div class="font-serif text-xl font-semibold mb-1">Mensual</div>
+      <div class="text-ink/60 text-sm mb-5">Flexibilidad total</div>
+      <div class="mb-5">
+        <div class="text-4xl font-serif font-bold">$12.990</div>
+        <div class="text-ink/60 text-sm">/mes después del trial</div>
+      </div>
+      <div class="bg-glow-50 rounded-xl p-4 mb-5 border border-glow-200">
+        <div class="text-xs font-bold uppercase tracking-wider text-glow-700 mb-1">Empieza por</div>
+        <div class="text-2xl font-bold text-glow-700">$990 · 7 días</div>
+      </div>
+      <a href="#" data-plan="MONTHLY" class="block text-center bg-ink text-white py-4 rounded-full font-bold hover:bg-glow-600 transition">Empezar mensual</a>
+      <p class="text-xs text-ink/50 mt-3 text-center">Cancela cuando quieras</p>
+    </div>
+
+    <div class="bg-glow-500 text-white rounded-3xl p-7 relative">
+      <div class="absolute -top-3 right-5 bg-ink text-cream text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">42% menos</div>
+      <div class="font-serif text-xl font-semibold mb-1">Anual</div>
+      <div class="text-white/80 text-sm mb-5">Para las que van en serio</div>
+      <div class="mb-5">
+        <div class="text-4xl font-serif font-bold">$89.990</div>
+        <div class="text-white/80 text-sm">/año · equivale a $7.499/mes</div>
+      </div>
+      <div class="bg-white/15 backdrop-blur rounded-xl p-4 mb-5">
+        <div class="text-xs font-bold uppercase tracking-wider mb-1">Empieza por</div>
+        <div class="text-2xl font-bold">$990 · 7 días</div>
+      </div>
+      <a href="#" data-plan="ANNUAL" class="block text-center bg-white text-ink py-4 rounded-full font-bold hover:bg-cream transition">Empezar anual</a>
+      <p class="text-xs text-white/80 mt-3 text-center">Ahorras $66.890 vs mensual</p>
+    </div>
   </div>
 </section>
 
@@ -194,32 +253,30 @@ fbq('track', 'PageView');
 <script>
   const MP_LINK = 'https://mpago.la/1BaojSf';
   document.getElementById('cta-final').href = MP_LINK;
-  document.querySelectorAll('a[href="#empezar"]').forEach(a => {
-    a.addEventListener('click', () => {
-      // smooth scroll handled by anchor
-    });
-  });
+  document.querySelectorAll('a[data-plan]').forEach(a => a.href = MP_LINK);
 
-  // Track variant on landing
   if (typeof fbq !== 'undefined') {
     fbq('trackCustom', 'LandingView', { variant: 'F_singym' });
   }
 
-  // Save variant + fire InitiateCheckout when MP link clicked
-  document.querySelectorAll('a[href*="mpago.la"], #cta-final').forEach(el => {
+  // Pricing buttons
+  document.querySelectorAll('a[data-plan]').forEach(el => {
     el.addEventListener('click', () => {
-      localStorage.setItem('mgu_variant', 'F_singym_MONTHLY');
+      const plan = el.getAttribute('data-plan');
+      localStorage.setItem('mgu_variant', 'F_singym_' + plan);
       if (typeof fbq !== 'undefined') {
-        fbq('track', 'InitiateCheckout', { content_name: 'F_singym_MONTHLY', value: 990, currency: 'CLP' });
+        fbq('track', 'InitiateCheckout', { content_name: 'F_singym_' + plan, value: 990, currency: 'CLP' });
       }
     });
   });
 
-  // Replace #empezar anchors with MP link on final CTA
-  setTimeout(() => {
-    const finalCta = document.getElementById('cta-final');
-    if (finalCta) finalCta.href = MP_LINK;
-  }, 100);
+  // Final CTA defaults to MONTHLY
+  document.getElementById('cta-final').addEventListener('click', () => {
+    localStorage.setItem('mgu_variant', 'F_singym_MONTHLY');
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'InitiateCheckout', { content_name: 'F_singym_MONTHLY', value: 990, currency: 'CLP' });
+    }
+  });
 </script>
 
 </body>

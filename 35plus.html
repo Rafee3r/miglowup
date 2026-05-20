@@ -137,6 +137,74 @@ fbq('track', 'PageView');
   </div>
 </section>
 
+<!-- TESTIMONIOS 35+ -->
+<section class="px-5 py-16 bg-white fade-in">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="font-serif text-3xl md:text-4xl font-bold text-center mb-3">Mujeres 35+ que volvieron a sentirse ellas</h2>
+    <p class="text-center text-ink/60 mb-10">Resultados sostenibles, sin matarse en el gym.</p>
+
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="bg-cream rounded-3xl p-6 border border-ink/5">
+        <img src="/assets/testimonial-1.jpg" alt="Camila" class="w-full aspect-square object-cover rounded-2xl mb-5" loading="lazy" />
+        <div class="font-serif text-xl font-bold text-glow-600 mb-2">Perimenopausia + 5 kg</div>
+        <p class="text-ink/70 text-sm mb-4 italic">"Tengo 38 y la grasa abdominal apareció de la nada. El método 35+ entendió eso. Bajé 5 kilos sin matarme entrenando, con foco en fuerza."</p>
+        <div class="text-sm font-semibold">Camila, 38 · Las Condes</div>
+      </div>
+      <div class="bg-cream rounded-3xl p-6 border border-ink/5">
+        <img src="/assets/testimonial-2.jpg" alt="Valentina" class="w-full aspect-square object-cover rounded-2xl mb-5" loading="lazy" />
+        <div class="font-serif text-xl font-bold text-glow-600 mb-2">Sueño + energía recuperados</div>
+        <p class="text-ink/70 text-sm mb-4 italic">"Bochornos, insomnio, fatiga. Pensé que era 'la edad'. Las rutinas low-impact y el coach IA me cambiaron el sueño en 6 semanas."</p>
+        <div class="text-sm font-semibold">Valentina, 41 · Maipú</div>
+      </div>
+      <div class="bg-cream rounded-3xl p-6 border border-ink/5">
+        <img src="/assets/testimonial-3.jpg" alt="Constanza" class="w-full aspect-square object-cover rounded-2xl mb-5" loading="lazy" />
+        <div class="font-serif text-xl font-bold text-glow-600 mb-2">Después de los 45</div>
+        <p class="text-ink/70 text-sm mb-4 italic">"Tras los 40 nada me funcionaba como antes. Esto sí. Conservé masa muscular y bajé 6 kilos. Pero lo más importante: me siento yo de nuevo."</p>
+        <div class="text-sm font-semibold">Constanza, 45 · Concepción</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="px-5 py-16 max-w-3xl mx-auto fade-in">
+  <h2 class="font-serif text-3xl md:text-4xl font-bold text-center mb-3">Elige tu plan</h2>
+  <p class="text-center text-ink/60 mb-10">Siempre empiezas con trial de $990 · 7 días</p>
+
+  <div class="grid md:grid-cols-2 gap-5">
+    <div class="bg-white rounded-3xl p-7 border border-ink/10">
+      <div class="font-serif text-xl font-semibold mb-1">Mensual</div>
+      <div class="text-ink/60 text-sm mb-5">Flexibilidad total</div>
+      <div class="mb-5">
+        <div class="text-4xl font-serif font-bold">$12.990</div>
+        <div class="text-ink/60 text-sm">/mes después del trial</div>
+      </div>
+      <div class="bg-glow-50 rounded-xl p-4 mb-5 border border-glow-200">
+        <div class="text-xs font-bold uppercase tracking-wider text-glow-700 mb-1">Empieza por</div>
+        <div class="text-2xl font-bold text-glow-700">$990 · 7 días</div>
+      </div>
+      <a href="#" data-plan="MONTHLY" class="block text-center bg-ink text-white py-4 rounded-full font-bold hover:bg-glow-600 transition">Empezar mensual</a>
+      <p class="text-xs text-ink/50 mt-3 text-center">Cancela cuando quieras</p>
+    </div>
+
+    <div class="bg-glow-500 text-white rounded-3xl p-7 relative">
+      <div class="absolute -top-3 right-5 bg-ink text-cream text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">42% menos</div>
+      <div class="font-serif text-xl font-semibold mb-1">Anual</div>
+      <div class="text-white/80 text-sm mb-5">Para las que van en serio</div>
+      <div class="mb-5">
+        <div class="text-4xl font-serif font-bold">$89.990</div>
+        <div class="text-white/80 text-sm">/año · equivale a $7.499/mes</div>
+      </div>
+      <div class="bg-white/15 backdrop-blur rounded-xl p-4 mb-5">
+        <div class="text-xs font-bold uppercase tracking-wider mb-1">Empieza por</div>
+        <div class="text-2xl font-bold">$990 · 7 días</div>
+      </div>
+      <a href="#" data-plan="ANNUAL" class="block text-center bg-white text-ink py-4 rounded-full font-bold hover:bg-cream transition">Empezar anual</a>
+      <p class="text-xs text-white/80 mt-3 text-center">Ahorras $66.890 vs mensual</p>
+    </div>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section class="px-5 py-16 max-w-2xl mx-auto fade-in">
   <h2 class="font-serif text-3xl font-bold text-center mb-10">Preguntas frecuentes 35+</h2>
@@ -182,10 +250,21 @@ fbq('track', 'PageView');
 <script>
   const MP_LINK = 'https://mpago.la/1BaojSf';
   document.getElementById('cta-final').href = MP_LINK;
+  document.querySelectorAll('a[data-plan]').forEach(a => a.href = MP_LINK);
 
   if (typeof fbq !== 'undefined') {
     fbq('trackCustom', 'LandingView', { variant: 'I_35plus' });
   }
+
+  document.querySelectorAll('a[data-plan]').forEach(el => {
+    el.addEventListener('click', () => {
+      const plan = el.getAttribute('data-plan');
+      localStorage.setItem('mgu_variant', 'I_35plus_' + plan);
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'InitiateCheckout', { content_name: 'I_35plus_' + plan, value: 990, currency: 'CLP' });
+      }
+    });
+  });
 
   document.getElementById('cta-final').addEventListener('click', () => {
     localStorage.setItem('mgu_variant', 'I_35plus_MONTHLY');
