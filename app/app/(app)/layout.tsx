@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { NavTabs } from "./_components/NavTabs";
 import { Header } from "./_components/Header";
+import { ServiceWorkerRegister } from "./_components/ServiceWorkerRegister";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
@@ -16,6 +17,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
   return (
     <div className="min-h-screen flex flex-col pb-20">
+      <ServiceWorkerRegister />
       <Header />
 
       <main className="flex-1 w-full max-w-2xl mx-auto px-5 py-6">
