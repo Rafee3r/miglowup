@@ -74,7 +74,7 @@ fbq('track', 'PageView');
 
   <!-- Header -->
   <div class="text-center mb-8 fade-in delay-1">
-    <div class="text-xs uppercase tracking-widest font-bold text-glow-500 mb-2">Pago confirmado · $990</div>
+    <div class="text-xs uppercase tracking-widest font-bold text-glow-500 mb-2">Trial activado · 7 días gratis</div>
     <h1 class="font-serif text-4xl md:text-5xl font-bold leading-tight mb-3">
       ¡Bienvenida,<br/><span class="italic text-glow-500">fundadora!</span>
     </h1>
@@ -99,30 +99,11 @@ fbq('track', 'PageView');
     <div id="countdown" class="text-xs text-ink/50 mt-3">Te redirigimos automáticamente en <span id="cd-num">8</span> segundos...</div>
   </div>
 
-  <!-- CTA: Activar renovación automática (solo si NO está subscrita aún) -->
-  <div id="subscribe-cta" class="bg-glow-50 rounded-3xl p-6 mb-5 border-2 border-glow-300 fade-in delay-2 text-center hidden">
-    <div class="text-xs uppercase tracking-widest font-bold text-glow-700 mb-3">🔒 Asegura tu plaza fundadora</div>
-    <h2 class="font-serif text-2xl font-bold mb-2">Activa tu renovación automática</h2>
-    <p class="text-sm text-ink/70 mb-4">
-      Sin esto, tu acceso se vence el día 8. Activa la renovación para que el método siga después del trial — <strong>cancelas cuando quieras</strong>.
+  <!-- Info de cobro futuro -->
+  <div class="bg-glow-50 rounded-3xl p-5 mb-5 border border-glow-200 fade-in delay-2 text-center">
+    <p class="text-sm text-ink/70">
+      Tu trial son <strong>7 días completamente gratis</strong>. El día 8 se renueva automáticamente a <strong>$12.990/mes</strong> · cancelas cuando quieras.
     </p>
-    <div class="bg-white rounded-2xl p-4 mb-5 border border-glow-200">
-      <div class="text-xs uppercase tracking-widest font-bold text-ink/50 mb-1">Cobro del día 8 en adelante</div>
-      <div class="font-serif text-3xl font-black text-glow-700">$12.990 <span class="text-base font-normal text-ink/60">/mes</span></div>
-      <div class="text-xs text-ink/50 mt-1">Precio fundadora congelado de por vida</div>
-    </div>
-    <button id="subscribe-btn"
-       class="inline-flex items-center justify-center gap-2 bg-glow-500 text-white px-8 py-4 rounded-full font-bold text-base hover:bg-glow-600 transition w-full disabled:opacity-50">
-      <span id="sub-btn-text">Activar renovación →</span>
-    </button>
-    <p class="text-[11px] text-ink/40 mt-3">Tarjeta ya guardada por MP · suele ser 1 click</p>
-  </div>
-
-  <!-- Estado: ya está subscrita -->
-  <div id="subscribed-confirm" class="bg-green-50 rounded-3xl p-6 mb-5 border-2 border-green-300 fade-in delay-2 text-center hidden">
-    <div class="text-4xl mb-2">✅</div>
-    <h2 class="font-serif text-2xl font-bold mb-2">Renovación activada</h2>
-    <p class="text-sm text-ink/70">Tu plaza fundadora está asegurada. El próximo cobro de $12.990 será al día 8 desde tu trial.</p>
   </div>
 
   <!-- Detalles secundarios -->
@@ -131,7 +112,7 @@ fbq('track', 'PageView');
     <div class="space-y-4 text-sm">
       <div class="flex gap-3 items-start">
         <div class="w-8 h-8 rounded-full bg-glow-100 text-glow-600 font-serif font-bold flex items-center justify-center flex-shrink-0">✓</div>
-        <div><strong>Pago confirmado</strong> · $990 procesado correctamente</div>
+        <div><strong>Trial activado</strong> · acceso completo por 7 días gratis</div>
       </div>
       <div class="flex gap-3 items-start">
         <div class="w-8 h-8 rounded-full bg-glow-100 text-glow-600 font-serif font-bold flex items-center justify-center flex-shrink-0">1</div>
@@ -150,7 +131,7 @@ fbq('track', 'PageView');
 
   <!-- Garantía -->
   <div class="text-center text-xs text-ink/60 fade-in delay-2">
-    🔒 Trial 7 días · cancelas cuando quieras<br/>
+    🔒 7 días gratis · $12.990/mes desde el día 8 · cancelas cuando quieras<br/>
     Dudas: <a href="mailto:hola@miglowup.cl" class="text-glow-600 font-semibold">hola@miglowup.cl</a>
   </div>
 
@@ -166,30 +147,22 @@ fbq('track', 'PageView');
   })();
 
   // ============================================================
-  //  PURCHASE EVENT (browser-side, deduplicado con el webhook)
-  //
-  //  El event_id usa el payment_id de MP para que Meta deduplique
-  //  con el evento que dispara el webhook server-side (Conversions API).
+  //  Free trial activado → fire StartTrial pixel (deduplicado con webhook)
   // ============================================================
   (function() {
     const params = new URLSearchParams(window.location.search);
-    const status = (params.get('collection_status') || params.get('status') || params.get('payment_status') || '').toLowerCase();
-    const approvedStatuses = ['approved', 'success', 'paid'];
-    const isApproved = approvedStatuses.includes(status);
-    const isTest = params.get('test') === '1';
-
-    const paymentId = params.get('payment_id') || params.get('collection_id') || '';
+    const isSubscribed = params.get('subscribed') === '1';
+    const preapprovalId = params.get('preapproval_id') || '';
     const variant = localStorage.getItem('mgu_variant') || 'direct';
+    const eventId = preapprovalId ? ('pre_' + preapprovalId) : ('mgu_' + Date.now());
 
-    // event_id IDÉNTICO al que usa el webhook (mp_${paymentId}) → Meta deduplica
-    const eventId = paymentId ? ('mp_' + paymentId) : ('mgu_' + Date.now());
-
-    if ((isApproved || isTest) && typeof fbq !== 'undefined') {
-      fbq('track', 'Purchase', {
-        value: 990,
+    if (isSubscribed && typeof fbq !== 'undefined') {
+      fbq('track', 'StartTrial', {
+        value: 0,
         currency: 'CLP',
-        content_name: 'MiGlowUp Trial 7 días',
+        content_name: 'MiGlowUp Free Trial 7 días',
         content_ids: [variant],
+        predicted_ltv: 12990,
       }, { eventID: eventId });
       localStorage.removeItem('mgu_variant');
     }
@@ -197,23 +170,12 @@ fbq('track', 'PageView');
 
   // ============================================================
   //  Auto-redirect a WhatsApp después de N segundos
-  //  (desactivado si hay subscribe CTA visible — el user debe
-  //  decidir suscribirse primero)
   // ============================================================
   (function() {
     const link = document.getElementById('whatsapp-link');
     const cdEl = document.getElementById('cd-num');
-    const subCta = document.getElementById('subscribe-cta');
     if (!link || !cdEl) return;
     if (!window.WHATSAPP_INVITE || window.WHATSAPP_INVITE.includes('REEMPLAZAR')) {
-      document.getElementById('countdown').style.display = 'none';
-      return;
-    }
-    // Si va a aparecer el CTA de suscripción, no auto-redirect
-    const params = new URLSearchParams(window.location.search);
-    const status = (params.get('collection_status') || params.get('status') || '').toLowerCase();
-    const willShowSubCta = ['approved','success','paid'].includes(status) && !params.get('subscribed');
-    if (willShowSubCta) {
       document.getElementById('countdown').style.display = 'none';
       return;
     }
@@ -229,52 +191,6 @@ fbq('track', 'PageView');
       setTimeout(tick, 1000);
     };
     tick();
-  })();
-
-  // ============================================================
-  //  CTA Renovación automática (paso 2: crear preapproval)
-  // ============================================================
-  (function() {
-    const params = new URLSearchParams(window.location.search);
-    const status = (params.get('collection_status') || params.get('status') || '').toLowerCase();
-    const paymentId = params.get('payment_id') || params.get('collection_id') || '';
-    const plan = (params.get('plan') || 'MONTHLY').toUpperCase();
-    const isApproved = ['approved','success','paid'].includes(status);
-    const alreadySubscribed = params.get('subscribed') === '1';
-
-    if (alreadySubscribed) {
-      document.getElementById('subscribed-confirm').classList.remove('hidden');
-      return;
-    }
-
-    // Mostrar CTA solo si pago aprobado Y tenemos payment_id
-    if (!isApproved || !paymentId) return;
-
-    document.getElementById('subscribe-cta').classList.remove('hidden');
-
-    document.getElementById('subscribe-btn').addEventListener('click', async () => {
-      const btn = document.getElementById('subscribe-btn');
-      const text = document.getElementById('sub-btn-text');
-      btn.disabled = true;
-      text.textContent = 'Generando link...';
-
-      try {
-        const res = await fetch(`/api/subscribe?payment_id=${encodeURIComponent(paymentId)}&plan=${plan}`);
-        const data = await res.json();
-        if (!data.ok || !data.init_point) {
-          throw new Error(data.error || 'No se pudo crear la suscripción');
-        }
-        if (typeof fbq !== 'undefined') {
-          fbq('trackCustom', 'SubscribeIntent', { plan: plan, payment_id: paymentId });
-        }
-        window.location.href = data.init_point;
-      } catch (err) {
-        console.error(err);
-        text.textContent = 'Error — reintentar';
-        btn.disabled = false;
-        alert('Algo falló. Intenta de nuevo o escríbenos a hola@miglowup.cl');
-      }
-    });
   })();
 </script>
 

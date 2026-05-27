@@ -1,26 +1,35 @@
 /**
- * Crea una preferencia de Checkout Pro en MercadoPago para el pago
- * inicial de $990 (trial 7 días). Devuelve la init_point URL para
- * redirigir al usuario.
+ * Crea una Suscripción (Preapproval) en MercadoPago con free trial
+ * de 7 días y cobro recurrente de $12.990/mes (o $89.990/año).
+ *
+ * Modelo: "7 días GRATIS → $12.990/mes auto"
+ * - Día 0: Usuaria autoriza tarjeta, NO se cobra nada
+ * - Día 8: MP auto-cobra el monto recurrente
+ * - Cada mes/año desde entonces: cobro automático
  *
  * Uso desde el frontend:
  *   GET /api/checkout?plan=MONTHLY&variant=F_singym
- *
- * Reemplaza el link estático mpago.la/1BaojSf en todas las landings.
- *
- * Beneficios vs el link estático:
- * - back_urls configuradas → MP redirige a /gracias automáticamente
- * - external_reference con variant + plan → tracking server-side preciso
- * - notification_url → webhook recibe pagos confirmados
- * - auto_return=approved → redirección inmediata sin "Volver al sitio"
+ *   → devuelve { init_point: "https://..." } para redirigir al usuario
  */
 
 const SITE_URL = 'https://miglowup.cl';
 
-const PRICING = {
-  MONTHLY: { trial: 990, name: 'MiGlowUp Trial 7 días (Plan Mensual)' },
-  ANNUAL:  { trial: 990, name: 'MiGlowUp Trial 7 días (Plan Anual)' },
+const PLANS = {
+  MONTHLY: {
+    amount: 12990,
+    frequency: 1,
+    frequency_type: 'months',
+    reason: 'MiGlowUp Membresía Mensual',
+  },
+  ANNUAL: {
+    amount: 89990,
+    frequency: 12,
+    frequency_type: 'months',
+    reason: 'MiGlowUp Membresía Anual',
+  },
 };
+
+const TRIAL_DAYS = 7;
 
 export async function onRequestGet({ request, env }) {
   try {
@@ -28,64 +37,59 @@ export async function onRequestGet({ request, env }) {
     const plan = (url.searchParams.get('plan') || 'MONTHLY').toUpperCase();
     const variant = url.searchParams.get('variant') || 'direct';
 
-    if (!PRICING[plan]) {
-      return json({ ok: false, error: 'Invalid plan' }, 400);
-    }
+    if (!PLANS[plan]) return json({ ok: false, error: 'Invalid plan' }, 400);
     if (!env.MP_ACCESS_TOKEN) {
       return json({ ok: false, error: 'MP_ACCESS_TOKEN not configured' }, 500);
     }
 
+    const planConfig = PLANS[plan];
     const externalRef = `${variant}_${plan}_${Date.now()}`;
-    const pricing = PRICING[plan];
 
-    const preference = {
-      items: [
-        {
-          title: pricing.name,
-          description: 'Trial 7 días · acceso completo a comunidad WhatsApp, rutinas, coach IA y app',
-          quantity: 1,
-          currency_id: 'CLP',
-          unit_price: pricing.trial,
-        },
-      ],
-      back_urls: {
-        success: `${SITE_URL}/gracias?status=approved&plan=${plan}&variant=${variant}`,
-        failure: `${SITE_URL}/promo?status=failed`,
-        pending: `${SITE_URL}/gracias?status=pending&plan=${plan}&variant=${variant}`,
-      },
-      auto_return: 'approved',
+    // start_date debe ser ≥ ahora. MP usa free_trial.frequency para
+    // diferir el primer cobro. La autorización es inmediata.
+    const startDate = new Date(Date.now() + 60 * 1000); // +1 min para evitar 400
+
+    const preapproval = {
+      reason: planConfig.reason,
       external_reference: externalRef,
-      notification_url: `${SITE_URL}/api/mp-webhook`,
-      statement_descriptor: 'MIGLOWUP',
-      metadata: {
-        plan,
-        variant,
-        intent: 'trial',
+      auto_recurring: {
+        frequency: planConfig.frequency,
+        frequency_type: planConfig.frequency_type,
+        start_date: startDate.toISOString(),
+        transaction_amount: planConfig.amount,
+        currency_id: 'CLP',
+        free_trial: {
+          frequency: TRIAL_DAYS,
+          frequency_type: 'days',
+        },
       },
+      back_url: `${SITE_URL}/gracias?subscribed=1&plan=${plan}&variant=${variant}`,
+      status: 'pending',
     };
 
-    const mpRes = await fetch('https://api.mercadopago.com/checkout/preferences', {
+    const mpRes = await fetch('https://api.mercadopago.com/preapproval', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${env.MP_ACCESS_TOKEN}`,
       },
-      body: JSON.stringify(preference),
+      body: JSON.stringify(preapproval),
     });
 
     if (!mpRes.ok) {
       const err = await mpRes.text();
-      console.error('MP preference error:', err);
+      console.error('MP preapproval error:', err);
       return json({ ok: false, error: 'MP API error', detail: err }, 500);
     }
 
     const data = await mpRes.json();
     return json({
       ok: true,
-      preference_id: data.id,
+      preapproval_id: data.id,
       init_point: data.init_point,
-      sandbox_init_point: data.sandbox_init_point,
       external_reference: externalRef,
+      trial_days: TRIAL_DAYS,
+      next_charge_amount: planConfig.amount,
     });
   } catch (err) {
     return json({ ok: false, error: err.message }, 500);
