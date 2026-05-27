@@ -1,5 +1,6 @@
 export default function ComunidadPage() {
-  const invite = process.env.NEXT_PUBLIC_WHATSAPP_INVITE || "https://chat.whatsapp.com/REEMPLAZAR";
+  // Link del grupo WhatsApp — hardcodeado para poder cambiarlo solo editando este archivo
+  const invite = "https://chat.whatsapp.com/CKmozDPbrtYKJN7GFOmFXn?mode=gi_t";
 
   return (
     <div className="fade-in space-y-6">
