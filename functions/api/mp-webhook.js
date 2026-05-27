@@ -23,64 +23,114 @@ export async function onRequestPost({ request, env }) {
   try {
     const body = await request.json();
 
-    // MP envía notificaciones de varios tipos — solo nos interesa "payment"
+    // MP envía notificaciones de varios tipos. Manejamos:
+    // - "payment" → un cobro (trial $990 o cobro recurrente $12.990)
+    // - "subscription_preapproval" → cambio de estado de la suscripción
+    // - "subscription_authorized_payment" → cobro recurrente confirmado
     const topic = body.type || body.topic;
-    if (topic !== 'payment') {
-      return json({ ok: true, ignored: topic });
+
+    if (topic === 'payment') {
+      return await handlePayment(body, env);
     }
-
-    const paymentId = body.data?.id || body.resource;
-    if (!paymentId) return json({ ok: false, error: 'no payment id' }, 400);
-
-    // 1. Consultar el pago a MP para verificar que está aprobado
-    const mpRes = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
-      headers: { Authorization: `Bearer ${env.MP_ACCESS_TOKEN}` },
-    });
-    if (!mpRes.ok) {
-      const err = await mpRes.text();
-      return json({ ok: false, error: 'mp api error', detail: err }, 500);
+    if (topic === 'subscription_preapproval' || topic === 'preapproval') {
+      return await handlePreapproval(body, env);
     }
-    const payment = await mpRes.json();
-
-    if (payment.status !== 'approved') {
-      return json({ ok: true, status: payment.status, note: 'no aprobado, ignorado' });
+    if (topic === 'subscription_authorized_payment') {
+      return await handleAuthorizedPayment(body, env);
     }
-
-    const email = payment.payer?.email || null;
-    const firstName = payment.payer?.first_name || null;
-    const amount = payment.transaction_amount || 990;
-    const externalRef = payment.external_reference || null;
-    const variant = externalRef || 'unknown';
-
-    // 2. Disparar Purchase a Meta Conversions API
-    if (env.META_PIXEL_ID && env.META_CAPI_TOKEN) {
-      await sendMetaPurchase({
-        pixelId: env.META_PIXEL_ID,
-        token: env.META_CAPI_TOKEN,
-        eventId: `mp_${paymentId}`,
-        email,
-        firstName,
-        amount,
-        variant,
-        eventSourceUrl: 'https://miglowup.cl/gracias',
-      });
-    }
-
-    // 3. (Opcional) Enviar email con link WhatsApp
-    if (env.RESEND_API_KEY && email && env.WHATSAPP_INVITE) {
-      await sendWelcomeEmail({
-        apiKey: env.RESEND_API_KEY,
-        from: env.RESEND_FROM || 'MiGlowUp <hola@miglowup.cl>',
-        to: email,
-        firstName,
-        whatsappInvite: env.WHATSAPP_INVITE,
-      });
-    }
-
-    return json({ ok: true, paymentId, status: 'processed' });
+    return json({ ok: true, ignored: topic });
   } catch (err) {
     return json({ ok: false, error: err.message }, 500);
   }
+}
+
+async function handlePayment(body, env) {
+  const paymentId = body.data?.id || body.resource;
+  if (!paymentId) return json({ ok: false, error: 'no payment id' }, 400);
+
+  const mpRes = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
+    headers: { Authorization: `Bearer ${env.MP_ACCESS_TOKEN}` },
+  });
+  if (!mpRes.ok) {
+    const err = await mpRes.text();
+    return json({ ok: false, error: 'mp api error', detail: err }, 500);
+  }
+  const payment = await mpRes.json();
+
+  if (payment.status !== 'approved') {
+    return json({ ok: true, status: payment.status, note: 'no aprobado, ignorado' });
+  }
+
+  const email = payment.payer?.email || null;
+  const firstName = payment.payer?.first_name || null;
+  const amount = payment.transaction_amount || 990;
+  const externalRef = payment.external_reference || null;
+  const variant = externalRef || 'unknown';
+
+  // Detectar si es trial inicial ($990) o cobro recurrente ($12.990)
+  const isRecurring = amount >= 5000;
+  const eventName = isRecurring ? 'Subscribe' : 'Purchase';
+
+  if (env.META_PIXEL_ID && env.META_CAPI_TOKEN) {
+    await sendMetaEvent({
+      pixelId: env.META_PIXEL_ID,
+      token: env.META_CAPI_TOKEN,
+      eventName,
+      eventId: `mp_${paymentId}`,
+      email,
+      firstName,
+      amount,
+      variant,
+      eventSourceUrl: 'https://miglowup.cl/gracias',
+    });
+  }
+
+  // Solo enviar email de bienvenida en el PRIMER pago (trial)
+  if (!isRecurring && env.RESEND_API_KEY && email && env.WHATSAPP_INVITE) {
+    await sendWelcomeEmail({
+      apiKey: env.RESEND_API_KEY,
+      from: env.RESEND_FROM || 'MiGlowUp <hola@miglowup.cl>',
+      to: email,
+      firstName,
+      whatsappInvite: env.WHATSAPP_INVITE,
+    });
+  }
+
+  return json({ ok: true, paymentId, status: 'processed', kind: eventName });
+}
+
+async function handlePreapproval(body, env) {
+  const id = body.data?.id || body.resource;
+  if (!id) return json({ ok: false, error: 'no preapproval id' }, 400);
+
+  const res = await fetch(`https://api.mercadopago.com/preapproval/${id}`, {
+    headers: { Authorization: `Bearer ${env.MP_ACCESS_TOKEN}` },
+  });
+  if (!res.ok) return json({ ok: false, error: 'mp preapproval fetch failed' }, 500);
+  const pre = await res.json();
+
+  // Disparar evento StartTrial solo cuando preapproval pasa a authorized
+  if (pre.status === 'authorized' && env.META_PIXEL_ID && env.META_CAPI_TOKEN) {
+    await sendMetaEvent({
+      pixelId: env.META_PIXEL_ID,
+      token: env.META_CAPI_TOKEN,
+      eventName: 'StartTrial',
+      eventId: `pre_${id}`,
+      email: pre.payer_email || null,
+      firstName: null,
+      amount: pre.auto_recurring?.transaction_amount || 12990,
+      variant: pre.external_reference || 'subscribed',
+      eventSourceUrl: 'https://miglowup.cl/gracias',
+    });
+  }
+
+  return json({ ok: true, preapproval_id: id, status: pre.status });
+}
+
+async function handleAuthorizedPayment(body, env) {
+  // Cuando MP cobra un mes recurrente exitosamente
+  const id = body.data?.id || body.resource;
+  return json({ ok: true, authorized_payment_id: id, note: 'recurring charge logged' });
 }
 
 // MP también puede enviar GET para verificar el endpoint
@@ -100,14 +150,20 @@ async function sha256(str) {
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
-async function sendMetaPurchase({ pixelId, token, eventId, email, firstName, amount, variant, eventSourceUrl }) {
+async function sendMetaEvent({ pixelId, token, eventName, eventId, email, firstName, amount, variant, eventSourceUrl }) {
   const userData = {};
   if (email) userData.em = [await sha256(email)];
   if (firstName) userData.fn = [await sha256(firstName)];
   userData.country = [await sha256('cl')];
 
+  const contentName = eventName === 'Subscribe'
+    ? 'MiGlowUp Membresía Recurrente'
+    : eventName === 'StartTrial'
+    ? 'MiGlowUp Suscripción Autorizada'
+    : 'MiGlowUp Trial 7 días';
+
   const event = {
-    event_name: 'Purchase',
+    event_name: eventName,
     event_time: Math.floor(Date.now() / 1000),
     event_id: eventId,
     event_source_url: eventSourceUrl,
@@ -116,7 +172,7 @@ async function sendMetaPurchase({ pixelId, token, eventId, email, firstName, amo
     custom_data: {
       currency: 'CLP',
       value: amount,
-      content_name: 'MiGlowUp Trial 7 días',
+      content_name: contentName,
       content_ids: [variant],
       content_type: 'product',
     },

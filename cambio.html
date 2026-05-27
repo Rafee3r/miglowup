@@ -78,6 +78,7 @@ fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=4376662015813242&ev=PageView&noscript=1"/></noscript>
 <!-- End Meta Pixel -->
+<script src="/assets/checkout.js" defer></script>
 </head>
 <body class="grain">
 
@@ -570,24 +571,16 @@ fbq('track', 'PageView');
 </div>
 
 <script>
-  const MP_LINKS = {
-    MONTHLY: 'https://mpago.la/1BaojSf',
-    ANNUAL:  'https://mpago.la/1BaojSf',
-  };
-
+  const VARIANT = 'D_cambio';
   document.querySelectorAll('[data-mp-link]').forEach(el => {
-    const key = el.dataset.mpLink;
-    el.href = MP_LINKS[key] || '#';
-    el.addEventListener('click', () => {
-      localStorage.setItem('mgu_variant', 'D_cambio_' + key);
-      if (typeof fbq !== 'undefined') {
-        fbq('track', 'InitiateCheckout', { content_name: 'D_cambio_' + key, value: 990, currency: 'CLP' });
-      }
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      goToCheckout(el.dataset.mpLink, VARIANT);
     });
   });
 
   if (typeof fbq !== 'undefined') {
-    fbq('trackCustom', 'LandingView', { variant: 'D_cambio' });
+    fbq('trackCustom', 'LandingView', { variant: VARIANT });
   }
 </script>
 

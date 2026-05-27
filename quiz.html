@@ -54,6 +54,7 @@
 fbq('init', '4376662015813242');
 fbq('track', 'PageView');
 </script>
+<script src="/assets/checkout.js" defer></script>
 </head>
 <body class="min-h-screen flex flex-col">
 
@@ -216,8 +217,13 @@ fbq('track', 'PageView');
 </section>
 
 <script>
-  const MP_LINK = 'https://mpago.la/1BaojSf';
-  document.querySelectorAll('a[data-plan]').forEach(a => a.href = MP_LINK);
+  const VARIANT = 'G_quiz';
+  document.querySelectorAll('a[data-plan]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      goToCheckout(el.getAttribute('data-plan'), VARIANT);
+    });
+  });
 
   const questions = [
     {
@@ -364,16 +370,7 @@ fbq('track', 'PageView');
     fbq('trackCustom', 'LandingView', { variant: 'G_quiz' });
   }
 
-  // Save variant + fire InitiateCheckout when MP link clicked
-  document.querySelectorAll('a[data-plan]').forEach(el => {
-    el.addEventListener('click', () => {
-      const plan = el.getAttribute('data-plan');
-      localStorage.setItem('mgu_variant', 'G_quiz_' + plan);
-      if (typeof fbq !== 'undefined') {
-        fbq('track', 'InitiateCheckout', { content_name: 'G_quiz_' + plan, value: 990, currency: 'CLP' });
-      }
-    });
-  });
+  // (los click handlers ya están bindeados arriba con goToCheckout)
 </script>
 
 </body>

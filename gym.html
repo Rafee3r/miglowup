@@ -43,6 +43,7 @@
 fbq('init', '4376662015813242');
 fbq('track', 'PageView');
 </script>
+<script src="/assets/checkout.js" defer></script>
 </head>
 <body class="min-h-screen">
 
@@ -251,31 +252,20 @@ fbq('track', 'PageView');
 </footer>
 
 <script>
-  const MP_LINK = 'https://mpago.la/1BaojSf';
-  document.getElementById('cta-final').href = MP_LINK;
-  document.querySelectorAll('a[data-plan]').forEach(a => a.href = MP_LINK);
-
+  const VARIANT = 'F_singym';
   if (typeof fbq !== 'undefined') {
-    fbq('trackCustom', 'LandingView', { variant: 'F_singym' });
+    fbq('trackCustom', 'LandingView', { variant: VARIANT });
   }
-
-  // Pricing buttons
+  // Bindeo todos los CTAs al nuevo flujo dinámico
   document.querySelectorAll('a[data-plan]').forEach(el => {
-    el.addEventListener('click', () => {
-      const plan = el.getAttribute('data-plan');
-      localStorage.setItem('mgu_variant', 'F_singym_' + plan);
-      if (typeof fbq !== 'undefined') {
-        fbq('track', 'InitiateCheckout', { content_name: 'F_singym_' + plan, value: 990, currency: 'CLP' });
-      }
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      goToCheckout(el.getAttribute('data-plan'), VARIANT);
     });
   });
-
-  // Final CTA defaults to MONTHLY
-  document.getElementById('cta-final').addEventListener('click', () => {
-    localStorage.setItem('mgu_variant', 'F_singym_MONTHLY');
-    if (typeof fbq !== 'undefined') {
-      fbq('track', 'InitiateCheckout', { content_name: 'F_singym_MONTHLY', value: 990, currency: 'CLP' });
-    }
+  document.getElementById('cta-final').addEventListener('click', (e) => {
+    e.preventDefault();
+    goToCheckout('MONTHLY', VARIANT);
   });
 </script>
 
