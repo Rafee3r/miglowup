@@ -17,19 +17,18 @@ type CalendarDay = { date: string; hasWorkout: boolean };
 export function TrackingClient({
   measurements, calendarDays, todayKey,
 }: { measurements: Measurement[]; calendarDays: CalendarDay[]; todayKey: string }) {
-  const latest = measurements[measurements.length - 1];
-  const first = measurements[0];
+  const weightsOnly = measurements.filter((m) => m.weight_kg !== null);
+  const latestWeight = weightsOnly[weightsOnly.length - 1]?.weight_kg ?? null;
+  const firstWeight = weightsOnly[0]?.weight_kg ?? null;
   const weightDelta =
-    latest?.weight_kg && first?.weight_kg && measurements.length > 1
-      ? +(latest.weight_kg - first.weight_kg).toFixed(1)
+    latestWeight && firstWeight && weightsOnly.length > 1
+      ? +(latestWeight - firstWeight).toFixed(1)
       : null;
 
-  const weightSeries = measurements
-    .filter((m) => m.weight_kg !== null)
-    .map((m) => ({
-      date: new Date(m.created_at).toLocaleDateString("es-CL", { day: "numeric", month: "short" }),
-      peso: m.weight_kg,
-    }));
+  const weightSeries = weightsOnly.map((m) => ({
+    date: new Date(m.created_at).toLocaleDateString("es-CL", { day: "numeric", month: "short" }),
+    peso: m.weight_kg,
+  }));
 
   const waistSeries = measurements
     .filter((m) => m.waist_cm !== null)
@@ -58,8 +57,8 @@ export function TrackingClient({
       >
         <StatCard
           label="Peso actual"
-          value={latest?.weight_kg ? `${latest.weight_kg}` : "—"}
-          unit={latest?.weight_kg ? "kg" : ""}
+          value={latestWeight ? `${latestWeight}` : "—"}
+          unit={latestWeight ? "kg" : ""}
           delta={weightDelta}
         />
         <StatCard

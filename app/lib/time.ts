@@ -4,14 +4,24 @@
  * es seguro. Encapsulado en este helper para mantener las páginas limpias.
  */
 
+export function getChileanDateString(dateInput: Date | string | number = new Date()): string {
+  const date = dateInput instanceof Date ? dateInput : new Date(dateInput);
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Santiago",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(date);
+}
+
 export function daysAgoISO(days: number): string {
   return new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
 }
 
 export function todayKey(): string {
-  return new Date().toISOString().slice(0, 10);
+  return getChileanDateString();
 }
 
 export function dateKeyDaysAgo(days: number): string {
-  return new Date(Date.now() - days * 86400000).toISOString().slice(0, 10);
+  return getChileanDateString(Date.now() - days * 86400000);
 }

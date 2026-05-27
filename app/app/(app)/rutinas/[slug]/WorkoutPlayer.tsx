@@ -651,7 +651,7 @@ function Cooldown({ routine, onFinish }: { routine: Routine; onFinish: () => voi
 function Done({
   routine, totalSeconds, feedbacks, onBack,
 }: { routine: Routine; totalSeconds: number; feedbacks: { exercise: string; feedback: Feedback }[]; onBack: () => void }) {
-  const mins = Math.floor(totalSeconds / 60);
+  const mins = Math.max(1, Math.round(totalSeconds / 60));
   const sets = routine.exercises.reduce((s, e) => s + e.sets, 0);
   const hardCount = feedbacks.filter((f) => f.feedback === "hard").length;
   const easyCount = feedbacks.filter((f) => f.feedback === "easy").length;

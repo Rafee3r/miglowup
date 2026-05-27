@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { listRoutines } from "@/lib/routines";
 import { createClient } from "@/lib/supabase/server";
 import { daysAgoISO } from "@/lib/time";
@@ -6,15 +7,22 @@ import { daysAgoISO } from "@/lib/time";
 export default async function RutinasPage() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
+  if (!user) redirect("/login");
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("onboarded")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  if (!profile?.onboarded) redirect("/onboarding");
 
   // Cargar últimos 30 días de logs para mostrar "ya hecho" y streak
-  const { data: logs } = user
-    ? await supabase
-        .from("routine_logs")
-        .select("routine_slug, completed_at")
-        .eq("user_id", user.id)
-        .gte("completed_at", daysAgoISO(30))
-    : { data: [] };
+  const { data: logs } = await supabase
+    .from("routine_logs")
+    .select("routine_slug, completed_at")
+    .eq("user_id", user.id)
+    .gte("completed_at", daysAgoISO(30));
 
   const completedCount = (logs ?? []).reduce<Record<string, number>>((acc, log) => {
     acc[log.routine_slug] = (acc[log.routine_slug] ?? 0) + 1;

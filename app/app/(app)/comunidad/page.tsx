@@ -1,4 +1,19 @@
-export default function ComunidadPage() {
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
+
+export default async function ComunidadPage() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) redirect("/login");
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("onboarded")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  if (!profile?.onboarded) redirect("/onboarding");
+
   // Link del grupo WhatsApp — hardcodeado para poder cambiarlo solo editando este archivo
   const invite = "https://chat.whatsapp.com/CKmozDPbrtYKJN7GFOmFXn?mode=gi_t";
 

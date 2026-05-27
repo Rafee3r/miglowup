@@ -11,25 +11,45 @@ export function AddMeasurement() {
   const [waist, setWaist] = useState("");
   const [hip, setHip] = useState("");
   const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function save(e: React.FormEvent) {
     e.preventDefault();
     setSaving(true);
-    const supabase = createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return;
-    await supabase.from("measurements").insert({
-      user_id: user.id,
-      weight_kg: weight ? Number(weight) : null,
-      waist_cm: waist ? Number(waist) : null,
-      hip_cm: hip ? Number(hip) : null,
-    });
-    setWeight("");
-    setWaist("");
-    setHip("");
-    setOpen(false);
-    setSaving(false);
-    router.refresh();
+    setError(null);
+    try {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        setError("Usuario no autenticado");
+        setSaving(false);
+        return;
+      }
+      const { error: insertError } = await supabase.from("measurements").insert({
+        user_id: user.id,
+        weight_kg: weight ? Number(weight) : null,
+        waist_cm: waist ? Number(waist) : null,
+        hip_cm: hip ? Number(hip) : null,
+      });
+
+      if (insertError) {
+        console.error("Supabase insert error:", insertError);
+        setError("No se pudo guardar la medición. Inténtalo otra vez.");
+        setSaving(false);
+        return;
+      }
+
+      setWeight("");
+      setWaist("");
+      setHip("");
+      setOpen(false);
+      router.refresh();
+    } catch (err) {
+      console.error("Save measurement error:", err);
+      setError("Error inesperado de red o servidor.");
+    } finally {
+      setSaving(false);
+    }
   }
 
   if (!open) {
@@ -78,6 +98,7 @@ export function AddMeasurement() {
           />
         </div>
       </div>
+      {error && <p className="text-xs text-rose-500 font-semibold mb-2">{error}</p>}
       <div className="flex gap-2">
         <button
           type="button"

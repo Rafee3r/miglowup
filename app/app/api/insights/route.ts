@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { getChileanDateString } from "@/lib/time";
 
 export const runtime = "edge";
 
@@ -134,16 +135,16 @@ function fallbackInsights(b: Brief) {
 
 function computeStreak(dates: string[]): number {
   if (dates.length === 0) return 0;
-  const uniqueDays = Array.from(new Set(dates.map((d) => d.slice(0, 10)))).sort().reverse();
-  const today = new Date().toISOString().slice(0, 10);
-  const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+  const uniqueDays = Array.from(new Set(dates.map((d) => getChileanDateString(d)))).sort().reverse();
+  const today = getChileanDateString();
+  const yesterday = getChileanDateString(Date.now() - 86400000);
   let offset: number;
   if (uniqueDays[0] === today) offset = 0;
   else if (uniqueDays[0] === yesterday) offset = 1;
   else return 0;
   let streak = 0;
   for (let i = 0; i < uniqueDays.length; i++) {
-    const expected = new Date(Date.now() - (i + offset) * 86400000).toISOString().slice(0, 10);
+    const expected = getChileanDateString(Date.now() - (i + offset) * 86400000);
     if (uniqueDays[i] === expected) streak++;
     else break;
   }
