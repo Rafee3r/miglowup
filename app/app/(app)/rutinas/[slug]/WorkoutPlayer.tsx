@@ -287,10 +287,27 @@ function Controls({
 function Intro({ routine, onStart }: { routine: Routine; onStart: () => void }) {
   const totalSets = routine.exercises.reduce((sum, e) => sum + e.sets, 0);
   return (
-    <div className={`min-h-[calc(100vh-100px)] bg-gradient-to-br ${routine.color} text-white p-6 flex flex-col relative overflow-hidden`}>
+    <div className="min-h-[calc(100vh-100px)] text-white p-6 flex flex-col relative overflow-hidden">
+      {/* Background Image / Color fallback */}
+      {routine.imageUrl ? (
+        <>
+          <img 
+            src={routine.imageUrl} 
+            alt={routine.title} 
+            className="absolute inset-0 w-full h-full object-cover" 
+            onError={(e) => {
+              (e.currentTarget as HTMLElement).style.display = 'none';
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/25" />
+        </>
+      ) : (
+        <div className={`absolute inset-0 bg-gradient-to-br ${routine.color} opacity-95`} />
+      )}
+
       {/* Decorative blobs */}
-      <div className="absolute -top-20 -right-20 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
-      <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-white/5 rounded-full blur-3xl" />
+      <div className="absolute -top-20 -right-20 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-white/5 rounded-full blur-3xl pointer-events-none" />
 
       <Link href="/rutinas" className="text-white/80 text-sm font-medium mb-6 relative z-10">‹ Volver</Link>
 
@@ -661,7 +678,23 @@ function Done({
     "Nivel justo. Mantenemos.";
 
   return (
-    <div className={`min-h-[calc(100vh-100px)] bg-gradient-to-br ${routine.color} text-white p-6 flex flex-col items-center justify-center text-center relative overflow-hidden`}>
+    <div className="min-h-[calc(100vh-100px)] text-white p-6 flex flex-col items-center justify-center text-center relative overflow-hidden">
+      {/* Background Image / Color fallback */}
+      {routine.imageUrl ? (
+        <>
+          <img 
+            src={routine.imageUrl} 
+            alt={routine.title} 
+            className="absolute inset-0 w-full h-full object-cover" 
+            onError={(e) => {
+              (e.currentTarget as HTMLElement).style.display = 'none';
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/25" />
+        </>
+      ) : (
+        <div className={`absolute inset-0 bg-gradient-to-br ${routine.color} opacity-95`} />
+      )}
       {/* Confetti */}
       {Array.from({ length: 15 }).map((_, i) => (
         <motion.div

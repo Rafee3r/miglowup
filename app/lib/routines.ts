@@ -32,6 +32,7 @@ export type Routine = {
   warmup: string[];
   cooldown: string[];
   exercises: Exercise[];
+  imageUrl: string;
 };
 
 export const ROUTINES: Record<string, Routine> = {
@@ -52,6 +53,7 @@ export const ROUTINES: Record<string, Routine> = {
       { name: 'Zancadas alternadas', kind: 'reps', amount: 10, sets: 3, rest: 30, cue: 'Rodilla nunca pasa de la punta del pie.', emoji: '🚶‍♀️' },
       { name: 'Mountain climbers', kind: 'reps', amount: 20, sets: 3, rest: 45, cue: 'Ritmo constante. Respira.', emoji: '🏔️' },
     ],
+    imageUrl: '/assets/routine-full-body.jpg',
   },
   'abs-15': {
     slug: 'abs-15',
@@ -70,6 +72,7 @@ export const ROUTINES: Record<string, Routine> = {
       { name: 'Tijeras (scissor kicks)', kind: 'reps', amount: 20, sets: 3, rest: 30, cue: 'Lumbares pegadas al suelo.', emoji: '✂️' },
       { name: 'Bicicleta', kind: 'reps', amount: 20, sets: 3, rest: 30, cue: 'Toca codo con rodilla opuesta.', emoji: '🚴‍♀️' },
     ],
+    imageUrl: '/assets/routine-abs.jpg',
   },
   'gluteos-30': {
     slug: 'gluteos-30',
@@ -89,6 +92,7 @@ export const ROUTINES: Record<string, Routine> = {
       { name: 'Patada de glúteo', kind: 'reps', amount: 15, sets: 3, rest: 30, cue: 'Talón al techo. No arquees lumbar.', emoji: '⬆️' },
       { name: 'Puente con marcha', kind: 'reps', amount: 20, sets: 3, rest: 30, cue: 'Caderas estables. Alterna piernas.', emoji: '🌉' },
     ],
+    imageUrl: '/assets/routine-gluteos.jpg',
   },
   'cardio-20': {
     slug: 'cardio-20',
@@ -107,6 +111,7 @@ export const ROUTINES: Record<string, Routine> = {
       { name: 'Mountain climbers', kind: 'time', amount: 45, sets: 3, rest: 15, cue: 'Ritmo rápido pero controlado.', emoji: '🏔️' },
       { name: 'Sentadilla con salto', kind: 'time', amount: 45, sets: 3, rest: 60, cue: 'Aterriza suave en sentadilla.', emoji: '🚀' },
     ],
+    imageUrl: '/assets/routine-cardio.jpg',
   },
   'yoga-30': {
     slug: 'yoga-30',
@@ -126,6 +131,7 @@ export const ROUTINES: Record<string, Routine> = {
       { name: 'Paloma (derecha)', kind: 'time', amount: 60, sets: 1, rest: 15, cue: 'Caderas abiertas. Respira profundo.', emoji: '🕊️' },
       { name: 'Paloma (izquierda)', kind: 'time', amount: 60, sets: 1, rest: 15, cue: 'Caderas abiertas. Respira profundo.', emoji: '🕊️' },
     ],
+    imageUrl: '/assets/routine-yoga.jpg',
   },
   'movilidad-10': {
     slug: 'movilidad-10',
@@ -144,6 +150,7 @@ export const ROUTINES: Record<string, Routine> = {
       { name: 'Cat-cow', kind: 'reps', amount: 10, sets: 1, rest: 10, cue: 'Sincroniza con respiración.', emoji: '🐈' },
       { name: 'Estiramiento de cadera', kind: 'time', amount: 30, sets: 2, rest: 10, cue: 'Suave. Respira en el estiramiento.', emoji: '🦵' },
     ],
+    imageUrl: '/assets/routine-movilidad.jpg',
   },
 };
 

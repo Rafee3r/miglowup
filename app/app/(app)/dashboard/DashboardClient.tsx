@@ -110,13 +110,30 @@ export function DashboardClient({ firstName }: { firstName: string }) {
 
           <Link
             href={`/rutinas/${rec.slug}`}
-            className="block relative overflow-hidden rounded-3xl p-6 bg-gradient-to-br from-[#FF8A66] via-[#F26A47] to-[#D74E2D] hover:scale-[1.01] hover:shadow-xl hover:shadow-glow-500/15 transition duration-300 ease-out shadow-lg text-white group"
+            className="block relative overflow-hidden rounded-3xl p-6 hover:scale-[1.01] hover:shadow-xl hover:shadow-glow-500/15 transition duration-300 ease-out shadow-lg text-white group"
           >
+            {/* Background Image / Color fallback */}
+            {rec.imageUrl ? (
+              <>
+                <img 
+                  src={rec.imageUrl} 
+                  alt={rec.title} 
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500 ease-out" 
+                  onError={(e) => {
+                    (e.currentTarget as HTMLElement).style.display = 'none';
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/5" />
+              </>
+            ) : (
+              <div className="absolute inset-0 bg-gradient-to-br from-[#FF8A66] via-[#F26A47] to-[#D74E2D]" />
+            )}
+
             {/* Background design glow */}
-            <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl" />
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl pointer-events-none" />
             
             {/* Workout Emoji floated back */}
-            <div className="absolute right-6 bottom-4 text-9xl opacity-15 select-none font-serif leading-none group-hover:scale-110 transition duration-500">
+            <div className="absolute right-6 bottom-4 text-9xl opacity-15 select-none font-serif leading-none group-hover:scale-110 transition duration-500 pointer-events-none">
               {rec.emoji}
             </div>
 

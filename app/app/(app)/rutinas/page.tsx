@@ -47,20 +47,37 @@ export default async function RutinasPage() {
               href={`/rutinas/${r.slug}`}
               className="group block relative overflow-hidden rounded-3xl border border-ink/10 hover:border-glow-300 transition shadow-sm hover:shadow-lg"
             >
-              <div className={`bg-gradient-to-br ${r.color} p-5 flex items-center gap-4 text-white`}>
-                <div className="w-16 h-16 rounded-2xl bg-white/15 backdrop-blur flex items-center justify-center text-3xl flex-shrink-0">
+              <div className="relative p-5 flex items-center gap-4 text-white min-h-[100px] overflow-hidden">
+                {/* Background Image / Color fallback */}
+                {r.imageUrl ? (
+                  <>
+                    <img 
+                      src={r.imageUrl} 
+                      alt={r.title} 
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500 ease-out" 
+                      onError={(e) => {
+                        (e.currentTarget as HTMLElement).style.display = 'none';
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/10" />
+                  </>
+                ) : (
+                  <div className={`absolute inset-0 bg-gradient-to-br ${r.color} opacity-95`} />
+                )}
+
+                <div className="relative z-10 w-16 h-16 rounded-2xl bg-white/15 backdrop-blur flex items-center justify-center text-3xl flex-shrink-0">
                   {r.emoji}
                 </div>
-                <div className="flex-1 min-w-0">
+                <div className="relative z-10 flex-1 min-w-0">
                   <div className="font-serif text-xl font-bold leading-tight">{r.title}</div>
                   <div className="text-sm text-white/80 mt-0.5">{r.duration} · {r.level} · {r.exercises.length} ejercicios</div>
                 </div>
                 {done > 0 && (
-                  <div className="bg-white/20 backdrop-blur rounded-full px-3 py-1 text-xs font-bold">
+                  <div className="relative z-10 bg-white/20 backdrop-blur rounded-full px-3 py-1 text-xs font-bold">
                     {done}× ✓
                   </div>
                 )}
-                <div className="text-white/60 group-hover:text-white group-hover:translate-x-1 transition">›</div>
+                <div className="relative z-10 text-white/60 group-hover:text-white group-hover:translate-x-1 transition">›</div>
               </div>
               <div className="bg-white px-5 py-3 text-xs text-ink/60">
                 {r.description}
