@@ -1,4 +1,4 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 
 export const runtime = "edge";
@@ -7,7 +7,7 @@ export const runtime = "edge";
  * Genera el saludo personalizado del dashboard y la recomendación de rutina
  * basado en perfil, actividad reciente y hora del día.
  */
-export async function GET(_request: NextRequest) {
+export async function GET() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
@@ -40,9 +40,15 @@ export async function GET(_request: NextRequest) {
     timeOfDay: tod,
   };
 
+  const streakValue = computeStreak(lastLogs.map((l) => l.completed_at));
+
   const apiKey = process.env.DEEPSEEK_API_KEY;
   if (!apiKey) {
-    return NextResponse.json(fallbackInsights(userBrief));
+    return NextResponse.json({
+      ...fallbackInsights(userBrief),
+      streak: streakValue,
+      workoutsLast7Days: userBrief.workoutsLast7Days,
+    });
   }
 
   const prompt = `Eres el coach IA de MiGlowUp. Genera 2 cosas en JSON estricto:
@@ -85,14 +91,14 @@ Responde SOLO JSON válido, sin markdown ni explicaciones:
       greeting: parsed.greeting || fallbackInsights(userBrief).greeting,
       recommendedRoutine: parsed.recommendedRoutine || "full-body-25",
       recommendedReason: parsed.recommendedReason || "Una sesión balanceada para hoy.",
-      streak: computeStreak(lastLogs.map((l) => l.completed_at)),
+      streak: streakValue,
       workoutsLast7Days: userBrief.workoutsLast7Days,
     });
   } catch (err) {
     console.error("Insights AI error, using fallback:", err);
     return NextResponse.json({
       ...fallbackInsights(userBrief),
-      streak: computeStreak(lastLogs.map((l) => l.completed_at)),
+      streak: streakValue,
       workoutsLast7Days: userBrief.workoutsLast7Days,
     });
   }
@@ -131,12 +137,14 @@ function computeStreak(dates: string[]): number {
   const uniqueDays = Array.from(new Set(dates.map((d) => d.slice(0, 10)))).sort().reverse();
   const today = new Date().toISOString().slice(0, 10);
   const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
-  if (uniqueDays[0] !== today && uniqueDays[0] !== yesterday) return 0;
+  let offset: number;
+  if (uniqueDays[0] === today) offset = 0;
+  else if (uniqueDays[0] === yesterday) offset = 1;
+  else return 0;
   let streak = 0;
   for (let i = 0; i < uniqueDays.length; i++) {
-    const expected = new Date(Date.now() - i * 86400000).toISOString().slice(0, 10);
-    const expectedAlt = new Date(Date.now() - (i + 1) * 86400000).toISOString().slice(0, 10);
-    if (uniqueDays[i] === expected || (i === 0 && uniqueDays[i] === expectedAlt)) streak++;
+    const expected = new Date(Date.now() - (i + offset) * 86400000).toISOString().slice(0, 10);
+    if (uniqueDays[i] === expected) streak++;
     else break;
   }
   return streak;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
@@ -28,13 +28,48 @@ export function WorkoutPlayer({ routine }: { routine: Routine }) {
   const [feedbacks, setFeedbacks] = useState<{ exercise: string; feedback: Feedback }[]>([]);
   const intervalRef = useRef<number | null>(null);
 
+  // ─────────── Audio helpers (declarados ANTES del useEffect que los usa) ───────────
+  const beep = useCallback(() => {
+    if (muted) return;
+    try {
+      const ctx = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.frequency.value = 880;
+      gain.gain.setValueAtTime(0.15, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.3);
+    } catch {}
+  }, [muted]);
+
+  const speak = useCallback((text: string) => {
+    if (muted) return;
+    try {
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = "es-CL";
+      u.rate = 1.1;
+      window.speechSynthesis.speak(u);
+    } catch {}
+  }, [muted]);
+
+  // Extraer exIndex narrow-safe para usar en useEffect deps
+  const currentExIndex = phase.kind === "exercise" ? phase.exIndex : -1;
+
   // ─────────── Timer engine ───────────
+  // Solo corre para ejercicios time-based y para rest periods.
+  // Para reps-based, el usuario debe presionar "Completé las X reps".
   useEffect(() => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
       intervalRef.current = null;
     }
-    if (phase.kind !== "exercise" && phase.kind !== "rest") return;
+    const isTimedExercise =
+      phase.kind === "exercise" && routine.exercises[currentExIndex]?.kind === "time";
+    const isRest = phase.kind === "rest";
+    if (!isTimedExercise && !isRest) return;
 
     intervalRef.current = window.setInterval(() => {
       setPhase((p) => {
@@ -64,7 +99,7 @@ export function WorkoutPlayer({ routine }: { routine: Routine }) {
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [phase.kind, voiceOn, routine.exercises]);
+  }, [phase.kind, currentExIndex, voiceOn, routine.exercises, beep, speak]);
 
   function advanceAfterFeedback(exIndex: number, setIndex: number): Phase {
     const ex = routine.exercises[exIndex];
@@ -75,32 +110,6 @@ export function WorkoutPlayer({ routine }: { routine: Routine }) {
       return { kind: "rest", nextExIndex: exIndex + 1, nextSetIndex: 0, secondsLeft: ex.rest };
     }
     return { kind: "cooldown" };
-  }
-
-  // ─────────── Audio helpers ───────────
-  function beep() {
-    if (muted) return;
-    try {
-      const ctx = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.frequency.value = 880;
-      gain.gain.setValueAtTime(0.15, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
-      osc.start();
-      osc.stop(ctx.currentTime + 0.3);
-    } catch {}
-  }
-  function speak(text: string) {
-    if (muted) return;
-    try {
-      const u = new SpeechSynthesisUtterance(text);
-      u.lang = "es-CL";
-      u.rate = 1.1;
-      window.speechSynthesis.speak(u);
-    } catch {}
   }
   function haptic(ms = 10) {
     if ("vibrate" in navigator) navigator.vibrate(ms);
@@ -147,13 +156,7 @@ export function WorkoutPlayer({ routine }: { routine: Routine }) {
       secondsLeft: next.kind === "time" ? next.amount : 0,
     });
   }
-  function finishCooldown() {
-    const total = startedAt ? Math.floor((Date.now() - startedAt) / 1000) : 0;
-    haptic(50);
-    setPhase({ kind: "done", totalSeconds: total });
-    void logRoutine(total);
-  }
-  async function logRoutine(durationSeconds: number) {
+  const logRoutine = useCallback(async (durationSeconds: number) => {
     try {
       const supabase = createClient();
       const { data: { user } } = await supabase.auth.getUser();
@@ -166,7 +169,15 @@ export function WorkoutPlayer({ routine }: { routine: Routine }) {
     } catch (err) {
       console.error("Failed to log routine", err);
     }
-  }
+  }, [routine.slug]);
+
+  const finishCooldown = useCallback(() => {
+    // Date.now() en event handler (no render) — purity rule no aplica acá
+    const total = startedAt ? Math.floor((Date.now() - startedAt) / 1000) : 0;
+    haptic(50);
+    setPhase({ kind: "done", totalSeconds: total });
+    void logRoutine(total);
+  }, [startedAt, logRoutine]);
 
   // ─────────── Render ───────────
   return (

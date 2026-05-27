@@ -55,20 +55,11 @@ export default function OnboardingPage() {
     setRevealing(true);
     setError(null);
     try {
-      // 1. Pedir plan a la IA
-      const res = await fetch("/api/plan-reveal", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(answers),
-      });
-      const data = await res.json();
-      setPlan(data);
-
-      // 2. Guardar perfil
+      // 1. Guardar perfil PRIMERO (más crítico que el plan IA)
       const supabase = createClient();
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) { router.push("/login"); return; }
-      await supabase.from("profiles").upsert({
+      const { error: profileError } = await supabase.from("profiles").upsert({
         id: user.id,
         first_name: answers.firstName,
         goal: answers.goal,
@@ -76,11 +67,48 @@ export default function OnboardingPage() {
         age: answers.age ?? null,
         onboarded: true,
       });
+      if (profileError) {
+        console.error("Profile save error:", profileError);
+        setError("No pudimos guardar tu perfil. Inténtalo otra vez.");
+        return;
+      }
       if (answers.weight || answers.height) {
         await supabase.from("measurements").insert({
           user_id: user.id,
           weight_kg: answers.weight ?? null,
           height_cm: answers.height ?? null,
+        });
+      }
+
+      // 2. Pedir plan a la IA (si falla, mostramos fallback genérico)
+      try {
+        const res = await fetch("/api/plan-reveal", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(answers),
+        });
+        if (!res.ok) throw new Error(`Plan API returned ${res.status}`);
+        const data = await res.json();
+        if (data && typeof data.headline === "string") {
+          setPlan(data);
+        } else {
+          throw new Error("Invalid plan response shape");
+        }
+      } catch (planErr) {
+        console.error("Plan AI error:", planErr);
+        // Fallback local: aún muestra algo en lugar de loading infinito
+        setPlan({
+          headline: `Plan para ${answers.firstName || "ti"}: empezar simple.`,
+          intro: "Tu coach está descansando un momento. Igual te dejamos arrancar.",
+          weeklySchedule: "4 días a la semana, 20-30 min cada uno",
+          focusAreas: ["Constancia", "Tonificación", "Energía"],
+          firstWeek: [
+            "Día 1: Movilidad matutina (10 min)",
+            "Día 3: Full Body 25 min",
+            "Día 5: Yoga 30 min",
+          ],
+          milestone: "En 4 semanas, esperamos que entrenar sea natural.",
+          tone: "gentle",
         });
       }
     } catch (e) {
@@ -615,7 +643,7 @@ function PlanReveal({
         transition={{ delay: 0.4 }}
         className="bg-white rounded-3xl p-6 mb-4 border border-glow-200 shadow-sm"
       >
-        <p className="text-ink/80 leading-relaxed italic">"{plan.intro}"</p>
+        <p className="text-ink/80 leading-relaxed italic">«{plan.intro}»</p>
       </motion.div>
 
       <motion.div

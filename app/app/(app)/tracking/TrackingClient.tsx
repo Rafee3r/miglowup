@@ -12,14 +12,11 @@ type Measurement = {
   created_at: string;
 };
 
-type RoutineLog = {
-  routine_slug: string;
-  completed_at: string;
-};
+type CalendarDay = { date: string; hasWorkout: boolean };
 
 export function TrackingClient({
-  measurements, logs,
-}: { measurements: Measurement[]; logs: RoutineLog[] }) {
+  measurements, calendarDays, todayKey,
+}: { measurements: Measurement[]; calendarDays: CalendarDay[]; todayKey: string }) {
   const latest = measurements[measurements.length - 1];
   const first = measurements[0];
   const weightDelta =
@@ -41,13 +38,8 @@ export function TrackingClient({
       cintura: m.waist_cm,
     }));
 
-  // ─── Habit calendar últimos 35 días ───
-  const todayKey = new Date().toISOString().slice(0, 10);
-  const days: { date: string; hasWorkout: boolean }[] = [];
-  for (let i = 34; i >= 0; i--) {
-    const d = new Date(Date.now() - i * 86400000).toISOString().slice(0, 10);
-    days.push({ date: d, hasWorkout: logs.some((l) => l.completed_at.slice(0, 10) === d) });
-  }
+  // El calendario llega pre-computado desde el server (evita Date.now en cliente)
+  const days = calendarDays;
   const totalWorkouts = days.filter((d) => d.hasWorkout).length;
 
   return (

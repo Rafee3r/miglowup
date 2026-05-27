@@ -45,15 +45,18 @@ export default function CoachPage() {
 
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
-      let acc = "";
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-        acc += decoder.decode(value, { stream: true });
+        const chunk = decoder.decode(value, { stream: true });
         setMessages((prev) => {
           const next = [...prev];
-          next[next.length - 1] = { role: "assistant", content: acc };
+          const last = next[next.length - 1];
+          next[next.length - 1] = {
+            role: "assistant",
+            content: (last?.content ?? "") + chunk,
+          };
           return next;
         });
       }

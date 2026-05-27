@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { listRoutines } from "@/lib/routines";
 import { createClient } from "@/lib/supabase/server";
+import { daysAgoISO } from "@/lib/time";
 
 export default async function RutinasPage() {
   const supabase = await createClient();
@@ -12,7 +13,7 @@ export default async function RutinasPage() {
         .from("routine_logs")
         .select("routine_slug, completed_at")
         .eq("user_id", user.id)
-        .gte("completed_at", new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString())
+        .gte("completed_at", daysAgoISO(30))
     : { data: [] };
 
   const completedCount = (logs ?? []).reduce<Record<string, number>>((acc, log) => {

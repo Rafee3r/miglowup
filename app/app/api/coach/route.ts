@@ -188,18 +188,20 @@ function buildUserContext(profile: Profile | null, logs: RoutineLog[], measureme
 function computeStreak(dates: string[]): number {
   if (dates.length === 0) return 0;
   const uniqueDays = Array.from(new Set(dates.map((d) => d.slice(0, 10)))).sort().reverse();
-  let streak = 0;
   const today = new Date().toISOString().slice(0, 10);
   const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
 
-  if (uniqueDays[0] !== today && uniqueDays[0] !== yesterday) return 0;
+  // offset: 0 si el último entreno fue hoy, 1 si fue ayer, sino sin racha
+  let offset: number;
+  if (uniqueDays[0] === today) offset = 0;
+  else if (uniqueDays[0] === yesterday) offset = 1;
+  else return 0;
 
+  let streak = 0;
   for (let i = 0; i < uniqueDays.length; i++) {
-    const expected = new Date(Date.now() - i * 86400000).toISOString().slice(0, 10);
-    const expectedAlt = new Date(Date.now() - (i + 1) * 86400000).toISOString().slice(0, 10);
-    if (uniqueDays[i] === expected || (i === 0 && uniqueDays[i] === expectedAlt)) {
-      streak++;
-    } else break;
+    const expected = new Date(Date.now() - (i + offset) * 86400000).toISOString().slice(0, 10);
+    if (uniqueDays[i] === expected) streak++;
+    else break;
   }
   return streak;
 }

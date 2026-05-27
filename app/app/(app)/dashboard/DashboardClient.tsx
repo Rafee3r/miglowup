@@ -75,7 +75,7 @@ export function DashboardClient({ firstName }: { firstName: string }) {
             <div className="flex-1 min-w-0">
               <h2 className="font-serif text-2xl font-black leading-tight mb-1">{rec.title}</h2>
               <p className="text-white/90 text-sm mb-3">{rec.duration} · {rec.level}</p>
-              <p className="text-sm text-white/95 italic">"{insights?.recommendedReason}"</p>
+              <p className="text-sm text-white/95 italic">«{insights?.recommendedReason}»</p>
             </div>
           </div>
           <div className="mt-4 inline-flex items-center gap-2 bg-white/15 backdrop-blur rounded-full px-4 py-2 text-sm font-semibold">
