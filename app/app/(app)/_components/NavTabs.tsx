@@ -16,8 +16,8 @@ export function NavTabs({ onboarded }: { onboarded: boolean }) {
     { href: "/dashboard", label: "Inicio", icon: "🏠" },
     { href: "/rutinas", label: "Entrenamientos", icon: "💪" },
     { href: "plus", label: "", icon: "" }, // Central spacer for the floating button
-    { href: "/coach", label: "Nutrición", icon: "🥗" }, // Nutrición links to coach for meal advice
-    { href: "/tracking", label: "Perfil", icon: "👤" }, // Perfil links to tracking stats
+    { href: "/coach", label: "Coach", icon: "✨" }, // Coach IA chat page
+    { href: "/tracking", label: "Racha", icon: "🔥" }, // Tracking / progress stats page
   ];
 
   function handleQuickAction(href: string) {
