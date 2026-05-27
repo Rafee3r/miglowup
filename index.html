@@ -71,27 +71,32 @@ fbq('track', 'PageView');
 </header>
 
 <!-- HERO -->
-<section class="px-5 py-20 md:py-32 max-w-5xl mx-auto fade-in">
-  <div class="text-center max-w-3xl mx-auto">
-    <div class="inline-flex items-center gap-2 bg-glow-100 text-glow-700 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-8">
-      <span class="w-1.5 h-1.5 rounded-full bg-glow-500"></span>
-      Hecho en Chile, para chilenas
+<section class="px-5 py-12 md:py-20 max-w-6xl mx-auto fade-in">
+  <div class="grid md:grid-cols-2 gap-12 items-center">
+    <div class="order-2 md:order-1">
+      <div class="inline-flex items-center gap-2 bg-glow-100 text-glow-700 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">
+        <span class="w-1.5 h-1.5 rounded-full bg-glow-500"></span>
+        Hecho en Chile, para chilenas
+      </div>
+      <h1 class="font-serif text-5xl md:text-6xl lg:text-7xl font-black leading-[0.95] mb-6">
+        Cuidarte<br/>
+        <span class="italic text-glow-500">no debería</span><br/>
+        ser tan difícil.
+      </h1>
+      <p class="text-lg text-ink/70 mb-8 leading-relaxed">
+        MiGlowUp es una comunidad fitness para chilenas que junta rutinas en casa, coach con IA y un grupo real de mujeres que se acompañan — todo desde tu celular.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
+        <a href="/promo" class="bg-glow-500 text-white px-8 py-4 rounded-full font-bold hover:bg-glow-600 transition shadow-lg shadow-glow-500/25">
+          Conocer el método →
+        </a>
+        <a href="#metodo" class="text-ink/70 hover:text-ink font-semibold px-4 py-3 transition">
+          Saber más
+        </a>
+      </div>
     </div>
-    <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-black leading-[0.95] mb-6">
-      Cuidarte<br/>
-      <span class="italic text-glow-500">no debería</span><br/>
-      ser tan difícil.
-    </h1>
-    <p class="text-lg md:text-xl text-ink/70 max-w-xl mx-auto mb-10 leading-relaxed">
-      MiGlowUp es una comunidad fitness para chilenas que junta rutinas en casa, coach con IA y un grupo real de mujeres que se acompañan — todo desde tu celular.
-    </p>
-    <div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
-      <a href="/promo" class="bg-glow-500 text-white px-8 py-4 rounded-full font-bold hover:bg-glow-600 transition shadow-lg shadow-glow-500/25">
-        Conocer el método →
-      </a>
-      <a href="#metodo" class="text-ink/70 hover:text-ink font-semibold px-4 py-3 transition">
-        Saber más
-      </a>
+    <div class="order-1 md:order-2">
+      <img src="/assets/hero-home.jpg" alt="Chilena en su living preparándose para entrenar" class="w-full aspect-[4/5] object-cover rounded-3xl shadow-2xl" loading="eager" />
     </div>
   </div>
 </section>
@@ -125,36 +130,50 @@ fbq('track', 'PageView');
   </div>
 
   <div class="grid md:grid-cols-2 gap-5">
-    <div class="bg-white rounded-3xl p-8 border border-ink/10">
-      <div class="text-4xl mb-4">💬</div>
-      <h3 class="font-serif text-2xl font-bold mb-2">Comunidad WhatsApp</h3>
-      <p class="text-ink/70 leading-relaxed">Un grupo privado de chilenas reales que se hablan todos los días. Marciana modera y empuja cuando flaqueas. Cero hombres, cero juicio.</p>
+    <div class="bg-white rounded-3xl border border-ink/10 overflow-hidden">
+      <img src="/assets/pilar-comunidad.jpg" alt="Comunidad WhatsApp de MiGlowUp" class="w-full aspect-square object-cover" loading="lazy" />
+      <div class="p-7">
+        <div class="text-3xl mb-2">💬</div>
+        <h3 class="font-serif text-2xl font-bold mb-2">Comunidad WhatsApp</h3>
+        <p class="text-ink/70 leading-relaxed">Un grupo privado de chilenas reales que se hablan todos los días. Marciana modera y empuja cuando flaqueas. Cero hombres, cero juicio.</p>
+      </div>
     </div>
-    <div class="bg-white rounded-3xl p-8 border border-ink/10">
-      <div class="text-4xl mb-4">✨</div>
-      <h3 class="font-serif text-2xl font-bold mb-2">Coach IA 24/7</h3>
-      <p class="text-ink/70 leading-relaxed">Pregúntale lo que sea, cuando se te ocurra. Tu coach personalizado entiende tu objetivo, tu nivel y tus días malos. Responde sin esperar.</p>
+    <div class="bg-white rounded-3xl border border-ink/10 overflow-hidden">
+      <img src="/assets/pilar-coach.jpg" alt="Coach IA personalizado" class="w-full aspect-square object-cover" loading="lazy" />
+      <div class="p-7">
+        <div class="text-3xl mb-2">✨</div>
+        <h3 class="font-serif text-2xl font-bold mb-2">Coach IA 24/7</h3>
+        <p class="text-ink/70 leading-relaxed">Pregúntale lo que sea, cuando se te ocurra. Tu coach personalizado entiende tu objetivo, tu nivel y tus días malos. Responde sin esperar.</p>
+      </div>
     </div>
-    <div class="bg-white rounded-3xl p-8 border border-ink/10">
-      <div class="text-4xl mb-4">💪</div>
-      <h3 class="font-serif text-2xl font-bold mb-2">Rutinas en casa</h3>
-      <p class="text-ink/70 leading-relaxed">15 a 28 minutos al día. Sin equipamiento, sin pesas, sin tener que cambiarte para salir. Tu peso corporal es todo lo que necesitas.</p>
+    <div class="bg-white rounded-3xl border border-ink/10 overflow-hidden">
+      <img src="/assets/pilar-rutinas.jpg" alt="Rutinas en casa" class="w-full aspect-square object-cover" loading="lazy" />
+      <div class="p-7">
+        <div class="text-3xl mb-2">💪</div>
+        <h3 class="font-serif text-2xl font-bold mb-2">Rutinas en casa</h3>
+        <p class="text-ink/70 leading-relaxed">15 a 28 minutos al día. Sin equipamiento, sin pesas, sin tener que cambiarte para salir. Tu peso corporal es todo lo que necesitas.</p>
+      </div>
     </div>
-    <div class="bg-white rounded-3xl p-8 border border-ink/10">
-      <div class="text-4xl mb-4">📱</div>
-      <h3 class="font-serif text-2xl font-bold mb-2">App MiGlowUp</h3>
-      <p class="text-ink/70 leading-relaxed">Todo en tu celular: rutina del día, tracking de progreso, calendario, fotos privadas, comunicación con el coach. Funciona donde estés.</p>
+    <div class="bg-white rounded-3xl border border-ink/10 overflow-hidden">
+      <img src="/assets/pilar-app.jpg" alt="App MiGlowUp" class="w-full aspect-square object-cover" loading="lazy" />
+      <div class="p-7">
+        <div class="text-3xl mb-2">📱</div>
+        <h3 class="font-serif text-2xl font-bold mb-2">App MiGlowUp</h3>
+        <p class="text-ink/70 leading-relaxed">Todo en tu celular: rutina del día, tracking de progreso, calendario, fotos privadas, comunicación con el coach. Funciona donde estés.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- COMUNIDAD STATS -->
 <section id="comunidad" class="px-5 py-20 bg-ink text-cream fade-in">
-  <div class="max-w-4xl mx-auto">
-    <div class="text-center mb-14">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-10">
       <div class="text-xs uppercase tracking-widest font-bold text-glow-300 mb-3">La comunidad</div>
       <h2 class="font-serif text-4xl md:text-5xl font-bold">No es marketing.<br/>Es una <span class="italic text-glow-400">tribu real</span>.</h2>
     </div>
+
+    <img src="/assets/comunidad-grupo.jpg" alt="Comunidad MiGlowUp" class="w-full aspect-[16/9] object-cover rounded-3xl mb-10 shadow-2xl" loading="lazy" />
 
     <div class="grid md:grid-cols-3 gap-5">
       <div class="text-center">
@@ -174,21 +193,28 @@ fbq('track', 'PageView');
 </section>
 
 <!-- HISTORIA / MARCIANA -->
-<section id="historia" class="px-5 py-20 max-w-4xl mx-auto fade-in">
-  <div class="text-xs uppercase tracking-widest font-bold text-glow-500 mb-4">Detrás de MiGlowUp</div>
-  <h2 class="font-serif text-3xl md:text-5xl font-bold leading-tight mb-8">
-    Una hermana, una idea,<br/>una <span class="italic text-glow-500">comunidad creciendo</span>.
-  </h2>
-  <div class="space-y-5 text-lg text-ink/75 leading-relaxed">
-    <p>
-      MiGlowUp nació por una razón concreta: <strong>Marciana</strong>, creadora de contenido y deportista chilena, vio cómo cientos de mujeres le escribían pidiendo orientación sobre cómo empezar a moverse — y se daba cuenta que el problema casi nunca era la rutina, sino la <em>soledad</em>.
-    </p>
-    <p>
-      Entrenar sola pesa. Comer bien sola pesa. Cuidarte sola pesa. Por eso construimos esto: <strong>un lugar donde no estás sola, pero tampoco tienes que ir a ningún gimnasio.</strong>
-    </p>
-    <p>
-      Hoy somos un equipo pequeño en Santiago, con la misión de hacer que cuidarte sea menos difícil para chilenas que no caben en el molde de las apps de Silicon Valley.
-    </p>
+<section id="historia" class="px-5 py-20 max-w-6xl mx-auto fade-in">
+  <div class="grid md:grid-cols-2 gap-12 items-center">
+    <div>
+      <img src="/assets/historia-equipo.jpg" alt="Detrás de MiGlowUp" class="w-full aspect-[4/5] object-cover rounded-3xl shadow-xl" loading="lazy" />
+    </div>
+    <div>
+      <div class="text-xs uppercase tracking-widest font-bold text-glow-500 mb-4">Detrás de MiGlowUp</div>
+      <h2 class="font-serif text-3xl md:text-5xl font-bold leading-tight mb-8">
+        Una hermana, una idea,<br/>una <span class="italic text-glow-500">comunidad creciendo</span>.
+      </h2>
+      <div class="space-y-5 text-lg text-ink/75 leading-relaxed">
+        <p>
+          MiGlowUp nació por una razón concreta: <strong>Marciana</strong>, creadora de contenido y deportista chilena, vio cómo cientos de mujeres le escribían pidiendo orientación sobre cómo empezar a moverse — y se daba cuenta que el problema casi nunca era la rutina, sino la <em>soledad</em>.
+        </p>
+        <p>
+          Entrenar sola pesa. Comer bien sola pesa. Cuidarte sola pesa. Por eso construimos esto: <strong>un lugar donde no estás sola, pero tampoco tienes que ir a ningún gimnasio.</strong>
+        </p>
+        <p>
+          Hoy somos un equipo pequeño en Santiago, con la misión de hacer que cuidarte sea menos difícil para chilenas que no caben en el molde de las apps de Silicon Valley.
+        </p>
+      </div>
+    </div>
   </div>
 </section>
 
