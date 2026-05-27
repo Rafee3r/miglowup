@@ -1,39 +1,64 @@
 import Link from "next/link";
+import { listRoutines } from "@/lib/routines";
+import { createClient } from "@/lib/supabase/server";
 
-const ROUTINES = [
-  { slug: "full-body-25", title: "Full Body", duration: "25 min", level: "Principiante", emoji: "💪", color: "bg-glow-500" },
-  { slug: "abs-15", title: "Abdomen express", duration: "15 min", level: "Todos los niveles", emoji: "🔥", color: "bg-glow-600" },
-  { slug: "gluteos-30", title: "Glúteos & piernas", duration: "30 min", level: "Intermedio", emoji: "🍑", color: "bg-glow-400" },
-  { slug: "cardio-20", title: "Cardio HIIT", duration: "20 min", level: "Intermedio", emoji: "⚡", color: "bg-glow-700" },
-  { slug: "yoga-30", title: "Yoga & estiramiento", duration: "30 min", level: "Principiante", emoji: "🧘‍♀️", color: "bg-emerald-600" },
-  { slug: "movilidad-10", title: "Movilidad matutina", duration: "10 min", level: "Todos", emoji: "☀️", color: "bg-amber-500" },
-];
+export default async function RutinasPage() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
 
-export default function RutinasPage() {
+  // Cargar últimos 30 días de logs para mostrar "ya hecho" y streak
+  const { data: logs } = user
+    ? await supabase
+        .from("routine_logs")
+        .select("routine_slug, completed_at")
+        .eq("user_id", user.id)
+        .gte("completed_at", new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString())
+    : { data: [] };
+
+  const completedCount = (logs ?? []).reduce<Record<string, number>>((acc, log) => {
+    acc[log.routine_slug] = (acc[log.routine_slug] ?? 0) + 1;
+    return acc;
+  }, {});
+
+  const routines = listRoutines();
+
   return (
     <div className="fade-in space-y-6">
       <div>
-        <h1 className="font-serif text-3xl font-bold">Rutinas</h1>
-        <p className="text-ink/60 mt-1">Elige la que te haga sentido hoy.</p>
+        <h1 className="font-serif text-3xl font-bold">Biblioteca de rutinas</h1>
+        <p className="text-ink/60 mt-1">Elige la que te haga sentido hoy. Tu cuerpo sabe.</p>
       </div>
 
       <div className="space-y-3">
-        {ROUTINES.map((r) => (
-          <Link
-            key={r.slug}
-            href={`/rutinas/${r.slug}`}
-            className="flex items-center gap-4 bg-white rounded-2xl p-5 border border-ink/10 hover:border-glow-300 transition"
-          >
-            <div className={`${r.color} text-white w-14 h-14 rounded-2xl flex items-center justify-center text-2xl`}>
-              {r.emoji}
-            </div>
-            <div className="flex-1">
-              <div className="font-semibold">{r.title}</div>
-              <div className="text-sm text-ink/60">{r.duration} · {r.level}</div>
-            </div>
-            <div className="text-ink/30">›</div>
-          </Link>
-        ))}
+        {routines.map((r) => {
+          const done = completedCount[r.slug] ?? 0;
+          return (
+            <Link
+              key={r.slug}
+              href={`/rutinas/${r.slug}`}
+              className="group block relative overflow-hidden rounded-3xl border border-ink/10 hover:border-glow-300 transition shadow-sm hover:shadow-lg"
+            >
+              <div className={`bg-gradient-to-br ${r.color} p-5 flex items-center gap-4 text-white`}>
+                <div className="w-16 h-16 rounded-2xl bg-white/15 backdrop-blur flex items-center justify-center text-3xl flex-shrink-0">
+                  {r.emoji}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="font-serif text-xl font-bold leading-tight">{r.title}</div>
+                  <div className="text-sm text-white/80 mt-0.5">{r.duration} · {r.level} · {r.exercises.length} ejercicios</div>
+                </div>
+                {done > 0 && (
+                  <div className="bg-white/20 backdrop-blur rounded-full px-3 py-1 text-xs font-bold">
+                    {done}× ✓
+                  </div>
+                )}
+                <div className="text-white/60 group-hover:text-white group-hover:translate-x-1 transition">›</div>
+              </div>
+              <div className="bg-white px-5 py-3 text-xs text-ink/60">
+                {r.description}
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
