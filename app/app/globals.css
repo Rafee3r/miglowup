@@ -12,8 +12,8 @@
   --color-cream: #FBF6EE;
   --color-ink: #1A1A1A;
 
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-serif: "Fraunces", serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), serif;
 }
 
 html, body {

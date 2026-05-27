@@ -91,7 +91,7 @@ export function TrackingClient({
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3 + i * 0.005 }}
-              className={`aspect-square rounded-md ${d.hasWorkout ? "bg-glow-500" : "bg-ink/5"} ${d.date === todayKey ? "ring-2 ring-glow-700" : ""}`}
+              className={`aspect-square rounded-md transition duration-300 ${d.hasWorkout ? "bg-glow-500 shadow-sm shadow-glow-500/20" : "bg-ink/5"} ${d.date === todayKey ? "ring-2 ring-glow-500 ring-offset-2" : ""}`}
               title={`${d.date}${d.hasWorkout ? " · entrené" : ""}`}
             />
           ))}
@@ -209,15 +209,16 @@ export function TrackingClient({
 function StatCard({
   label, value, unit, delta,
 }: { label: string; value: string; unit: string; delta?: number | null }) {
+  const isLoss = delta !== null && delta !== undefined && delta < 0;
   return (
-    <div className="bg-white rounded-2xl p-4 border border-ink/10">
+    <div className="bg-white rounded-2xl p-4 border border-ink/10 hover:border-glow-300 hover:shadow-sm transition duration-300 ease-out">
       <div className="text-[10px] uppercase tracking-widest font-bold text-ink/50">{label}</div>
       <div className="flex items-baseline gap-1 mt-1">
-        <div className="font-serif text-2xl font-black">{value}</div>
+        <div className="font-serif text-2xl font-black text-ink">{value}</div>
         {unit && <div className="text-xs text-ink/50">{unit}</div>}
       </div>
       {delta !== null && delta !== undefined && (
-        <div className={`text-xs mt-1 font-semibold ${delta < 0 ? "text-emerald-600" : delta > 0 ? "text-rose-500" : "text-ink/50"}`}>
+        <div className={`text-xs mt-1 font-semibold ${isLoss ? "text-emerald-600" : delta > 0 ? "text-glow-600" : "text-ink/50"}`}>
           {delta > 0 ? "↑" : delta < 0 ? "↓" : ""} {Math.abs(delta)} kg
         </div>
       )}

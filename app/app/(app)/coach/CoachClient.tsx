@@ -80,10 +80,10 @@ export function CoachClient() {
         {messages.map((m, i) => (
           <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
             <div
-              className={`max-w-[85%] px-4 py-3 rounded-2xl whitespace-pre-wrap ${
+              className={`max-w-[85%] px-4 py-3 rounded-2xl whitespace-pre-wrap leading-relaxed transition-all duration-300 ${
                 m.role === "user"
-                  ? "bg-glow-500 text-white rounded-br-sm"
-                  : "bg-white border border-ink/10 rounded-bl-sm"
+                  ? "bg-glow-500 text-white rounded-br-sm shadow-md shadow-glow-500/10"
+                  : "bg-white border border-ink/10 rounded-bl-sm shadow-sm"
               }`}
             >
               {m.content || "..."}
@@ -93,12 +93,12 @@ export function CoachClient() {
       </div>
 
       {messages.length <= 1 && (
-        <div className="grid grid-cols-2 gap-2 mb-3">
+        <div className="grid grid-cols-2 gap-2 mb-4">
           {SUGGESTIONS.map((s) => (
             <button
               key={s}
               onClick={() => send(s)}
-              className="text-xs bg-white border border-ink/10 px-3 py-2 rounded-xl text-left hover:border-glow-300 transition"
+              className="text-xs bg-white border border-ink/10 px-4 py-3 rounded-2xl text-left hover:border-glow-400 hover:bg-glow-50 hover:text-glow-700 hover:-translate-y-0.5 hover:shadow-sm transition duration-300 ease-out font-medium"
             >
               {s}
             </button>
@@ -117,12 +117,12 @@ export function CoachClient() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Escribe a tu coach..."
-          className="flex-1 px-4 py-3 rounded-full border border-ink/15 focus:border-glow-500 focus:ring-2 focus:ring-glow-200 outline-none"
+          className="flex-1 px-5 py-3.5 rounded-full border border-ink/15 focus:border-glow-400 focus:ring-4 focus:ring-glow-100 outline-none transition duration-300"
         />
         <button
           type="submit"
           disabled={!input.trim() || streaming}
-          className="bg-glow-500 text-white px-5 rounded-full font-bold hover:bg-glow-600 transition disabled:opacity-50"
+          className="bg-glow-500 text-white px-6 rounded-full font-bold hover:bg-glow-600 transition duration-300 disabled:opacity-50 active:scale-95 shadow-md shadow-glow-500/10"
         >
           {streaming ? "..." : "Enviar"}
         </button>
