@@ -31,11 +31,16 @@ export function PlanClient({
                        status === "cancelled" ? "Cancelada" :
                        status === "paused" ? "Pausada" : status;
 
-  const daysUntilCharge = nextBillingAt
-    ? Math.max(0, Math.floor((new Date(nextBillingAt).getTime() - Date.now()) / 86400000))
-    : trialEndsAt
-    ? Math.max(0, Math.floor((new Date(trialEndsAt).getTime() - Date.now()) / 86400000))
-    : null;
+  const [daysUntilCharge, setDaysUntilCharge] = useState<number | null>(null);
+
+  useEffect(() => {
+    const days = nextBillingAt
+      ? Math.max(0, Math.floor((new Date(nextBillingAt).getTime() - Date.now()) / 86400000))
+      : trialEndsAt
+      ? Math.max(0, Math.floor((new Date(trialEndsAt).getTime() - Date.now()) / 86400000))
+      : null;
+    setTimeout(() => setDaysUntilCharge(days), 0);
+  }, [nextBillingAt, trialEndsAt]);
 
   return (
     <div className="fade-in space-y-6">
@@ -146,10 +151,12 @@ function NotificationsSettings({ firstName }: { firstName: string }) {
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (!("Notification" in window)) {
-      setPermission("unsupported");
+      setTimeout(() => setPermission("unsupported"), 0);
       return;
     }
-    setPermission(Notification.permission);
+    if (Notification.permission !== "default") {
+      setTimeout(() => setPermission(Notification.permission), 0);
+    }
   }, []);
 
   async function requestPermission() {
