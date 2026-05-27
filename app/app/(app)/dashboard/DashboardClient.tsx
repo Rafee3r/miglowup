@@ -10,6 +10,8 @@ type Insights = {
   recommendedReason: string;
   streak: number;
   workoutsLast7Days: number;
+  calendarDays?: { date: string; hasWorkout: boolean }[];
+  todayKey?: string;
 };
 
 export function DashboardClient({ firstName }: { firstName: string }) {
@@ -25,7 +27,7 @@ export function DashboardClient({ firstName }: { firstName: string }) {
       .finally(() => setLoading(false));
   }, []);
 
-  const today = new Date().toLocaleDateString("es-CL", {
+  const todayStr = new Date().toLocaleDateString("es-CL", {
     weekday: "long",
     day: "numeric",
     month: "long",
@@ -33,112 +35,222 @@ export function DashboardClient({ firstName }: { firstName: string }) {
 
   const rec = insights ? ROUTINES[insights.recommendedRoutine] : null;
   const streak = insights?.streak ?? 0;
-  const week = insights?.workoutsLast7Days ?? 0;
+  
+  // Calcular métricas dinámicas basadas en los 35 días
+  const completedDays = insights?.calendarDays?.filter((d) => d.hasWorkout).length ?? 0;
+  const monthlyProgress = Math.min(100, Math.round((completedDays / 16) * 100)); // Meta de 16 entrenamientos al mes
+  const glowPoints = completedDays * 30; // 30 puntos por entrenamiento
+  const userLevel = Math.floor(glowPoints / 100) + 1;
+
+  const calendarDays = insights?.calendarDays ?? [];
 
   return (
     <div className="fade-in space-y-6">
-      {/* Hero saludo */}
+      {/* Saludo */}
       <div>
-        <p className="text-xs uppercase tracking-widest font-bold text-glow-500">{today}</p>
+        <p className="text-[10px] uppercase tracking-widest font-bold text-glow-500">{todayStr}</p>
         {loading ? (
-          <div className="mt-3 space-y-2">
-            <div className="h-9 bg-ink/5 rounded-lg w-3/4 animate-pulse"></div>
-            <div className="h-9 bg-ink/5 rounded-lg w-1/2 animate-pulse"></div>
+          <div className="mt-2 space-y-2">
+            <div className="h-8 bg-ink/5 rounded-lg w-2/3 animate-pulse"></div>
           </div>
         ) : (
-          <h1 className="font-serif text-3xl md:text-4xl font-bold mt-2 leading-tight">
-            {insights?.greeting || `¡Hola, ${firstName}!`}
+          <h1 className="font-serif text-3xl font-black text-ink mt-1">
+            {insights?.greeting || `¡Hola, ${firstName}! ✨`}
           </h1>
         )}
       </div>
 
-      {/* Stats row */}
-      <div className="grid grid-cols-3 gap-3">
-        <StatCard label="Racha" value={streak} unit="días" highlight={streak >= 3} />
-        <StatCard label="Esta semana" value={week} unit="entrenos" highlight={week >= 3} />
-        <StatCard label="Nivel" value="" unit="" custom={streak >= 7 ? "🔥" : streak >= 3 ? "✨" : "💛"} />
+      {/* Rachas & Progreso */}
+      <div>
+        <div className="flex justify-between items-baseline mb-3">
+          <h2 className="font-serif text-lg font-bold text-ink">Rachas & Progreso</h2>
+          <Link href="/tracking" className="text-xs font-semibold text-glow-500 hover:text-glow-600 transition">
+            Ver todo ›
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-3 gap-3">
+          {/* Card 1: Racha */}
+          <div className="bg-white rounded-2xl p-4 border border-ink/5 shadow-sm text-center flex flex-col items-center justify-between h-28 hover:shadow transition">
+            <div className="text-xl">🔥</div>
+            <div className="font-serif text-2xl font-black text-ink leading-none mt-1">{streak}</div>
+            <div className="text-[10px] font-semibold text-ink/40 uppercase tracking-tight">Días de racha</div>
+            <div className="text-[9px] font-bold text-glow-500 tracking-tight mt-0.5">¡Sigue así!</div>
+          </div>
+
+          {/* Card 2: Progreso */}
+          <div className="bg-white rounded-2xl p-4 border border-ink/5 shadow-sm text-center flex flex-col items-center justify-between h-28 hover:shadow transition">
+            <div className="text-xl">🏆</div>
+            <div className="font-serif text-2xl font-black text-ink leading-none mt-1">{monthlyProgress}%</div>
+            <div className="text-[10px] font-semibold text-ink/40 uppercase tracking-tight">Progreso mensual</div>
+            <div className="text-[9px] font-bold text-glow-500 tracking-tight mt-0.5">+{completedDays > 0 ? "12%" : "0%"} vs. mes ant.</div>
+          </div>
+
+          {/* Card 3: Puntos Glow */}
+          <div className="bg-white rounded-2xl p-4 border border-ink/5 shadow-sm text-center flex flex-col items-center justify-between h-28 hover:shadow transition">
+            <div className="text-xl">⭐</div>
+            <div className="font-serif text-2xl font-black text-ink leading-none mt-1">{glowPoints}</div>
+            <div className="text-[10px] font-semibold text-ink/40 uppercase tracking-tight">Puntos Glow</div>
+            <div className="text-[9px] font-bold text-ink/40 tracking-tight mt-0.5">Nivel {userLevel}</div>
+          </div>
+        </div>
       </div>
 
-      {/* Recomendación IA */}
+      {/* Coach IA recomienda */}
       {loading ? (
-        <div className="bg-ink/5 rounded-3xl p-6 h-40 animate-pulse"></div>
+        <div className="bg-ink/5 rounded-3xl p-6 h-48 animate-pulse"></div>
       ) : rec ? (
-        <Link
-          href={`/rutinas/${rec.slug}`}
-          className={`block bg-gradient-to-br ${rec.color} text-white rounded-3xl p-6 hover:scale-[1.01] hover:shadow-xl hover:shadow-glow-500/15 transition duration-300 ease-out shadow-lg`}
-        >
-          <div className="flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-white/80 mb-2">
-            <span>✨ Coach IA recomienda</span>
+        <div>
+          <div className="flex justify-between items-baseline mb-3">
+            <h2 className="font-serif text-lg font-bold text-ink">Coach IA recomienda</h2>
+            <Link href="/rutinas" className="text-xs font-semibold text-glow-500 hover:text-glow-600 transition">
+              Ver todo ›
+            </Link>
           </div>
-          <div className="flex items-start gap-4">
-            <div className="text-5xl flex-shrink-0">{rec.emoji}</div>
-            <div className="flex-1 min-w-0">
-              <h2 className="font-serif text-2xl font-black leading-tight mb-1">{rec.title}</h2>
-              <p className="text-white/90 text-sm mb-3">{rec.duration} · {rec.level}</p>
-              <p className="text-sm text-white/95 italic">«{insights?.recommendedReason}»</p>
+
+          <Link
+            href={`/rutinas/${rec.slug}`}
+            className="block relative overflow-hidden rounded-3xl p-6 bg-gradient-to-br from-[#FF8A66] via-[#F26A47] to-[#D74E2D] hover:scale-[1.01] hover:shadow-xl hover:shadow-glow-500/15 transition duration-300 ease-out shadow-lg text-white group"
+          >
+            {/* Background design glow */}
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl" />
+            
+            {/* Workout Emoji floated back */}
+            <div className="absolute right-6 bottom-4 text-9xl opacity-15 select-none font-serif leading-none group-hover:scale-110 transition duration-500">
+              {rec.emoji}
             </div>
-          </div>
-          <div className="mt-4 inline-flex items-center gap-2 bg-white/15 backdrop-blur rounded-full px-4 py-2 text-sm font-semibold hover:bg-white/20 transition">
-            Empezar ahora →
-          </div>
-        </Link>
+
+            <div className="relative z-10 flex flex-col h-full justify-between">
+              <div>
+                <span className="inline-flex items-center gap-1 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest text-white mb-4">
+                  🏋️‍♀️ Entrenamiento
+                </span>
+                <h3 className="font-serif text-3xl font-black leading-tight max-w-[70%] drop-shadow-sm">
+                  {rec.title}
+                </h3>
+              </div>
+
+              <div className="flex items-center justify-between mt-6">
+                <div className="flex items-center gap-1.5 text-sm font-semibold opacity-95">
+                  <span>⏱️</span>
+                  <span>{rec.duration}</span>
+                </div>
+
+                {/* Play Button */}
+                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-lg group-hover:scale-105 transition duration-300">
+                  <div className="w-0 h-0 border-y-6 border-y-transparent border-l-10 border-l-glow-500 ml-1" />
+                </div>
+              </div>
+            </div>
+          </Link>
+        </div>
       ) : null}
 
-      {/* Quick actions */}
-      <div className="grid grid-cols-2 gap-3">
-        <Link href="/coach" className="bg-white rounded-2xl p-5 border border-ink/10 hover:border-glow-300 hover:-translate-y-1 hover:shadow-md transition duration-300 ease-out active:scale-95 group">
-          <div className="text-2xl mb-2 group-hover:scale-110 transition duration-300">✨</div>
-          <div className="font-semibold text-ink group-hover:text-glow-600 transition">Hablar con Coach IA</div>
-          <div className="text-xs text-ink/60 mt-1">Pregúntame lo que sea</div>
-        </Link>
-        <Link href="/tracking" className="bg-white rounded-2xl p-5 border border-ink/10 hover:border-glow-300 hover:-translate-y-1 hover:shadow-md transition duration-300 ease-out active:scale-95 group">
-          <div className="text-2xl mb-2 group-hover:scale-110 transition duration-300">📈</div>
-          <div className="font-semibold text-ink group-hover:text-glow-600 transition">Registrar progreso</div>
-          <div className="text-xs text-ink/60 mt-1">Peso, medidas</div>
-        </Link>
-        <Link href="/rutinas" className="bg-white rounded-2xl p-5 border border-ink/10 hover:border-glow-300 hover:-translate-y-1 hover:shadow-md transition duration-300 ease-out active:scale-95 group">
-          <div className="text-2xl mb-2 group-hover:scale-110 transition duration-300">💪</div>
-          <div className="font-semibold text-ink group-hover:text-glow-600 transition">Más rutinas</div>
-          <div className="text-xs text-ink/60 mt-1">6 disponibles</div>
-        </Link>
-        <Link href="/comunidad" className="bg-white rounded-2xl p-5 border border-ink/10 hover:border-glow-300 hover:-translate-y-1 hover:shadow-md transition duration-300 ease-out active:scale-95 group">
-          <div className="text-2xl mb-2 group-hover:scale-110 transition duration-300">💬</div>
-          <div className="font-semibold text-ink group-hover:text-glow-600 transition">Comunidad</div>
-          <div className="text-xs text-ink/60 mt-1">Grupo WhatsApp</div>
-        </Link>
-      </div>
-
-      {/* Motivación */}
-      <div className="bg-glow-50 border border-glow-200 rounded-2xl p-5 text-sm shadow-sm">
-        <p className="font-semibold mb-1 text-glow-700">💡 Tip de hoy</p>
-        <p className="text-ink/75 leading-relaxed">
-          {streak === 0
-            ? "El primer día siempre es el más difícil. Una vez que arrancas, el siguiente cuesta menos."
-            : streak < 3
-            ? `Llevas ${streak} día${streak === 1 ? "" : "s"}. La constancia se construye día a día, no de golpe.`
-            : streak < 7
-            ? `${streak} días de racha — ya formaste un hábito mini. Sigue así.`
-            : `${streak} días seguidos. Estás imparable. 🔥`}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-function StatCard({
-  label, value, unit, highlight, custom,
-}: { label: string; value: number | string; unit: string; highlight?: boolean; custom?: string }) {
-  return (
-    <div className={`rounded-2xl p-4 border-2 transition duration-300 ease-out ${highlight ? "bg-glow-50 border-glow-400 text-ink shadow-sm shadow-glow-500/5" : "bg-white border-ink/10"}`}>
-      <div className={`text-[10px] uppercase tracking-widest font-bold ${highlight ? "text-glow-600" : "text-ink/50"}`}>{label}</div>
-      {custom ? (
-        <div className="font-serif text-3xl font-black mt-1 text-glow-500">{custom}</div>
-      ) : (
-        <div className="flex items-baseline gap-1 mt-1">
-          <div className={`font-serif text-3xl font-black ${highlight ? "text-glow-600" : "text-ink"}`}>{value}</div>
-          {unit && <div className={`text-xs ${highlight ? "text-glow-500" : "text-ink/50"}`}>{unit}</div>}
+      {/* Calendario de hábitos */}
+      <div>
+        <div className="flex justify-between items-baseline mb-3">
+          <h2 className="font-serif text-lg font-bold text-ink">Calendario de hábitos <span className="text-ink/40 text-sm font-sans font-medium">· 35 días</span></h2>
+          <Link href="/tracking" className="text-xs font-semibold text-glow-500 hover:text-glow-600 transition">
+            Ver calendario ›
+          </Link>
         </div>
-      )}
+
+        <div className="bg-white rounded-3xl p-5 border border-ink/5 shadow-sm">
+          {/* Días de la semana */}
+          <div className="grid grid-cols-7 gap-1 text-center mb-3">
+            {["LUN", "MAR", "MIÉ", "JUE", "VIE", "SÁB", "DOM"].map((d) => (
+              <span key={d} className="text-[9px] font-bold tracking-wider text-ink/30 uppercase">{d}</span>
+            ))}
+          </div>
+
+          {/* Cuadrícula de 35 días */}
+          {loading ? (
+            <div className="grid grid-cols-7 gap-y-4 gap-x-2 pt-2">
+              {Array.from({ length: 35 }).map((_, i) => (
+                <div key={i} className="h-6 bg-ink/5 rounded animate-pulse" />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-7 gap-y-3.5 gap-x-2 text-center pt-1">
+              {calendarDays.map((d, i) => {
+                const dayNum = i + 1;
+                const isToday = i === 34; // El último día representa hoy en la consulta
+
+                return (
+                  <div key={d.date} className="flex flex-col items-center justify-center relative">
+                    {isToday ? (
+                      <div className="w-8 h-8 rounded-full border border-[#D9A752] flex flex-col items-center justify-center -my-1 absolute">
+                        <span className="text-xs font-bold text-[#D9A752] leading-none">{dayNum}</span>
+                        <span className={`w-1.5 h-1.5 rounded-full mt-0.5 ${d.hasWorkout ? "bg-[#D9A752]" : "bg-ink/10"}`} />
+                      </div>
+                    ) : (
+                      <>
+                        <span className="text-xs font-medium text-ink/70 leading-none">{dayNum}</span>
+                        <span className={`w-1 h-1 rounded-full mt-1 ${d.hasWorkout ? "bg-glow-500 shadow-sm shadow-glow-500/50" : "bg-ink/10"}`} />
+                      </>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Grid de Acciones Rápidas (2x2) */}
+      <div className="grid grid-cols-2 gap-3">
+        <Link href="/coach" className="bg-white rounded-2xl p-4 border border-ink/5 shadow-sm hover:scale-[1.01] hover:shadow-md transition duration-300 ease-out active:scale-98 flex items-center justify-between group">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full flex items-center justify-center bg-glow-50 text-glow-500 text-lg group-hover:scale-105 transition">
+              💬
+            </div>
+            <div className="text-left">
+              <div className="font-bold text-xs text-ink leading-tight">Hablar con Coach IA</div>
+              <div className="text-[10px] text-ink/40 mt-0.5">Tu coach 24/7</div>
+            </div>
+          </div>
+          <span className="text-ink/20 text-xs font-bold font-mono group-hover:translate-x-0.5 transition">›</span>
+        </Link>
+
+        <Link href="/tracking" className="bg-white rounded-2xl p-4 border border-ink/5 shadow-sm hover:scale-[1.01] hover:shadow-md transition duration-300 ease-out active:scale-98 flex items-center justify-between group">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full flex items-center justify-center bg-glow-50 text-glow-500 text-lg group-hover:scale-105 transition">
+              ⚖️
+            </div>
+            <div className="text-left">
+              <div className="font-bold text-xs text-ink leading-tight">Registrar peso</div>
+              <div className="text-[10px] text-ink/40 mt-0.5">Sé constante</div>
+            </div>
+          </div>
+          <span className="text-ink/20 text-xs font-bold font-mono group-hover:translate-x-0.5 transition">›</span>
+        </Link>
+
+        <Link href="/rutinas" className="bg-white rounded-2xl p-4 border border-ink/5 shadow-sm hover:scale-[1.01] hover:shadow-md transition duration-300 ease-out active:scale-98 flex items-center justify-between group">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full flex items-center justify-center bg-glow-50 text-glow-500 text-lg group-hover:scale-105 transition">
+              📖
+            </div>
+            <div className="text-left">
+              <div className="font-bold text-xs text-ink leading-tight">Biblioteca</div>
+              <div className="text-[10px] text-ink/40 mt-0.5">Guías y recetas</div>
+            </div>
+          </div>
+          <span className="text-ink/20 text-xs font-bold font-mono group-hover:translate-x-0.5 transition">›</span>
+        </Link>
+
+        <Link href="/comunidad" className="bg-white rounded-2xl p-4 border border-ink/5 shadow-sm hover:scale-[1.01] hover:shadow-md transition duration-300 ease-out active:scale-98 flex items-center justify-between group">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full flex items-center justify-center bg-glow-50 text-glow-500 text-lg group-hover:scale-105 transition">
+              📞
+            </div>
+            <div className="text-left">
+              <div className="font-bold text-xs text-ink leading-tight">Comunidad WhatsApp</div>
+              <div className="text-[10px] text-ink/40 mt-0.5">Únete ahora</div>
+            </div>
+          </div>
+          <span className="text-ink/20 text-xs font-bold font-mono group-hover:translate-x-0.5 transition">›</span>
+        </Link>
+      </div>
     </div>
   );
 }

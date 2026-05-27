@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
-import { getChileanDateString } from "@/lib/time";
+import { getChileanDateString, todayKey, dateKeyDaysAgo } from "@/lib/time";
 
 export const runtime = "edge";
 
@@ -19,7 +19,7 @@ export async function GET() {
       .from("routine_logs")
       .select("routine_slug, completed_at")
       .eq("user_id", user.id)
-      .gte("completed_at", new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString())
+      .gte("completed_at", new Date(Date.now() - 45 * 24 * 60 * 60 * 1000).toISOString())
       .order("completed_at", { ascending: false }),
   ]);
 
@@ -43,12 +43,25 @@ export async function GET() {
 
   const streakValue = computeStreak(lastLogs.map((l) => l.completed_at));
 
+  // Generar calendario de 35 días para el dashboard
+  const calendarDays: { date: string; hasWorkout: boolean }[] = [];
+  const todayKeyVal = todayKey();
+  for (let i = 34; i >= 0; i--) {
+    const d = dateKeyDaysAgo(i);
+    calendarDays.push({
+      date: d,
+      hasWorkout: lastLogs.some((l) => getChileanDateString(l.completed_at) === d),
+    });
+  }
+
   const apiKey = process.env.DEEPSEEK_API_KEY;
   if (!apiKey) {
     return NextResponse.json({
       ...fallbackInsights(userBrief),
       streak: streakValue,
       workoutsLast7Days: userBrief.workoutsLast7Days,
+      calendarDays,
+      todayKey: todayKeyVal,
     });
   }
 
@@ -94,6 +107,8 @@ Responde SOLO JSON válido, sin markdown ni explicaciones:
       recommendedReason: parsed.recommendedReason || "Una sesión balanceada para hoy.",
       streak: streakValue,
       workoutsLast7Days: userBrief.workoutsLast7Days,
+      calendarDays,
+      todayKey: todayKeyVal,
     });
   } catch (err) {
     console.error("Insights AI error, using fallback:", err);
@@ -101,6 +116,8 @@ Responde SOLO JSON válido, sin markdown ni explicaciones:
       ...fallbackInsights(userBrief),
       streak: streakValue,
       workoutsLast7Days: userBrief.workoutsLast7Days,
+      calendarDays,
+      todayKey: todayKeyVal,
     });
   }
 }
@@ -118,11 +135,11 @@ function fallbackInsights(b: Brief) {
   const name = b.name ?? "fundadora";
   let greeting: string;
   if (b.daysSinceTraining === null) {
-    greeting = `Hola ${name}, ¿lista para tu primera rutina? 💛`;
+    greeting = `¡Hola, ${name}! ¿Lista para tu primera rutina? 💛`;
   } else if (b.daysSinceTraining === 0) {
-    greeting = `¡${name}, llevas un día perfecto hoy! ✨`;
+    greeting = `¡Hola, ${name}! ¡Llevas un día perfecto hoy! ✨`;
   } else if (b.daysSinceTraining >= 3) {
-    greeting = `Hola ${name}, ¿cómo va? Te extrañamos por acá 💛`;
+    greeting = `¡Hola, ${name}! ¿Cómo va? Te extrañamos por acá 💛`;
   } else {
     greeting = `Buen${b.timeOfDay === "mañana" ? "os días" : b.timeOfDay === "tarde" ? "a tarde" : "as noches"}, ${name} ✨`;
   }
