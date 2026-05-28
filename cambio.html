@@ -83,9 +83,14 @@ fbq('track', 'PageView');
 <body class="grain">
 
 <!-- Top banner -->
-<div class="bg-glow-500 text-white text-center text-xs sm:text-sm py-2 px-4 font-semibold">
-  <span class="inline-block w-2 h-2 bg-white rounded-full pulse-dot mr-2"></span>
-  Reto Verano 2026 · Plazas fundadoras desde $990
+<div class="bg-gradient-to-r from-glow-600 via-glow-500 to-glow-600 text-white text-center text-xs py-2.5 px-4 font-semibold tracking-wide shadow-md relative overflow-hidden h-10 flex items-center justify-center">
+  <div id="announcement-slider" class="transition-opacity duration-300 opacity-100 flex items-center justify-center">
+    <span class="relative flex h-2 w-2 mr-2 flex-shrink-0">
+      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+      <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+    </span>
+    <span id="announcement-text">Reto Verano 2026 · Plazas fundadoras desde $990</span>
+  </div>
 </div>
 
 <!-- Nav -->
@@ -581,6 +586,28 @@ fbq('track', 'PageView');
 
   if (typeof fbq !== 'undefined') {
     fbq('trackCustom', 'LandingView', { variant: VARIANT });
+  }
+
+  // Top banner slider
+  const announcements = [
+    "Reto Verano 2026 · Plazas fundadoras desde $990",
+    "🔥 247 chilenas entrenando activamente ahora mismo",
+    "🌸 7 DÍAS GRATIS: Regístrate sin cargos hoy",
+    "💬 Grupo privado de WhatsApp de la cohorte incluido"
+  ];
+  let curIndex = 0;
+  const slider = document.getElementById('announcement-slider');
+  const txt = document.getElementById('announcement-text');
+  
+  if (slider && txt) {
+    setInterval(() => {
+      slider.style.opacity = '0';
+      setTimeout(() => {
+        curIndex = (curIndex + 1) % announcements.length;
+        txt.innerHTML = announcements[curIndex];
+        slider.style.opacity = '1';
+      }, 300);
+    }, 4500);
   }
 </script>
 
