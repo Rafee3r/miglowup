@@ -44,18 +44,15 @@ export async function onRequestGet({ request, env }) {
 
     const planConfig = PLANS[plan];
     const externalRef = `${variant}_${plan}_${Date.now()}`;
-
-    // start_date debe ser ≥ ahora. MP usa free_trial.frequency para
-    // diferir el primer cobro. La autorización es inmediata.
-    const startDate = new Date(Date.now() + 60 * 1000); // +1 min para evitar 400
+    const email = url.searchParams.get('email') || 'hola@miglowup.cl';
 
     const preapproval = {
+      payer_email: email,
       reason: planConfig.reason,
       external_reference: externalRef,
       auto_recurring: {
         frequency: planConfig.frequency,
         frequency_type: planConfig.frequency_type,
-        start_date: startDate.toISOString(),
         transaction_amount: planConfig.amount,
         currency_id: 'CLP',
         free_trial: {
