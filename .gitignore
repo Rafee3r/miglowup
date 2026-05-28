@@ -18,3 +18,10 @@ app/.env*.local
 app/.vercel
 app/next-env.d.ts
 app/.turbo
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
