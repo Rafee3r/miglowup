@@ -47,7 +47,6 @@ export async function onRequestGet({ request, env }) {
     const email = url.searchParams.get('email') || 'hola@miglowup.cl';
 
     const preapproval = {
-      payer_email: email,
       reason: planConfig.reason,
       external_reference: externalRef,
       auto_recurring: {
@@ -60,8 +59,7 @@ export async function onRequestGet({ request, env }) {
           frequency_type: 'days',
         },
       },
-      back_url: `${SITE_URL}/gracias?subscribed=1&plan=${plan}&variant=${variant}`,
-      status: 'pending',
+      back_url: `${SITE_URL}/gracias?subscribed=1&plan=${plan}&variant=${variant}`
     };
 
     const mpRes = await fetch('https://api.mercadopago.com/preapproval', {
