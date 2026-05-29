@@ -35,7 +35,7 @@
       window.location.href = data.init_point;
     } catch (err) {
       console.error('Checkout error:', err);
-      alert('Algo falló al iniciar el pago. Intenta de nuevo en un momento o escríbenos a hola@miglowup.cl');
+      alert(`Algo falló al iniciar el pago (${err.message}). Intenta de nuevo en un momento o escríbenos a hola@miglowup.cl`);
     }
   };
 
