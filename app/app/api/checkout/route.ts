@@ -55,7 +55,7 @@ export async function GET(request: NextRequest) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${mpToken}`,
+        Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN?.trim()}`,
       },
       body: JSON.stringify(preapproval),
     });
