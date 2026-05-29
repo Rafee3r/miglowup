@@ -28,9 +28,17 @@
     // 2. Crear preferencia en MP
     try {
       const res = await fetch(`/api/checkout?plan=${encodeURIComponent(plan)}&variant=${encodeURIComponent(variant)}`);
+      
+      const contentType = res.headers.get('content-type') || '';
+      if (!contentType.includes('application/json')) {
+        const text = await res.text();
+        throw new Error(`Respuesta inválida del servidor (Status: ${res.status}). Probablemente la API no está corriendo o hay un error de despliegue.`);
+      }
+
       const data = await res.json();
+
       if (!data.ok || !data.init_point) {
-        throw new Error(data.error || 'No se pudo iniciar el pago');
+        throw new Error(data.error || data.detail || 'No se pudo iniciar el pago en MP');
       }
       window.location.href = data.init_point;
     } catch (err) {

@@ -66,7 +66,7 @@ export async function onRequestGet({ request, env }) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${env.MP_ACCESS_TOKEN}`,
+        Authorization: `Bearer ${env.MP_ACCESS_TOKEN.replace(/[^\x20-\x7E]/g, '')}`,
       },
       body: JSON.stringify(preapproval),
     });
@@ -87,6 +87,7 @@ export async function onRequestGet({ request, env }) {
       next_charge_amount: planConfig.amount,
     });
   } catch (err) {
+    if (err.message.includes('pattern')) return json({ ok: false, error: 'El MP_ACCESS_TOKEN en Cloudflare tiene caracteres invisibles inválidos. Vuelve a pegarlo.' }, 500);
     return json({ ok: false, error: err.message }, 500);
   }
 }

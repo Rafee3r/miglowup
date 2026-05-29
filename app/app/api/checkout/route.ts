@@ -55,7 +55,7 @@ export async function GET(request: NextRequest) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN?.trim()}`,
+        Authorization: `Bearer ${(process.env.MP_ACCESS_TOKEN || '').replace(/[^\x20-\x7E]/g, '')}`,
       },
       body: JSON.stringify(preapproval),
     });
@@ -76,6 +76,9 @@ export async function GET(request: NextRequest) {
       next_charge_amount: planConfig.amount,
     });
   } catch (err: any) {
+    if (err.message?.includes('pattern')) {
+      return NextResponse.json({ ok: false, error: 'El MP_ACCESS_TOKEN tiene caracteres invisibles inválidos. Vuelve a pegarlo sin saltos de línea.' }, { status: 500 });
+    }
     return NextResponse.json({ ok: false, error: err.message }, { status: 500 });
   }
 }
