@@ -68,6 +68,11 @@
                 linear-gradient(135deg, #F26A47, #FFB294) border-box;
     border: 2px solid transparent;
   }
+  @keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
 </style>
 
 <!-- Meta Pixel -->
@@ -83,11 +88,11 @@ fbq('track', 'PageView');
 <body class="grain">
 
 <!-- Top banner -->
-<div class="bg-gradient-to-r from-glow-600 via-glow-500 to-glow-600 text-white text-center text-xs py-2.5 px-4 font-semibold tracking-wide shadow-md relative overflow-hidden h-10 flex items-center justify-center">
+<div class="bg-gradient-to-r from-glow-600 via-glow-400 to-glow-600 bg-[length:200%_auto] text-white text-center text-xs py-2.5 px-4 font-semibold tracking-wide shadow-md relative overflow-hidden h-10 flex items-center justify-center" style="animation: gradient 3s ease infinite;">
   <div id="announcement-slider" class="transition-opacity duration-300 opacity-100 flex items-center justify-center">
     <span class="relative flex h-2 w-2 mr-2 flex-shrink-0">
-      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-      <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+      <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
     </span>
     <span id="announcement-text">⏰ Reto Verano arranca el lunes — quedan <strong class="underline decoration-wavy decoration-white/50">37 cupos</strong> de 150</span>
   </div>
