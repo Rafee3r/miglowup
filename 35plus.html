@@ -57,8 +57,41 @@ fbq('track', 'PageView');
       </a>
       <p class="text-xs text-ink/50 mt-4">7 días gratis · luego $12.990/mes · cancelas cuando quieras</p>
     </div>
-    <div class="order-1 md:order-2">
-      <img src="/assets/hero-35plus.jpg" alt="Mujer chilena 40+ entrenando" class="w-full aspect-[4/5] object-cover rounded-3xl shadow-2xl" loading="eager" />
+    <div class="order-1 md:order-2 relative group">
+      <!-- Dotted accent decoration behind image -->
+      <div class="absolute -top-6 -left-6 w-32 h-32 bg-[radial-gradient(#F26A47_1.5px,transparent_1.5px)] [background-size:12px_12px] opacity-35 pointer-events-none"></div>
+      <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-[radial-gradient(#F26A47_1.5px,transparent_1.5px)] [background-size:12px_12px] opacity-25 pointer-events-none"></div>
+      
+      <!-- Glowing accent background orb -->
+      <div class="absolute inset-0 bg-gradient-to-tr from-glow-400/20 to-glow-600/20 rounded-[2rem] blur-2xl opacity-60 group-hover:opacity-85 transition-opacity duration-500 -z-10"></div>
+      
+      <!-- Floating Badge 1 (Top Right) -->
+      <div class="absolute -top-4 -right-4 bg-white/90 backdrop-blur-md border border-white/60 rounded-2xl p-3.5 shadow-xl flex items-center gap-2.5 z-10 transform translate-y-1 hover:translate-y-0 transition duration-300 pointer-events-none select-none">
+        <div class="flex -space-x-1.5">
+          <div class="w-7 h-7 rounded-full border-2 border-white bg-cover bg-center" style="background-image: url('/assets/testimonial-1.jpg')"></div>
+          <div class="w-7 h-7 rounded-full border-2 border-white bg-cover bg-center" style="background-image: url('/assets/testimonial-2.jpg')"></div>
+          <div class="w-7 h-7 rounded-full border-2 border-white bg-cover bg-center" style="background-image: url('/assets/testimonial-3.jpg')"></div>
+        </div>
+        <div>
+          <div class="text-[9px] text-ink/50 font-bold uppercase tracking-wider leading-none mb-0.5">Comunidad</div>
+          <div class="text-xs font-bold text-ink leading-none">+250 Chilenas</div>
+        </div>
+      </div>
+
+      <!-- Floating Badge 2 (Bottom Left) -->
+      <div class="absolute -bottom-4 -left-4 bg-white/90 backdrop-blur-md border border-white/60 rounded-2xl p-3.5 shadow-xl flex items-center gap-2.5 z-10 transform -translate-y-1 hover:translate-y-0 transition duration-300 pointer-events-none select-none">
+        <div class="w-8 h-8 rounded-xl bg-glow-50 flex items-center justify-center text-glow-500 text-lg font-bold shadow-inner">🌸</div>
+        <div>
+          <div class="text-[9px] text-ink/50 font-bold uppercase tracking-wider leading-none mb-0.5">Método Adaptado</div>
+          <div class="text-xs font-bold text-ink leading-none">Bajo Impacto</div>
+        </div>
+      </div>
+      
+      <!-- The main image wrapper with inner double border -->
+      <div class="overflow-hidden rounded-[2rem] shadow-2xl border-4 border-white relative aspect-[4/5] z-0">
+        <img src="/assets/hero-35plus.jpg" alt="Mujer chilena 40+ entrenando" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" loading="eager" />
+        <div class="absolute inset-0 ring-1 ring-black/5 rounded-[28px] pointer-events-none"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -149,24 +182,53 @@ fbq('track', 'PageView');
     <h2 class="font-serif text-3xl md:text-4xl font-bold text-center mb-3">Mujeres 35+ que volvieron a sentirse ellas</h2>
     <p class="text-center text-ink/60 mb-10">Resultados sostenibles, sin matarse en el gym.</p>
 
-    <div class="grid md:grid-cols-3 gap-5">
-      <div class="bg-cream rounded-3xl p-6 border border-ink/5">
-        <img src="/assets/testimonial-1.jpg" alt="Camila" class="w-full aspect-square object-cover rounded-2xl mb-5" loading="lazy" />
-        <div class="font-serif text-xl font-bold text-glow-600 mb-2">Perimenopausia + 5 kg</div>
-        <p class="text-ink/70 text-sm mb-4 italic">"Tengo 38 y la grasa abdominal apareció de la nada. El método 35+ entendió eso. Bajé 5 kilos sin matarme entrenando, con foco en fuerza."</p>
-        <div class="text-sm font-semibold">Camila, 38 · Las Condes</div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <!-- Testimonial 1 -->
+      <div class="group bg-cream rounded-3xl p-6 border border-ink/5 hover:border-glow-500/20 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+        <div>
+          <div class="overflow-hidden rounded-2xl border border-ink/5 relative mb-5 aspect-square">
+            <img src="/assets/testimonial-1.jpg" alt="Camila" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" loading="lazy" />
+            <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm border border-ink/5 px-3 py-1 rounded-full text-[10px] font-bold tracking-wider text-ink/80 flex items-center gap-1.5 uppercase select-none pointer-events-none shadow-sm">
+              <span class="w-1.5 h-1.5 rounded-full bg-glow-500 animate-pulse"></span>
+              Cambio Realizado
+            </div>
+          </div>
+          <div class="font-serif text-xl font-bold text-glow-600 mb-2">Perimenopausia + 5 kg</div>
+          <p class="text-ink/70 text-sm mb-4 italic leading-relaxed">"Tengo 38 y la grasa abdominal apareció de la nada. El método 35+ entendió eso. Bajé 5 kilos sin matarme entrenando, con foco en fuerza."</p>
+        </div>
+        <div class="text-sm font-semibold text-ink/80 mt-auto border-t border-ink/5 pt-4">Camila, 38 · Las Condes</div>
       </div>
-      <div class="bg-cream rounded-3xl p-6 border border-ink/5">
-        <img src="/assets/testimonial-2.jpg" alt="Valentina" class="w-full aspect-square object-cover rounded-2xl mb-5" loading="lazy" />
-        <div class="font-serif text-xl font-bold text-glow-600 mb-2">Sueño + energía recuperados</div>
-        <p class="text-ink/70 text-sm mb-4 italic">"Bochornos, insomnio, fatiga. Pensé que era 'la edad'. Las rutinas low-impact y el coach IA me cambiaron el sueño en 6 semanas."</p>
-        <div class="text-sm font-semibold">Valentina, 41 · Maipú</div>
+
+      <!-- Testimonial 2 -->
+      <div class="group bg-cream rounded-3xl p-6 border border-ink/5 hover:border-glow-500/20 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+        <div>
+          <div class="overflow-hidden rounded-2xl border border-ink/5 relative mb-5 aspect-square">
+            <img src="/assets/testimonial-2.jpg" alt="Valentina" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" loading="lazy" />
+            <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm border border-ink/5 px-3 py-1 rounded-full text-[10px] font-bold tracking-wider text-ink/80 flex items-center gap-1.5 uppercase select-none pointer-events-none shadow-sm">
+              <span class="w-1.5 h-1.5 rounded-full bg-glow-500 animate-pulse"></span>
+              Cambio Realizado
+            </div>
+          </div>
+          <div class="font-serif text-xl font-bold text-glow-600 mb-2">Sueño + energía recuperados</div>
+          <p class="text-ink/70 text-sm mb-4 italic leading-relaxed">"Bochornos, insomnio, fatiga. Pensé que era 'la edad'. Las rutinas low-impact y el coach IA me cambiaron el sueño en 6 semanas."</p>
+        </div>
+        <div class="text-sm font-semibold text-ink/80 mt-auto border-t border-ink/5 pt-4">Valentina, 41 · Maipú</div>
       </div>
-      <div class="bg-cream rounded-3xl p-6 border border-ink/5">
-        <img src="/assets/testimonial-3.jpg" alt="Constanza" class="w-full aspect-square object-cover rounded-2xl mb-5" loading="lazy" />
-        <div class="font-serif text-xl font-bold text-glow-600 mb-2">Después de los 45</div>
-        <p class="text-ink/70 text-sm mb-4 italic">"Tras los 40 nada me funcionaba como antes. Esto sí. Conservé masa muscular y bajé 6 kilos. Pero lo más importante: me siento yo de nuevo."</p>
-        <div class="text-sm font-semibold">Constanza, 45 · Concepción</div>
+
+      <!-- Testimonial 3 -->
+      <div class="group bg-cream rounded-3xl p-6 border border-ink/5 hover:border-glow-500/20 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+        <div>
+          <div class="overflow-hidden rounded-2xl border border-ink/5 relative mb-5 aspect-square">
+            <img src="/assets/testimonial-3.jpg" alt="Constanza" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" loading="lazy" />
+            <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm border border-ink/5 px-3 py-1 rounded-full text-[10px] font-bold tracking-wider text-ink/80 flex items-center gap-1.5 uppercase select-none pointer-events-none shadow-sm">
+              <span class="w-1.5 h-1.5 rounded-full bg-glow-500 animate-pulse"></span>
+              Cambio Realizado
+            </div>
+          </div>
+          <div class="font-serif text-xl font-bold text-glow-600 mb-2">Después de los 45</div>
+          <p class="text-ink/70 text-sm mb-4 italic leading-relaxed">"Tras los 40 nada me funcionaba como antes. Esto sí. Conservé masa muscular y bajé 6 kilos. Pero lo más importante: me siento yo de nuevo."</p>
+        </div>
+        <div class="text-sm font-semibold text-ink/80 mt-auto border-t border-ink/5 pt-4">Constanza, 45 · Concepción</div>
       </div>
     </div>
   </div>

@@ -95,8 +95,41 @@ fbq('track', 'PageView');
         </a>
       </div>
     </div>
-    <div class="order-1 md:order-2">
-      <img src="/assets/hero-home.jpg" alt="Chilena en su living preparándose para entrenar" class="w-full aspect-[4/5] object-cover rounded-3xl shadow-2xl" loading="eager" />
+    <div class="order-1 md:order-2 relative group">
+      <!-- Dotted accent decoration behind image -->
+      <div class="absolute -top-6 -left-6 w-32 h-32 bg-[radial-gradient(#F26A47_1.5px,transparent_1.5px)] [background-size:12px_12px] opacity-30 pointer-events-none"></div>
+      <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-[radial-gradient(#F26A47_1.5px,transparent_1.5px)] [background-size:12px_12px] opacity-25 pointer-events-none"></div>
+      
+      <!-- Glowing accent background orb -->
+      <div class="absolute inset-0 bg-gradient-to-tr from-glow-400/20 to-glow-600/20 rounded-[2rem] blur-2xl opacity-60 group-hover:opacity-85 transition-opacity duration-500 -z-10"></div>
+      
+      <!-- Floating Badge 1 (Top Right) -->
+      <div class="absolute -top-4 -right-4 bg-white/90 backdrop-blur-md border border-white/60 rounded-2xl p-3.5 shadow-xl flex items-center gap-2.5 z-10 transform translate-y-1 hover:translate-y-0 transition duration-300 pointer-events-none select-none">
+        <div class="flex -space-x-1.5">
+          <div class="w-7 h-7 rounded-full border-2 border-white bg-cover bg-center" style="background-image: url('/assets/testimonial-1.jpg')"></div>
+          <div class="w-7 h-7 rounded-full border-2 border-white bg-cover bg-center" style="background-image: url('/assets/testimonial-2.jpg')"></div>
+          <div class="w-7 h-7 rounded-full border-2 border-white bg-cover bg-center" style="background-image: url('/assets/testimonial-3.jpg')"></div>
+        </div>
+        <div>
+          <div class="text-[9px] text-ink/50 font-bold uppercase tracking-wider leading-none mb-0.5">Comunidad</div>
+          <div class="text-xs font-bold text-ink leading-none">+250 Chilenas</div>
+        </div>
+      </div>
+
+      <!-- Floating Badge 2 (Bottom Left) -->
+      <div class="absolute -bottom-4 -left-4 bg-white/90 backdrop-blur-md border border-white/60 rounded-2xl p-3.5 shadow-xl flex items-center gap-2.5 z-10 transform -translate-y-1 hover:translate-y-0 transition duration-300 pointer-events-none select-none">
+        <div class="w-8 h-8 rounded-xl bg-glow-50 flex items-center justify-center text-glow-500 text-lg font-bold shadow-inner">🔥</div>
+        <div>
+          <div class="text-[9px] text-ink/50 font-bold uppercase tracking-wider leading-none mb-0.5">Tu Ritmo</div>
+          <div class="text-xs font-bold text-ink leading-none">100% En Casa</div>
+        </div>
+      </div>
+      
+      <!-- The main image wrapper with inner double border -->
+      <div class="overflow-hidden rounded-[2rem] shadow-2xl border-4 border-white relative aspect-[4/5] z-0">
+        <img src="/assets/hero-home.jpg" alt="Chilena en su living preparándose para entrenar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" loading="eager" />
+        <div class="absolute inset-0 ring-1 ring-black/5 rounded-[28px] pointer-events-none"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -129,35 +162,58 @@ fbq('track', 'PageView');
     <h2 class="font-serif text-4xl md:text-5xl font-bold">Cuatro piezas que se sostienen entre sí.</h2>
   </div>
 
-  <div class="grid md:grid-cols-2 gap-5">
-    <div class="bg-white rounded-3xl border border-ink/10 overflow-hidden">
-      <img src="/assets/pilar-comunidad.jpg" alt="Comunidad WhatsApp de MiGlowUp" class="w-full aspect-square object-cover" loading="lazy" />
+  <div class="grid md:grid-cols-2 gap-6">
+    <!-- Pilar 1 -->
+    <div class="group bg-white rounded-3xl border border-ink/10 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+      <div class="p-4 pb-0 overflow-hidden">
+        <div class="overflow-hidden rounded-2xl border border-ink/5 aspect-[4/3]">
+          <img src="/assets/pilar-comunidad.jpg" alt="Comunidad WhatsApp de MiGlowUp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" loading="lazy" />
+        </div>
+      </div>
       <div class="p-7">
-        <div class="text-3xl mb-2">💬</div>
+        <div class="inline-flex items-center justify-center w-12 h-12 bg-glow-50 text-glow-500 rounded-2xl mb-4 text-2xl shadow-sm">💬</div>
         <h3 class="font-serif text-2xl font-bold mb-2">Comunidad WhatsApp</h3>
         <p class="text-ink/70 leading-relaxed">Un grupo privado de chilenas reales que se hablan todos los días. Marciana modera y empuja cuando flaqueas. Cero hombres, cero juicio.</p>
       </div>
     </div>
-    <div class="bg-white rounded-3xl border border-ink/10 overflow-hidden">
-      <img src="/assets/pilar-coach.jpg" alt="Coach IA personalizado" class="w-full aspect-square object-cover" loading="lazy" />
+
+    <!-- Pilar 2 -->
+    <div class="group bg-white rounded-3xl border border-ink/10 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+      <div class="p-4 pb-0 overflow-hidden">
+        <div class="overflow-hidden rounded-2xl border border-ink/5 aspect-[4/3]">
+          <img src="/assets/pilar-coach.jpg" alt="Coach IA personalizado" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" loading="lazy" />
+        </div>
+      </div>
       <div class="p-7">
-        <div class="text-3xl mb-2">✨</div>
+        <div class="inline-flex items-center justify-center w-12 h-12 bg-glow-50 text-glow-500 rounded-2xl mb-4 text-2xl shadow-sm">✨</div>
         <h3 class="font-serif text-2xl font-bold mb-2">Coach IA 24/7</h3>
         <p class="text-ink/70 leading-relaxed">Pregúntale lo que sea, cuando se te ocurra. Tu coach personalizado entiende tu objetivo, tu nivel y tus días malos. Responde sin esperar.</p>
       </div>
     </div>
-    <div class="bg-white rounded-3xl border border-ink/10 overflow-hidden">
-      <img src="/assets/pilar-rutinas.jpg" alt="Rutinas en casa" class="w-full aspect-square object-cover" loading="lazy" />
+
+    <!-- Pilar 3 -->
+    <div class="group bg-white rounded-3xl border border-ink/10 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+      <div class="p-4 pb-0 overflow-hidden">
+        <div class="overflow-hidden rounded-2xl border border-ink/5 aspect-[4/3]">
+          <img src="/assets/pilar-rutinas.jpg" alt="Rutinas en casa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" loading="lazy" />
+        </div>
+      </div>
       <div class="p-7">
-        <div class="text-3xl mb-2">💪</div>
+        <div class="inline-flex items-center justify-center w-12 h-12 bg-glow-50 text-glow-500 rounded-2xl mb-4 text-2xl shadow-sm">💪</div>
         <h3 class="font-serif text-2xl font-bold mb-2">Rutinas en casa</h3>
         <p class="text-ink/70 leading-relaxed">15 a 28 minutos al día. Sin equipamiento, sin pesas, sin tener que cambiarte para salir. Tu peso corporal es todo lo que necesitas.</p>
       </div>
     </div>
-    <div class="bg-white rounded-3xl border border-ink/10 overflow-hidden">
-      <img src="/assets/pilar-app.jpg" alt="App MiGlowUp" class="w-full aspect-square object-cover" loading="lazy" />
+
+    <!-- Pilar 4 -->
+    <div class="group bg-white rounded-3xl border border-ink/10 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+      <div class="p-4 pb-0 overflow-hidden">
+        <div class="overflow-hidden rounded-2xl border border-ink/5 aspect-[4/3]">
+          <img src="/assets/pilar-app.jpg" alt="App MiGlowUp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" loading="lazy" />
+        </div>
+      </div>
       <div class="p-7">
-        <div class="text-3xl mb-2">📱</div>
+        <div class="inline-flex items-center justify-center w-12 h-12 bg-glow-50 text-glow-500 rounded-2xl mb-4 text-2xl shadow-sm">📱</div>
         <h3 class="font-serif text-2xl font-bold mb-2">App MiGlowUp</h3>
         <p class="text-ink/70 leading-relaxed">Todo en tu celular: rutina del día, tracking de progreso, calendario, fotos privadas, comunicación con el coach. Funciona donde estés.</p>
       </div>
@@ -173,7 +229,35 @@ fbq('track', 'PageView');
       <h2 class="font-serif text-4xl md:text-5xl font-bold">No es marketing.<br/>Es una <span class="italic text-glow-400">tribu real</span>.</h2>
     </div>
 
-    <img src="/assets/comunidad-grupo.jpg" alt="Comunidad MiGlowUp" class="w-full aspect-[16/9] object-cover rounded-3xl mb-10 shadow-2xl" loading="lazy" />
+    <!-- macOS Window Mockup container -->
+    <div class="relative max-w-5xl mx-auto mb-16 group">
+      <!-- Glowing background aura -->
+      <div class="absolute -inset-4 bg-gradient-to-r from-glow-500/20 to-glow-700/20 rounded-[2rem] blur-3xl opacity-50 group-hover:opacity-75 transition-opacity duration-700 pointer-events-none -z-10"></div>
+      
+      <!-- The Window Container -->
+      <div class="relative bg-[#0E0E0E] rounded-[2rem] border border-white/10 overflow-hidden shadow-2xl">
+        <!-- Window header (Glass) -->
+        <div class="bg-white/[0.03] backdrop-blur px-5 py-3.5 border-b border-white/10 flex items-center justify-between">
+          <div class="flex gap-2">
+            <span class="w-3 h-3 rounded-full bg-[#FF5F56]"></span>
+            <span class="w-3 h-3 rounded-full bg-[#FFBD2E]"></span>
+            <span class="w-3 h-3 rounded-full bg-[#27C93F]"></span>
+          </div>
+          <div class="text-[10px] md:text-xs text-cream/40 font-mono tracking-wider select-none pointer-events-none">app.miglowup.cl/tribu-grupo</div>
+          <div class="w-12"></div> <!-- Spacer to center the URL -->
+        </div>
+        
+        <!-- The Image itself -->
+        <div class="overflow-hidden aspect-video">
+          <img src="/assets/comunidad-grupo.jpg" alt="Comunidad MiGlowUp" class="w-full h-full object-cover group-hover:scale-[1.02] transition duration-700 ease-out" loading="lazy" />
+        </div>
+      </div>
+      
+      <!-- Floating tag -->
+      <div class="absolute -bottom-4 -right-4 bg-glow-500 text-white font-bold text-xs md:text-sm px-4 py-2.5 rounded-xl shadow-lg shadow-glow-500/20 transform rotate-2 hover:rotate-0 transition duration-300 pointer-events-none select-none">
+        ⚡ Conectadas en Santiago y regiones
+      </div>
+    </div>
 
     <div class="grid md:grid-cols-3 gap-5">
       <div class="text-center">
@@ -195,8 +279,24 @@ fbq('track', 'PageView');
 <!-- HISTORIA / MARCIANA -->
 <section id="historia" class="px-5 py-20 max-w-6xl mx-auto fade-in">
   <div class="grid md:grid-cols-2 gap-12 items-center">
-    <div>
-      <img src="/assets/historia-equipo.jpg" alt="Detrás de MiGlowUp" class="w-full aspect-[4/5] object-cover rounded-3xl shadow-xl" loading="lazy" />
+    <div class="relative group max-w-md mx-auto md:mx-0">
+      <!-- Accent background card -->
+      <div class="absolute inset-0 bg-glow-100 rounded-[2rem] transform translate-x-4 translate-y-4 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-300 ease-out -z-10 shadow-sm"></div>
+      
+      <!-- Border outline -->
+      <div class="absolute inset-0 border border-glow-500/20 rounded-[2rem] transform -translate-x-2 -translate-y-2 -z-10"></div>
+      
+      <!-- The main image with outer and inner border -->
+      <div class="overflow-hidden rounded-[2rem] shadow-xl border-4 border-white aspect-[4/5] relative z-0">
+        <img src="/assets/historia-equipo.jpg" alt="Detrás de MiGlowUp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" loading="lazy" />
+        <div class="absolute inset-0 ring-1 ring-black/5 rounded-[28px] pointer-events-none"></div>
+      </div>
+      
+      <!-- Styled signature badge -->
+      <div class="absolute bottom-4 right-4 bg-white/95 backdrop-blur-sm border border-ink/5 p-3.5 rounded-2xl shadow-lg flex items-center gap-2 transform translate-y-1 group-hover:translate-y-0 transition duration-300">
+        <span class="text-xl">✨</span>
+        <span class="font-serif text-xs md:text-sm font-bold text-ink">Marciana & Equipo</span>
+      </div>
     </div>
     <div>
       <div class="text-xs uppercase tracking-widest font-bold text-glow-500 mb-4">Detrás de MiGlowUp</div>
