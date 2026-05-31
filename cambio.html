@@ -147,7 +147,32 @@ fbq('track', 'PageView');
     </div>
 
     <!-- Phone mockup workout -->
-    <div class="relative flex justify-center">
+    <div class="relative flex justify-center group">
+      <!-- Background glowing orb -->
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-glow-500 rounded-full blur-[80px] opacity-25 group-hover:opacity-40 transition-opacity duration-700 pointer-events-none -z-10"></div>
+      
+      <!-- Dotted accent decoration behind phone -->
+      <div class="absolute -top-8 -left-8 w-24 h-24 bg-[radial-gradient(#F26A47_1.5px,transparent_1.5px)] [background-size:12px_12px] opacity-20 pointer-events-none"></div>
+      <div class="absolute -bottom-8 -right-8 w-24 h-24 bg-[radial-gradient(#F26A47_1.5px,transparent_1.5px)] [background-size:12px_12px] opacity-20 pointer-events-none"></div>
+
+      <!-- Floating stats pill 1 (Right) -->
+      <div class="absolute -right-6 top-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-3 shadow-2xl flex items-center gap-2.5 z-10 transform hover:translate-y-[-2px] transition duration-300 pointer-events-none select-none text-white max-w-[150px]">
+        <span class="text-xl">🔥</span>
+        <div>
+          <div class="text-[8px] text-white/50 font-bold uppercase tracking-wider leading-none mb-0.5">Racha</div>
+          <div class="text-xs font-bold text-white leading-none">17 Días Activa</div>
+        </div>
+      </div>
+
+      <!-- Floating stats pill 2 (Left) -->
+      <div class="absolute -left-6 bottom-24 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-3 shadow-2xl flex items-center gap-2.5 z-10 transform hover:translate-y-[2px] transition duration-300 pointer-events-none select-none text-white max-w-[150px]">
+        <span class="text-xl">💪</span>
+        <div>
+          <div class="text-[8px] text-white/50 font-bold uppercase tracking-wider leading-none mb-0.5">Rutina</div>
+          <div class="text-xs font-bold text-white leading-none">98% Completado</div>
+        </div>
+      </div>
+
       <div class="relative phone-shadow">
         <div class="w-[280px] md:w-[320px] bg-cream rounded-[3rem] p-3">
           <div class="bg-ink rounded-[2.3rem] overflow-hidden text-cream">
